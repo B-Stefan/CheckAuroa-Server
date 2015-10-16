@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "connect": "^3.2.0",
+    "newrelic": "^1.22.2",
     "swagger-tools": "0.8.*"
   }
 }
