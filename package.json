@@ -1,0 +1,15 @@
+{
+  "name": "SwaggerAurora-API",
+  "version": "0.0.1",
+  "description": "CheckAuroa-API-Schema",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "swagger-tools": "0.8.*"
+  }
+}
