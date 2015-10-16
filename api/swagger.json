@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "produces": ["application/json"],
-  "host": "localhost:8080",
+  "host": "check-aurora-api.herokuapp.com",
   "basePath": "/",
   "paths": {
   
