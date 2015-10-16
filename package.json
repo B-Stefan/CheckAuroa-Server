@@ -8,6 +8,9 @@
   ],
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "connect": "^3.2.0",
     "swagger-tools": "0.8.*"
