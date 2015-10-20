@@ -26,8 +26,11 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Null response"
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/OK"
+            }
           },
           "default" : {
             "description" : "unexpected error",
@@ -45,10 +48,16 @@
         "tags" : [ "notify" ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/OK"
+            }
           },
           "404" : {
-            "description" : "NOT FOUND"
+            "description" : "NOT FOUND",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
