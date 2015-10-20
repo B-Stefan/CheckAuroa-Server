@@ -14,6 +14,7 @@
       "post" : {
         "summary" : "Create a new notification",
         "operationId" : "createNotification",
+        "x-swagger-router-controller" : "Notification",
         "tags" : [ "notify" ],
         "parameters" : [ {
           "name" : "body",
@@ -40,6 +41,7 @@
         "summary" : "deletes a notification",
         "operationId" : "deleteNotification",
         "description" : "This method is to delete a notofication",
+        "x-swagger-router-controller" : "Notification",
         "tags" : [ "notify" ],
         "responses" : {
           "200" : {
@@ -54,6 +56,7 @@
     "/location" : {
       "get" : {
         "summary" : "geth the location",
+        "x-swagger-router-controller" : "Location",
         "responses" : {
           "200" : {
             "description" : "OK"
@@ -64,6 +67,7 @@
         "tags" : [ "location" ],
         "operationId" : "updateLocation",
         "summary" : "Updates the location for a spesific device",
+        "x-swagger-router-controller" : "Location",
         "parameters" : [ {
           "$ref" : "#/parameters/deviceIdParam"
         }, {
@@ -84,6 +88,7 @@
       "get" : {
         "summary" : "get a rating for your location",
         "operationId" : "getRating",
+        "x-swagger-router-controller" : "Rating",
         "tags" : [ "ratings" ],
         "parameters" : [ {
           "$ref" : "#/parameters/lngParam"
