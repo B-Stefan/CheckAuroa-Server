@@ -9,11 +9,18 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./bootstrap.js"
   },
   "dependencies": {
+    "babel": "^5.8.23",
     "connect": "^3.2.0",
     "newrelic": "^1.22.2",
     "swagger-tools": "0.8.*"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-size": "^2.0.0",
+    "require-dir": "^0.3.0",
+    "swagger-js-codegen": "^1.1.4"
   }
 }

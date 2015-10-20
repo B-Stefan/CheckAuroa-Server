@@ -1,20 +1,19 @@
-'use strict';
-require('newrelic');
-var app = require('connect')();
-var http = require('http');
-var swaggerTools = require('swagger-tools');
-
-var serverPort = process.env.PORT || 8080;
+import newrelic from "newrelic";
+import connect from "connect";
+import http from "http";
+import swaggerTools from "swagger-tools";
+const app = connect();
+const serverPort = process.env.PORT || 8080;
 
 // swaggerRouter configuration
-var options = {
+const options = {
   swaggerUi: '/swagger.json',
   controllers: './controllers',
   useStubs: process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var swaggerDoc = require('./api/swagger.json');
+const swaggerDoc = require('./api/swagger.json');
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
