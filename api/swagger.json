@@ -66,6 +66,7 @@
       "get" : {
         "summary" : "geth the location",
         "x-swagger-router-controller" : "Location",
+        "tags" : [ "location" ],
         "responses" : {
           "200" : {
             "description" : "OK"
@@ -73,10 +74,10 @@
         }
       },
       "post" : {
-        "tags" : [ "location" ],
         "operationId" : "updateLocation",
         "summary" : "Updates the location for a spesific device",
         "x-swagger-router-controller" : "Location",
+        "tags" : [ "location" ],
         "parameters" : [ {
           "$ref" : "#/parameters/deviceIdParam"
         }, {
