@@ -1,6 +1,6 @@
 'use strict';
 
-exports.createNotification = function(body) {
+export function createNotification(body) {
 
   var examples = {};
   
@@ -14,7 +14,7 @@ exports.createNotification = function(body) {
     return examples[Object.keys(examples)[0]];
   
 }
-exports.deleteNotification = function() {
+export function deleteNotification() {
 
   var examples = {};
   

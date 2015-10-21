@@ -1,13 +1,12 @@
-'use strict';
 
-exports.locationGet = function() {
+export function locationGet() {
 
   var examples = {};
   
 
   
 }
-exports.updateLocation = function(deviceId, deviceType, lat, lng) {
+export function  updateLocation(deviceId, deviceType, lat, lng) {
 
   var examples = {};
   

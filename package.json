@@ -14,8 +14,11 @@
   "dependencies": {
     "babel": "^5.8.23",
     "connect": "^3.2.0",
+    "moment": "^2.10.6",
     "newrelic": "^1.22.2",
-    "swagger-tools": "0.8.*"
+    "request": "^2.65.0",
+    "swagger-tools": "0.8.*",
+    "xml2json": "^0.9.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

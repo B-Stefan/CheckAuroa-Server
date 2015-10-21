@@ -2,18 +2,24 @@ import newrelic from "newrelic";
 import connect from "connect";
 import http from "http";
 import swaggerTools from "swagger-tools";
+import {isDevMode} from "./utils"
 const app = connect();
 const serverPort = process.env.PORT || 8080;
 
 // swaggerRouter configuration
 const options = {
-  swaggerUi: '/swagger.json',
   controllers: './controllers',
-  useStubs: true//process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
+  useStubs: isDevMode()// Conditionally turn on stubs (mock mode)
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 const swaggerDoc = require('./api/swagger.json');
+
+
+if(isDevMode()){
+  console.log("Starting in developer mode ")
+  swaggerDoc.host = "localhost:" + serverPort;
+}
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {

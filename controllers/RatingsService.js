@@ -1,20 +1,35 @@
-'use strict';
-
-exports.getRating = function(lng, lat, uTCDateTime) {
+import KPService from "./KPIndexService"
+import GeomagnaticLocationService from "./GeomagnaticLocationService"
+export function getRating(lng, lat, uTCDateTime,callback) {
 
   var examples = {};
-  
-  examples['application/json'] = {
-  "location" : {
-    "lng" : 1.3579000000000001069366817318950779736042022705078125,
-    "lat" : 1.3579000000000001069366817318950779736042022705078125
-  },
-  "kpIndex" : 1.3579000000000001069366817318950779736042022705078125
-};
-  
+  console.log("GET RAITNING")
+  /**
+   *
+   */
 
-  
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+
+  KPService.getKpByUTCDate(Date.UTC(), (data)=>{
+
+    let last  = data[data.length-1]
+    let response = {
+      "location" : {
+        "lng" : lng,
+        "lat" : lat
+      },
+      "kpIndex" : last
+    };
+
+    callback(response)
+  });
+
+  const service = new GeomagnaticLocationService();
+  service.transformToGeomagnetic(23,33,(geomagnaticLat,geomagnaticLng)=>{
+    console.log("transformToGeomagnetic:",geomagnaticLat,geomagnaticLng)
+  });
+
+
+
+
   
 }

@@ -1,215 +1,325 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "dev",
-    "title" : "CheckAuroa-API-Schema",
-    "description" : "CheckAuroa-API-Schema"
+  "swagger": "2.0",
+  "info": {
+    "title": "CheckAuroa-API-Schema",
+    "description": "CheckAuroa-API-Schema",
+    "version": "1.0.0"
   },
-  "host" : "check-aurora-api.herokuapp.com",
-  "schemes" : [ "http", "https" ],
-  "consumes" : [ "application/json" ],
-  "produces" : [ "application/json", "text/html" ],
-  "paths" : {
-    "/notification" : {
-      "post" : {
-        "summary" : "Create a new notification",
-        "operationId" : "createNotification",
-        "x-swagger-router-controller" : "Notification",
-        "tags" : [ "notify" ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "The lat lng position for calculate the rating",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/Notification"
+  "produces": [
+    "application/json"
+  ],
+  "host": "check-aurora-api.herokuapp.com",
+  "paths": {
+    "/rating": {
+      "get": {
+        "summary": "get a rating for your location",
+        "description": "",
+        "x-swagger-router-controller": "Ratings",
+        "tags": [
+          "Ratings"
+        ],
+        "operationId": "getRating",
+        "parameters": [
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The lat lng position for calculate the rating",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The lat lng position for calculate the rating",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "UTCDateTime",
+            "in": "query",
+            "description": "The lat lng position for calculate the rating",
+            "required": false,
+            "type": "string",
+            "default": "now",
+            "format": "dateTime"
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/OK"
+        ],
+        "responses": {
+          "200": {
+            "description": "An single rating element",
+            "schema": {
+              "properties": {
+                "location": {
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lng": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "kpIndex": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
             }
           },
-          "default" : {
-            "description" : "unexpected error",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "delete" : {
-        "summary" : "deletes a notification",
-        "operationId" : "deleteNotification",
-        "description" : "This method is to delete a notofication",
-        "x-swagger-router-controller" : "Notification",
-        "tags" : [ "notify" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/OK"
-            }
-          },
-          "404" : {
-            "description" : "NOT FOUND",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The error code",
+                  "default": "INTERNAL",
+                  "enum": [
+                    "INTERNAL",
+                    "KP_SERVICE_ERROR",
+                    "WEATHER_SERVICE_ERROR",
+                    "SUNSETRISE_SERVICE_ERROR"
+                  ]
+                }
+              }
             }
           }
         }
       }
     },
-    "/location" : {
-      "get" : {
-        "summary" : "geth the location",
-        "x-swagger-router-controller" : "Location",
-        "tags" : [ "location" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
+    "/location": {
+      "get": {
+        "summary": "geth the location",
+        "description": "",
+        "x-swagger-router-controller": "Location",
+        "tags": [
+          "Location"
+        ],
+        "operationId": "locationGet",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       },
-      "post" : {
-        "operationId" : "updateLocation",
-        "summary" : "Updates the location for a spesific device",
-        "x-swagger-router-controller" : "Location",
-        "tags" : [ "location" ],
-        "parameters" : [ {
-          "$ref" : "#/parameters/deviceIdParam"
-        }, {
-          "$ref" : "#/parameters/deviceTypeParam"
-        }, {
-          "$ref" : "#/parameters/latParam"
-        }, {
-          "$ref" : "#/parameters/lngParam"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
+      "post": {
+        "summary": "Updates the location for a spesific device",
+        "description": "",
+        "x-swagger-router-controller": "Location",
+        "tags": [
+          "Location"
+        ],
+        "operationId": "updateLocation",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "An id for your individual device",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceType",
+            "in": "query",
+            "description": "The device type code it can be on of [ANDOID, WEB, QT]",
+            "required": true,
+            "type": "string",
+            "default": "WEB",
+            "enum": [
+              "ANDROID",
+              "QT",
+              "WEB"
+            ]
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The lat lng position for calculate the rating",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The lat lng position for calculate the rating",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/rating" : {
-      "get" : {
-        "summary" : "get a rating for your location",
-        "operationId" : "getRating",
-        "x-swagger-router-controller" : "Rating",
-        "tags" : [ "ratings" ],
-        "parameters" : [ {
-          "$ref" : "#/parameters/lngParam"
-        }, {
-          "$ref" : "#/parameters/latParam"
-        }, {
-          "name" : "UTCDateTime",
-          "in" : "query",
-          "description" : "The lat lng position for calculate the rating",
-          "required" : false,
-          "type" : "string",
-          "format" : "dateTime",
-          "default" : "now"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "An single rating element",
-            "schema" : {
-              "$ref" : "#/definitions/Rating"
+    "/notification": {
+      "post": {
+        "summary": "Create a new notification",
+        "description": "",
+        "x-swagger-router-controller": "Notify",
+        "tags": [
+          "Notify"
+        ],
+        "operationId": "createNotification",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The lat lng position for calculate the rating",
+            "required": true,
+            "schema": {
+              "properties": {
+                "playSound": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
             }
           },
-          "default" : {
-            "description" : "unexpected error",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The error code",
+                  "default": "INTERNAL",
+                  "enum": [
+                    "INTERNAL",
+                    "KP_SERVICE_ERROR",
+                    "WEATHER_SERVICE_ERROR",
+                    "SUNSETRISE_SERVICE_ERROR"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes a notification",
+        "description": "This method is to delete a notofication",
+        "x-swagger-router-controller": "Notify",
+        "tags": [
+          "Notify"
+        ],
+        "operationId": "deleteNotification",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The error code",
+                  "default": "INTERNAL",
+                  "enum": [
+                    "INTERNAL",
+                    "KP_SERVICE_ERROR",
+                    "WEATHER_SERVICE_ERROR",
+                    "SUNSETRISE_SERVICE_ERROR"
+                  ]
+                }
+              }
             }
           }
         }
       }
     }
   },
-  "parameters" : {
-    "deviceIdParam" : {
-      "name" : "deviceId",
-      "in" : "query",
-      "description" : "An id for your individual device",
-      "required" : true,
-      "type" : "string"
-    },
-    "deviceTypeParam" : {
-      "name" : "deviceType",
-      "in" : "query",
-      "description" : "The device type code it can be on of [ANDOID, WEB, QT]",
-      "type" : "string",
-      "default" : "WEB",
-      "required" : true,
-      "enum" : [ "ANDROID", "QT", "WEB" ]
-    },
-    "latParam" : {
-      "name" : "lat",
-      "in" : "query",
-      "description" : "The lat lng position for calculate the rating",
-      "required" : true,
-      "type" : "number",
-      "format" : "double"
-    },
-    "lngParam" : {
-      "name" : "lng",
-      "in" : "query",
-      "description" : "The lat lng position for calculate the rating",
-      "required" : true,
-      "type" : "number",
-      "format" : "double"
-    }
-  },
-  "definitions" : {
-    "OK" : {
-      "properties" : {
-        "msg" : {
-          "type" : "string"
+  "definitions": {
+    "OK": {
+      "properties": {
+        "msg": {
+          "type": "string"
         }
       }
     },
-    "Error" : {
-      "properties" : {
-        "msg" : {
-          "type" : "string"
+    "Error": {
+      "properties": {
+        "msg": {
+          "type": "string"
         },
-        "code" : {
-          "description" : "The error code",
-          "type" : "string",
-          "default" : "INTERNAL",
-          "enum" : [ "INTERNAL", "KP_SERVICE_ERROR", "WEATHER_SERVICE_ERROR", "SUNSETRISE_SERVICE_ERROR" ]
+        "code": {
+          "type": "string",
+          "description": "The error code",
+          "default": "INTERNAL",
+          "enum": [
+            "INTERNAL",
+            "KP_SERVICE_ERROR",
+            "WEATHER_SERVICE_ERROR",
+            "SUNSETRISE_SERVICE_ERROR"
+          ]
         }
       }
     },
-    "Location" : {
-      "properties" : {
-        "lat" : {
-          "type" : "number"
+    "Location": {
+      "properties": {
+        "lat": {
+          "type": "number"
         },
-        "lng" : {
-          "type" : "number"
+        "lng": {
+          "type": "number"
         }
       }
     },
-    "Rating" : {
-      "properties" : {
-        "location" : {
-          "$ref" : "#/definitions/Location"
+    "Rating": {
+      "properties": {
+        "location": {
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
         },
-        "kpIndex" : {
-          "type" : "number",
-          "format" : "double"
+        "kpIndex": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
-    "Notification" : {
-      "properties" : {
-        "playSound" : {
-          "type" : "boolean"
+    "Notification": {
+      "properties": {
+        "playSound": {
+          "type": "boolean"
         }
       }
     }
