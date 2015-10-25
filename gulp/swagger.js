@@ -2,7 +2,6 @@ import gulp from "gulp"
 import size  from "gulp-size"
 import fs from "fs"
 import request from "request"
-import download from "gulp-download";
 import unzip from "unzip";
 gulp.task("swagger", (callback)=>{
 
