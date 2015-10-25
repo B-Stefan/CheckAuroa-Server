@@ -9,7 +9,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node ./bootstrap.js"
+    "start": "node ./bootstrap.js",
+    "gulp": "./node_modules/.bin/gulp"
   },
   "dependencies": {
     "babel": "^5.8.23",
@@ -24,6 +25,7 @@
     "gulp": "^3.9.0",
     "gulp-size": "^2.0.0",
     "require-dir": "^0.3.0",
-    "swagger-js-codegen": "^1.1.4"
+    "swagger-js-codegen": "^1.1.4",
+    "unzip": "^0.1.11"
   }
 }
