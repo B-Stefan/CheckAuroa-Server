@@ -196,12 +196,30 @@
       }
     },
     "GeomagnaticLocation" : {
-      "extends" : {
-        "$ref" : "#/definitions/Location"
-      },
       "properties" : {
-        "gm" : {
+        "latG" : {
           "type" : "number"
+        },
+        "lngG" : {
+          "type" : "number"
+        }
+      }
+    },
+    "KpInformation" : {
+      "properties" : {
+        "date" : {
+          "type" : "number"
+        },
+        "kpValue" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      }
+    },
+    "WeatherInformation" : {
+      "properties" : {
+        "summary" : {
+          "type" : "string"
         }
       }
     },
@@ -210,9 +228,14 @@
         "location" : {
           "$ref" : "#/definitions/Location"
         },
-        "kpIndex" : {
-          "type" : "number",
-          "format" : "double"
+        "locationGeomagnatic" : {
+          "$ref" : "#/definitions/GeomagnaticLocation"
+        },
+        "kp" : {
+          "$ref" : "#/definitions/KpInformation"
+        },
+        "weather" : {
+          "$ref" : "#/definitions/WeatherInformation"
         }
       }
     },
