@@ -168,7 +168,7 @@ export default class KpWingService {
 
     /**
      * Retun a sorted list of
-     * @param callback: (listSorted: Array<KPIndexInformation> )=>void
+     * @param callback: (listSorted: Array<KpInformation> )=>void
      *
      */
     getSortedList(callback){
