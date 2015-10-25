@@ -171,44 +171,46 @@ export default class KpWingService {
      * @param callback: (listSorted: Array<KpInformation> )=>void
      *
      */
-    getSortedList(callback){
+    getList(){
 
         //Get the KP file and parse the raw file so you have for each row of the text file one row in the arr
-        this.getKpIndexFile((results)=>{
+        return new Promise((resolve, reject)=>{
+            this.getKpIndexFile().then((results)=>{
 
-            //Sort the results so the last prediction is the first entry
-            let sorted = results.sort((a,b)=>{
-                return a.createdAt-b.createdAt
-            });
+                //Sort the results so the last prediction is the first entry
+                let sorted = results.sort((a,b)=>{
+                    return a.createdAt-b.createdAt
+                });
 
-            // create a new arr with the predictions of 1 hour
-            let kpInformationArr = sorted.map((row)=>{
-                return new KPIndexInformation(row.prediction1Hours);
-            });
+                // create a new arr with the predictions of 1 hour
+                let kpInformationArr = sorted.map((row)=>{
+                    return new KPIndexInformation(row.prediction1Hours);
+                });
 
-            //Add to the list the last 12 entries and form this entries the 4 hour prediction (12 because there is every 15 minutes a news row so 12/4 = 4h)
-            let last12Predictions  = sorted.slice(sorted.length-12,sorted.length);
-            last12Predictions.forEach((row)=>{
+                //Add to the list the last 12 entries and form this entries the 4 hour prediction (12 because there is every 15 minutes a news row so 12/4 = 4h)
+                let last12Predictions  = sorted.slice(sorted.length-12,sorted.length);
+                last12Predictions.forEach((row)=>{
 
-                let info = new KPIndexInformation(row.prediction4Hours);
+                    let info = new KPIndexInformation(row.prediction4Hours);
 
-                kpInformationArr.push(info);
-            });
+                    kpInformationArr.push(info);
+                });
 
 
-            /**
-             * Debug
-             */
+                /**
+                 * Debug
+                 */
 
-            kpInformationArr.forEach((data)=>{
+                kpInformationArr.forEach((data)=>{
 
-                var utcDate = moment.unix(data.date).utcOffset(0);
+                    var utcDate = moment.unix(data.date).utcOffset(0);
 
-                data.dateUTC = utcDate.format();
-                data.dateLocal = utcDate.utcOffset(3).format();
+                    data.dateUTC = utcDate.format();
+                    data.dateLocal = utcDate.utcOffset(3).format();
 
-            });
-            callback(kpInformationArr);
+                });
+                resolve(kpInformationArr);
+            }).catch(reject)
         })
 
 
@@ -300,20 +302,23 @@ export default class KpWingService {
     /**
      * Get the kp file from the server
      *
-     * @param callback function(data)
+     *
      */
-    getKpIndexFile(callback) {
-
-        if(typeof callback ==  'undefined'){
-            throw new Error("Please set callback ")
-        }
-        console.log(KpWingService.KP_API_URL)
-        request(KpWingService.KP_API_URL, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                let results = this.parseKPRawFile(body)
-                callback(results)
-            }
+    getKpIndexFile() {
+        return new Promise((resolve,reject)=>{
+            request(KpWingService.KP_API_URL, (error, response, body) => {
+                if (!error && response.statusCode == 200) {
+                    let results = this.parseKPRawFile(body)
+                    resolve(results)
+                }else {
+                    reject({
+                        err: error,
+                        response: response
+                    })
+                }
+            })
         })
+
 
 
     }

@@ -3,30 +3,37 @@ import GeomagnaticLocationService from "./GeomagnaticLocationService"
 export function getRating(lng, lat, uTCDateTime,callback) {
 
   var examples = {};
+  if(uTCDateTime  == undefined || uTCDateTime == "now"){
+    uTCDateTime  = Date.now()
+  }
   console.log("GET RAITNING")
   /**
    *
    */
 
+  const service = new GeomagnaticLocationService();
 
-  KPService.getKpByUTCDate(Date.UTC(), (data)=>{
+  let kpIndexPromise = KPService.getKpByUTCDate(uTCDateTime)
+  let geoPromise = service.transformToGeomagnetic(lat,lng);
 
-    let last  = data[data.length-1]
+  Promise.all([kpIndexPromise,geoPromise]).then((data)=> {
+    console.log("FINISHED")
+
+    let geoInformation = data.pop();
+    let kpInformation = data.pop();
     let response = {
-      "location" : {
-        "lng" : lng,
-        "lat" : lat
+      "location": {
+        "lng": lng,
+        "lat": lat
       },
-      "kpIndex" : last
+      "locationGeomagnetic": geoInformation,
+      "kpIndex": kpInformation
     };
 
     callback(response)
-  });
-
-  const service = new GeomagnaticLocationService();
-  service.transformToGeomagnetic(23,33,(geomagnaticLat,geomagnaticLng)=>{
-    console.log("transformToGeomagnetic:",geomagnaticLat,geomagnaticLng)
-  });
+  }).catch((err)=>{
+    console.log(err);
+  })
 
 
 

@@ -11,9 +11,31 @@ class KPIndexService {
 
     }
 
-    getKpByUTCDate(UTCDate, callback){
+    /**
+     *
+     * @param UTCDate
+     * @returns {Promise.<T>}
+     */
+    getKpByUTCDate(UTCDate){
+        let unixUtcTime = moment(UTCDate).utc().unix();
 
-        this.kpWingService.getSortedList(callback);
+        return new Promise((resolve,reject)=>{
+
+            //Get the list
+            this.kpWingService.getList().then((list)=>{
+                let nextKpInformation =
+                    list.map((kpInformation)=> {
+                            return {
+                                distance: Math.abs(kpInformation.date - unixUtcTime),
+                                info: kpInformation
+                            }
+                        })
+                    .sort((a,b)=>b.distance - a.distance)
+                    .pop();
+                resolve(nextKpInformation.info)
+
+            }).catch(reject);
+        })
 
     }
 
