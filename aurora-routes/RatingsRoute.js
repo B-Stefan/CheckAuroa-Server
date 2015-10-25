@@ -22,7 +22,7 @@ export default class RatingsRoute{
         const params = this.normalizeParams(req);
 
         this.raitingService.getRatings(params.lat, params.lng, params.utcDate).then((list)=>{
-            res.josn(list);
+            res.json(list);
         }).catch((e)=>{
             res.status(501);
             res.json(e);

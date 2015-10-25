@@ -19,6 +19,7 @@ export default class RatingsService{
 
         let geoInformation = data.pop();
         let kpInformation = data.pop();
+
         let response = {
           "location": {
             "lng": lng,
@@ -28,7 +29,7 @@ export default class RatingsService{
           "kpIndex": kpInformation
         };
 
-        resove(response)
+        resolve(response)
       }).catch((err)=>{
         console.log(err);
         reject(err);
