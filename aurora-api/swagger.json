@@ -94,7 +94,7 @@
         }
       }
     },
-    "/rating" : {
+    "/ratings" : {
       "get" : {
         "summary" : "get a rating for your location",
         "operationId" : "getRating",
