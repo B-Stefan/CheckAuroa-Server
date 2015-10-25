@@ -4,7 +4,7 @@
 logs
 *.log
 npm-debug.log*
-
+tmp
 .idea
 .DS_Store
 # Runtime data

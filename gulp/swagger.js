@@ -39,6 +39,7 @@ gulp.task("swagger", (callback)=>{
         let path = __dirname + '/../api/clients/';
         request(body.link)
             .pipe(unzip.Extract({ path: path})).on("end",function(){
+
             callback();
         })
 

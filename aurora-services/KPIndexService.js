@@ -4,7 +4,7 @@ import {isDevMode} from "./../utils"
 import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 
-class KPIndexService {
+export default class KPIndexService {
 
     constructor(){
         this.kpWingService =  new KpWingService();
@@ -41,6 +41,4 @@ class KPIndexService {
 
 
 }
-
-export default new KPIndexService();
 

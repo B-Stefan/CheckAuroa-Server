@@ -1,19 +1,15 @@
 import newrelic from "newrelic";
-import connect from "connect";
+import express from "express";
 import http from "http";
 import swaggerTools from "swagger-tools";
 import {isDevMode} from "./utils"
-const app = connect();
+import Router from "./aurora-routes/Router"
+const app = express();
 const serverPort = process.env.PORT || 8080;
 
-// swaggerRouter configuration
-const options = {
-  controllers: './controllers',
-  useStubs: isDevMode()// Conditionally turn on stubs (mock mode)
-};
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-const swaggerDoc = require('./api/swagger.json');
+const swaggerDoc = require('./aurora-api/swagger.json');
 
 
 if(isDevMode()){
@@ -29,11 +25,10 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Validate Swagger requests
   app.use(middleware.swaggerValidator());
 
-  // Route validated requests to appropriate controller
-  app.use(middleware.swaggerRouter(options));
-
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
+
+  const router = new Router(app);
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {
