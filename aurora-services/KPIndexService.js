@@ -11,6 +11,9 @@ export default class KPIndexService {
 
     }
 
+    getKpListByUTCDate(UTCDate){
+        return this.kpWingService.getList()
+    }
     /**
      *
      * @param UTCDate

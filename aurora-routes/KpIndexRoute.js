@@ -19,7 +19,7 @@ export default class KpIndexRoute{
 
         const params = this.normalizeParams(req);
 
-        this.kpService.getKpByUTCDate(params.utcDate).then((list)=>{
+        this.kpService.getKpListByUTCDate(params.utcDate).then((list)=>{
             res.json(list);
         }).catch((e)=>{
             res.status(501);
@@ -30,7 +30,14 @@ export default class KpIndexRoute{
 
     }
     getLastIndex(req,res,next){
-        res.send("Yeees" )
+        const params = this.normalizeParams(req);
+
+        this.kpService.getKpByUTCDate(params.utcDate).then((list)=>{
+            res.json(list);
+        }).catch((e)=>{
+            res.status(501);
+            res.json(e);
+        });
     }
 
 }
