@@ -9,18 +9,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node ./bootstrap.js",
+    "start": "npm run gulp swagger-clients && npm run doc && node ./bootstrap.js",
     "gulp": "./node_modules/.bin/gulp",
     "jsdoc": "./node_modules/.bin/jsdoc",
     "doc": "./node_modules/.bin/jsdoc -c ./jsdoc.json "
   },
-  "pre-push": [
-    "npm run gulp swagger-clients",
-    "npm run doc",
-    "git add docs",
-    "git add  aurora-api/clients",
-    "git commit -m \"Update-client-libs-&-Doc\""
-  ],
   "dependencies": {
     "babel": "^5.8.23",
     "connect": "^3.2.0",
@@ -31,18 +24,17 @@
     "request": "^2.65.0",
     "swagger-tools": "^0.8.7",
     "typescript-require": "^0.2.9",
-    "xml2json": "^0.9.0"
-  },
-  "devDependencies": {
+    "xml2json": "^0.9.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.3.0",
     "gulp-jsdoc": "^0.1.5",
     "gulp-size": "^2.0.0",
-    "jsdoc": "^3.3.3",
-    "jsdoc-babel": "^0.1.0",
-    "pre-git": "^0.6.2",
+    "unzip": "^0.1.11",
     "require-dir": "^0.3.0",
-    "swagger-js-codegen": "^1.1.4",
-    "unzip": "^0.1.11"
+    "jsdoc": "^3.3.3",
+    "jsdoc-babel": "^0.1.0"
+  },
+  "devDependencies": {
+    "pre-git": "^0.6.2"
   }
 }
