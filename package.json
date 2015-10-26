@@ -14,7 +14,7 @@
   },
   "pre-push": [
       "npm run gulp swagger-clients",
-      "git add ./aurora-api/clients/",
+      "git add  aurora-api/clients",
       "git commit -m 'Update client libs'"
   ],
   "dependencies": {
