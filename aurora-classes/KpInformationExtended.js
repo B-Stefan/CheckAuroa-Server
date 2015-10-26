@@ -1,10 +1,11 @@
-export default class KPInformation {
-    date;
-    kpValue;
+
+import {KpInformation} from "./../aurora-api/clients/typescript-node-client/api"
+export default class KpInformationExtended extends KpInformation {
     minutes;
     original;
     constructor(kpInformationInstance){
-        if(kpInformationInstance  instanceof KPInformation){
+        super();
+        if(kpInformationInstance  instanceof KpInformation){
             this.date = kpInformationInstance.date;
             this.kpValue = kpInformationInstance.kpValue;
             this.minutes= kpInformationInstance.minutes;
