@@ -30,13 +30,13 @@ To start the programm follow the next steps:
 To use this api in your application we provide several client libs. 
 Possible libraries are: 
 
-* [Typescript-Angular](./aurora-api/clients/typescript-angular.zip?raw=true)
+* [Typescript-Angular](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/android.zip)
 * Typescript-Node 
-* [Android](./aurora-api/clients/android.zip?raw=true)
+* [Android](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/android.zip)
 * Java 
 * PHP 
 * Scala 
-* [QT5](./aurora-api/clients/qt5.zip?raw=true) 
+* [QT5](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/qt5.zip) 
 * c++ 
 
 ## Upload new version 
