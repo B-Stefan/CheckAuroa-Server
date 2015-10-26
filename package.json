@@ -15,7 +15,7 @@
   "pre-push": [
       "npm run gulp swagger-clients",
       "git add  aurora-api/clients",
-      "git commit -m 'Update client libs'"
+      "git commit -m \"Update-client-libs\""
   ],
   "dependencies": {
     "babel": "^5.8.23",
