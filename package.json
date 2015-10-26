@@ -13,14 +13,15 @@
     "gulp": "./node_modules/.bin/gulp"
   },
   "pre-push": [
-      "npm run gulp swagger-clients",
-      "git add  aurora-api/clients",
-      "git commit -m \"Update-client-libs\""
+    "npm run gulp swagger-clients",
+    "git add  aurora-api/clients",
+    "git commit -m \"Update-client-libs\""
   ],
   "dependencies": {
     "babel": "^5.8.23",
     "connect": "^3.2.0",
     "express": "^4.13.3",
+    "marked": "^0.3.5",
     "moment": "^2.10.6",
     "newrelic": "^1.22.2",
     "request": "^2.65.0",
@@ -30,7 +31,10 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.3.0",
+    "gulp-jsdoc": "^0.1.5",
     "gulp-size": "^2.0.0",
+    "jsdoc": "^3.3.3",
     "pre-git": "^0.6.2",
     "require-dir": "^0.3.0",
     "swagger-js-codegen": "^1.1.4",

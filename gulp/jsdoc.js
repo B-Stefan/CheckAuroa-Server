@@ -3,20 +3,19 @@ import size  from "gulp-size"
 import fs from "fs"
 import request from "request"
 import GulpConfig from "./../Gulp-config"
+import jsdoc from "gulp-jsdoc"
+import babel from "gulp-babel"
 
-gulp.task("swagger-client-android", (callback)=>{
+gulp.task("jsdoc", ()=>{
 
-    /**
-     * Angular client
-     */
-    request.post({
-        url: "http://generator.swagger.io/api/gen/clients/android",
-        json:true,
-        body:GulpConfig.swaggerPostData
+    return gulp.src([
 
-    },(err,req,body)=>{
-        request(body.link).pipe(fs.createWriteStream('aurora-api/clients/android.zip')).on("end", callback);
-
-    })
+        "./aurora-classes/**/*.js",
+        "./aurora-routes/**/*.js",
+        "./aurora-services/**/*.js",
+        "./Readme.md"
+    ])
+        .pipe(babel())
+        .pipe(jsdoc('./docs'))
 
 });
