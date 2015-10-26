@@ -32,6 +32,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   const router = new Router(app);
 
   app.use('/', express.static('docs'));
+  app.use('/clients', express.static('aurora-api/clients'));
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {
