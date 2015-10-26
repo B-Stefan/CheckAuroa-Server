@@ -8,7 +8,7 @@
     "dictionaries": ["jsdoc","closure"]
   },
   "source": {
-    "include": [ "aurora-classes", "aurora-services", "Readme.md"],
+    "include": [ "aurora-classes", "aurora-services", "README.md"],
     "exclude": [ "node_modules/" ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"
