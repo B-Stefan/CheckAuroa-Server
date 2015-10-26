@@ -30,13 +30,13 @@ To start the programm follow the next steps:
 To use this api in your application we provide several client libs. 
 Possible libraries are: 
 
-* Typescript-Angular 
+* [Typescript-Angular](./aurora-api/clients/typescript-angular.zip?raw=true)
 * Typescript-Node 
-* Android 
+* [Android](./aurora-api/clients/android.zip?raw=true)
 * Java 
 * PHP 
 * Scala 
-* QT5 
+* [QT5](./aurora-api/clients/qt5.zip?raw=true) 
 * c++ 
 
 ##Upload new version 
