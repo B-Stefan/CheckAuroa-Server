@@ -94,6 +94,25 @@
         }
       }
     },
+    "/kpIndex/last" : {
+      "get" : {
+        "summary" : "Retuns the last KP index",
+        "operationId" : "getLastKpIndex",
+        "x-swagger-router-controller" : "KPIndex",
+        "tags" : [ "KP-Index" ],
+        "parameters" : [ {
+          "$ref" : "#/parameters/UTCDateParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The last (per default) or the newast kp index to your UTCDate parameter",
+            "schema" : {
+              "$ref" : "#/definitions/KpInformation"
+            }
+          }
+        }
+      }
+    },
     "/kpIndex" : {
       "get" : {
         "summary" : "Retuns a list of KpInformation",
@@ -118,7 +137,7 @@
     },
     "/ratings" : {
       "get" : {
-        "summary" : "get a rating for your location",
+        "summary" : "Geta list of  ratings for your location",
         "operationId" : "getRating",
         "x-swagger-router-controller" : "Rating",
         "tags" : [ "Ratings" ],
@@ -126,6 +145,8 @@
           "$ref" : "#/parameters/lngParam"
         }, {
           "$ref" : "#/parameters/latParam"
+        }, {
+          "$ref" : "#/parameters/UTCDateParam"
         } ],
         "responses" : {
           "200" : {
