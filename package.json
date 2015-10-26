@@ -19,7 +19,7 @@
     "npm run doc",
     "git add docs",
     "git add  aurora-api/clients",
-    "git commit -m \"Update-client-libs & Doc\""
+    "git commit -m \"Update-client-libs-&-Doc\""
   ],
   "dependencies": {
     "babel": "^5.8.23",
