@@ -254,8 +254,12 @@
     },
     "KpInformation" : {
       "properties" : {
-        "date" : {
+        "utc" : {
           "type" : "number"
+        },
+        "date" : {
+          "type" : "string",
+          "format" : "date-time"
         },
         "kpValue" : {
           "type" : "number",
