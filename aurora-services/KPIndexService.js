@@ -12,7 +12,22 @@ export default class KPIndexService {
     }
 
     getKpListByUTCDate(UTCDate){
-        return this.kpWingService.getList()
+        let unixUtcTime = UTCDate;
+
+        return new Promise((resolve,reject)=>{
+
+            //Get the list
+            this.kpWingService.getList().then((list)=>{
+                let nextKpInformation =
+                    list.filter((kpInformation)=> {
+                            return (kpInformation.date - unixUtcTime) > 0
+
+                        });
+
+                resolve(nextKpInformation)
+
+            }).catch(reject);
+        })
     }
     /**
      *

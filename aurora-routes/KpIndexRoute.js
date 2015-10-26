@@ -11,8 +11,15 @@ export default class KpIndexRoute{
         this.kpService = new KPIndexService()
     }
     normalizeParams(req){
+
+        let date;
+        if(req.swagger.params.UTCDateTime.value == "now"){
+            date = moment().unix()
+        }else {
+            date = moment(req.swagger.params.UTCDateTime.value).unix()
+        }
         return {
-            utcDate: req.swagger.params.UTCDateTime.value ? moment(req.swagger.params.UTCDateTime.value).unix(): moment().unix()
+            utcDate: date
         }
     }
     getKpIndexList(req,res,next){
