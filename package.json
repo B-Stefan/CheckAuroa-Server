@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "start": "npm run gulp swagger-clients && npm run doc && node ./bootstrap.js",
+    "dev": "node  node ./bootstrap.js",
     "gulp": "./node_modules/.bin/gulp",
     "jsdoc": "./node_modules/.bin/jsdoc",
     "doc": "./node_modules/.bin/jsdoc -c ./jsdoc.json "
