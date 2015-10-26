@@ -7,7 +7,7 @@ gulp.task("swagger", (callback)=>{
 
     var CodeGen = require('swagger-js-codegen').CodeGen;
 
-    var file = 'api/swagger.json';
+    var file = 'aurora-api/swagger.json';
 
 
     var swagger = JSON.parse(fs.readFileSync(file, 'UTF-8'));
@@ -36,7 +36,7 @@ gulp.task("swagger", (callback)=>{
 
         console.log(err,body)
 
-        let path = __dirname + '/../api/clients/';
+        let path = __dirname + '/../aurora-api/clients/';
         request(body.link)
             .pipe(unzip.Extract({ path: path})).on("end",function(){
 

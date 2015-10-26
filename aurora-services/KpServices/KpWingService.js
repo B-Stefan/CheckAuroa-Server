@@ -122,8 +122,13 @@ class Row{
         this.prediction4Hours = new KPIndexInformation();
 
         //Set up dates
-        this.prediction1Hours.date  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_4_HOURS_YEAR,rowValues);
-        this.prediction4Hours.date  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_8_HOURS_YEAR,rowValues);
+        this.prediction1Hours.utc  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_4_HOURS_YEAR,rowValues);
+        this.prediction1Hours.date = moment.unix(this.prediction1Hours.utc).utcOffset(0).format("YYYY-MM-DDTHH:mm:ssZ");
+
+
+        this.prediction4Hours.utc  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_8_HOURS_YEAR,rowValues);
+        this.prediction4Hours.date = moment.unix(this.prediction4Hours.utc).utcOffset(0).format("YYYY-MM-DDTHH:mm:ssZ");
+
         this.createdAt              = Row.getUTCDateFromRowARR(Row.COLLUMS.CREATED_AT_YEAR,rowValues);
 
 
@@ -197,18 +202,6 @@ export default class KpWingService {
                 });
 
 
-                /**
-                 * Debug
-                 */
-
-                kpInformationArr.forEach((data)=>{
-
-                    var utcDate = moment.unix(data.date).utcOffset(0);
-
-                    data.dateUTC = utcDate.format();
-                    data.dateLocal = utcDate.utcOffset(3).format();
-
-                });
                 resolve(kpInformationArr);
             }).catch(reject)
         })

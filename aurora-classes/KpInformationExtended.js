@@ -6,6 +6,7 @@ export default class KpInformationExtended extends KpInformation {
     constructor(kpInformationInstance){
         super();
         if(kpInformationInstance  instanceof KpInformation){
+            this.utc = kpInformationInstance.utc;
             this.date = kpInformationInstance.date;
             this.kpValue = kpInformationInstance.kpValue;
             this.minutes= kpInformationInstance.minutes;

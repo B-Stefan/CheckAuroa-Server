@@ -14,9 +14,9 @@ export default class KpIndexRoute{
 
         let date;
         if(req.swagger.params.UTCDateTime.value == "now"){
-            date = moment().unix()
+            date = moment().utcOffset(0).unix()
         }else {
-            date = moment(req.swagger.params.UTCDateTime.value).unix()
+            date = moment(req.swagger.params.UTCDateTime.value).utcOffset(0).unix()
         }
         return {
             utcDate: date
