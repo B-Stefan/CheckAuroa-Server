@@ -12,6 +12,11 @@
     "start": "node ./bootstrap.js",
     "gulp": "./node_modules/.bin/gulp"
   },
+  "pre-push": [
+      "npm run gulp swagger-clients",
+      "git add ./aurora-api/clients/",
+      "git commit -m 'Update client libs'"
+  ],
   "dependencies": {
     "babel": "^5.8.23",
     "connect": "^3.2.0",
@@ -26,6 +31,7 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-size": "^2.0.0",
+    "pre-git": "^0.6.2",
     "require-dir": "^0.3.0",
     "swagger-js-codegen": "^1.1.4",
     "unzip": "^0.1.11"
