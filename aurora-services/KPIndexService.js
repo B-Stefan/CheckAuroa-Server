@@ -20,7 +20,7 @@ export default class KPIndexService {
             this.kpWingService.getList().then((list)=>{
                 let nextKpInformation =
                     list.filter((kpInformation)=> {
-                            return (kpInformation.date - unixUtcTime) > 0
+                            return (unixUtcTime - kpInformation.date) > 0
 
                         });
 
@@ -48,7 +48,7 @@ export default class KPIndexService {
                                 info: kpInformation
                             }
                         })
-                    .sort((a,b)=>b.distance - a.distance)
+                    .sort((a,b)=>a.distance - b.distance)
                     .pop();
                 resolve(nextKpInformation.info)
 
