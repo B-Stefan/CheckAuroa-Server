@@ -1,0 +1,21 @@
+{
+  "opts": {
+    "destination": "./docs/",
+    "recurse": true
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "source": {
+    "include": [ "aurora-classes", "aurora-services", "Readme.md"],
+    "exclude": [ "node_modules/" ],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": ["node_modules/jsdoc-babel"],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

@@ -28,7 +28,10 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
+
   const router = new Router(app);
+
+  app.use('/', express.static('docs'));
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {
