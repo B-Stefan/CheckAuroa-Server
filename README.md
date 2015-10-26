@@ -3,7 +3,9 @@ This repository contains the code for the data api server for the mobile applica
 The application originated from two study courses at the [Jamk.fi](http://jamk.fi) in 2015.
 
 A live and running version of this server you can reach under the domain: 
- * https://check-aurora-api.herokuapp.com/docs/
+
+ * [Api-Console & Docs ](https://check-aurora-api.herokuapp.com/docs/)
+ * [Server](https://check-aurora-api.herokuapp.com/)
  
 
 ## Application idea 
@@ -30,13 +32,13 @@ To start the programm follow the next steps:
 To use this api in your application we provide several client libs. 
 Possible libraries are: 
 
-* [Typescript-Angular](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/android.zip)
+* [Typescript-Angular](https://check-aurora-api.herokuapp.com/clients/android.zip)
 * Typescript-Node 
-* [Android](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/android.zip)
+* [Android](https://check-aurora-api.herokuapp.com/clients/android.zip)
 * Java 
 * PHP 
 * Scala 
-* [QT5](https://github.com/B-Stefan/CheckAuroa-Server/raw/heroku-live/aurora-api/clients/qt5.zip) 
+* [QT5](https://check-aurora-api.herokuapp.com/clients/qt5.zip) 
 * c++ 
 
 ## Upload new version 
