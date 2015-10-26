@@ -24,7 +24,7 @@ export default class GeomagnaticLocationService {
                 vars: 4,
                 profile: 1,
                 latitude: lat,
-                year: new Date().getYear(),
+                year: new Date().getFullYear(),
                 stop: 1,
                 step: 1,
                 longitude: lng,
