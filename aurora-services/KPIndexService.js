@@ -20,7 +20,7 @@ export default class KPIndexService {
             this.kpWingService.getList().then((list)=>{
                 let nextKpInformation =
                     list.filter((kpInformation)=> {
-                            return (unixUtcTime - kpInformation.date) > 0
+                            return (kpInformation.date - unixUtcTime) > 0
 
                         });
 

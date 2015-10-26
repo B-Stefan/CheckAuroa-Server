@@ -2,7 +2,7 @@
 import request from "request"
 import {isDevMode} from "./../../utils"
 import moment from "moment";
-import KPIndexInformation from "./../../aurora-classes/KPIndexInformation"
+import KPIndexInformation from "./../../aurora-classes/KpInformationExtended"
 
 /**
  * Class for one row of the text file
