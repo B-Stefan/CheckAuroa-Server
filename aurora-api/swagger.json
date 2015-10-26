@@ -137,7 +137,7 @@
     },
     "/ratings" : {
       "get" : {
-        "summary" : "Geta list of  ratings for your location",
+        "summary" : "get a rating for your location",
         "operationId" : "getRating",
         "x-swagger-router-controller" : "Rating",
         "tags" : [ "Ratings" ],
@@ -152,7 +152,10 @@
           "200" : {
             "description" : "An single rating element",
             "schema" : {
-              "$ref" : "#/definitions/Rating"
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Rating"
+              }
             }
           },
           "default" : {
@@ -251,12 +254,12 @@
     },
     "KpInformation" : {
       "properties" : {
+        "utc" : {
+          "type" : "number"
+        },
         "date" : {
           "type" : "string",
           "format" : "date-time"
-        },
-        "utc" : {
-          "type" : "number"
         },
         "kpValue" : {
           "type" : "number",
