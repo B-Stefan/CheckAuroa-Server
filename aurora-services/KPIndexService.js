@@ -25,6 +25,7 @@ export default class KPIndexService {
     /**
      * Collect all kpInformation from different services and return a unsorted list of KpInformation
      * @method getKpList
+     * @class KPIndexService
      * @private
      * @returns {Promise<KpInformation[]>}
      */
@@ -46,6 +47,7 @@ export default class KPIndexService {
     /**
      * Returns a list of kp information. All entires are after the param UTCDate
      * @method getKpListByUTCDate
+     * @class KPIndexService
      * @param UTCDate
      * @returns {Promise<KpInformation[]>}
      */
@@ -70,6 +72,7 @@ export default class KPIndexService {
     /**
      * Returns the KPInformation that is the nearest to the param UTCDate
      * @method getKpByUTCDate
+     * @class KPIndexService
      * @param UTCDate
      * @returns {Promise.<KPInformation>}
      */

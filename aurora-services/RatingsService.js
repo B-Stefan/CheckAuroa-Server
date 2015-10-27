@@ -16,6 +16,7 @@ export default class RatingsService{
   /**
    * Set up the required sub-services
    * @constructor
+   * @class RatingsService
    */
   constructor(){
     this.geoService = new GeomagnaticLocationService();
@@ -28,14 +29,14 @@ export default class RatingsService{
    * Calculate the rating value and returns the value.
    * In this function all magic happend
    * @method calculateRating
-   * @param kpInformation
-   * @param weatherInformation
-   * @param weatherInfo
-   * @param location
-   * @param utcDateTime
+   * @class RatingsService
+   * @param {KpInformation} kpInformation
+   * @param {WeatherInformation} weatherInformation
+   * @param {Location} location
+   * @param {int} utcDateTime
    * @returns double
      */
-  calculateRating(kpInformation, weatherInformation,weatherInfo, location, utcDateTime){
+  calculateRating(kpInformation, weatherInformation, location, utcDateTime){
     //console.log(arguments);
     return Math.random();
   }
@@ -43,6 +44,7 @@ export default class RatingsService{
   /**
    * Returns a list of ratings for the next 24 hours
    * @method getRatings
+   * @class RatingsService
    * @param {double} lng
    * @param {double} lat
    * @param {int} uTCDateTime
