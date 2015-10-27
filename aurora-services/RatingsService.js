@@ -1,4 +1,5 @@
 import KPService from "./KPIndexService"
+import WeatherService from "./WeatherService"
 import GeomagnaticLocationService from "./GeomagnaticLocationService"
 import {Rating, Location,GeomagnaticLocation} from "./../aurora-api/clients/typescript-node-client/api.ts"
 import {unixToRFC3339Date} from "./../utils"
@@ -18,7 +19,8 @@ export default class RatingsService{
    */
   constructor(){
     this.geoService = new GeomagnaticLocationService();
-    this.kpService = new KPService()
+    this.kpService = new KPService();
+    this.weatherService = new WeatherService()
   }
 
   /**
@@ -27,13 +29,14 @@ export default class RatingsService{
    * In this function all magic happend
    * @param kpInformation
    * @param weatherInformation
+   * @param weatherInfo
    * @param location
    * @param utcDateTime
    * @returns double
      */
-  calculateRating(kpInformation, weatherInformation, location, utcDateTime){
-
-    return 0.0;
+  calculateRating(kpInformation, weatherInformation,weatherInfo, location, utcDateTime){
+    //console.log(arguments);
+    return Math.random();
   }
 
   /**
@@ -47,6 +50,8 @@ export default class RatingsService{
 
     let geoPromise = this.geoService.transformToGeomagnetic(lat,lng);
 
+    let weatherPromise = this.weatherService.getWeatherPredictionByLatLng(lat,lng,uTCDateTime);
+
     let location = new Location();
     location.lat = lat;
     location.lng = lng;
@@ -54,9 +59,10 @@ export default class RatingsService{
     let self = this;
 
     return new Promise((resolve,reject)=>{
-      Promise.all([geoPromise]).then((data)=> {
+      Promise.all([weatherPromise,geoPromise]).then((data)=> {
 
         let geomagnaticLocation = data.pop();
+        let weatherInfos = data.pop();
 
         let ratingsPromises = Array.from(Array(12).keys()).map((NullData, i)=>{
 
@@ -69,14 +75,14 @@ export default class RatingsService{
             }else {
               currentDate = moment.unix(uTCDateTime).utcOffset(0).add(i + (i-4)*2,"hour").unix();
             }
-            console.log(currentDate);
 
             this.kpService.getKpByUTCDate(currentDate).then((kpInformation)=>{
               let newRating = new Rating();
               newRating.utc = currentDate;
               newRating.date = unixToRFC3339Date(newRating.utc);
               newRating.kp = kpInformation;
-              newRating.value = this.calculateRating(newRating.kp,geomagnaticLocation,location, newRating.utc);
+              newRating.weather = this.weatherService.getNearestWeatherInformation(newRating.utc,weatherInfos);
+              newRating.value = this.calculateRating(newRating.kp,geomagnaticLocation,newRating.weather,location, newRating.utc);
 
               resolve(newRating)
 
