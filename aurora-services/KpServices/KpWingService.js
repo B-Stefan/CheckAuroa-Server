@@ -3,7 +3,7 @@ import request from "request"
 import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
 import KPIndexInformation from "./../../aurora-classes/KpInformationExtended"
-
+import NodeCache from "node-cache"
 /**
  * Class for one row of the text file
  */
@@ -171,6 +171,10 @@ export default class KpWingService {
     }
 
 
+    constructor(){
+        this.cache = new NodeCache()
+    }
+
     /**
      * Retun a sorted list of
      * @param callback: (listSorted: Array<KpInformation> )=>void
@@ -283,7 +287,7 @@ export default class KpWingService {
                 let newRow = new Row(rowValues);
                 results.push(newRow)
             }else {
-                console.log("Row not valid ", rowValues)
+                //console.log("Row not valid ", rowValues)
             }
 
         });
@@ -298,18 +302,29 @@ export default class KpWingService {
      *
      */
     getKpIndexFile() {
+
         return new Promise((resolve,reject)=>{
-            request(KpWingService.KP_API_URL, (error, response, body) => {
-                if (!error && response.statusCode == 200) {
-                    let results = this.parseKPRawFile(body)
-                    resolve(results)
-                }else {
-                    reject({
-                        err: error,
-                        response: response
-                    })
-                }
-            })
+
+            let cachedResult = this.cache.get( "result" );
+            if(cachedResult == undefined){
+                request(KpWingService.KP_API_URL, (error, response, body) => {
+                    if (!error && response.statusCode == 200) {
+                        let results = this.parseKPRawFile(body);
+                        this.cache.set("result", results, 10000);
+                        resolve(results)
+                    }else {
+                        reject({
+                            err: error,
+                            response: response
+                        })
+                    }
+                })
+            }else {
+                console.log("getKpIndexFile: resolved with cache");
+                resolve(cachedResult)
+            }
+
+
         })
 
 

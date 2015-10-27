@@ -56,34 +56,38 @@ export default class RatingsService{
         let kpInformation = data.pop();
 
 
-        let ratings = Array.from(Array(12).keys()).map((NullData, i)=>{
+        let ratingsPromises = Array.from(Array(12).keys()).map((NullData, i)=>{
 
 
           let currentDate;
           if(i < 5 ){
-            currentDate = moment.unix(uTCDateTime).utcOffset(0).add("hour",i).unix();
+            currentDate = moment.unix(uTCDateTime).utcOffset(0).add(i,"hour").unix();
           }else {
-            currentDate = moment.unix(uTCDateTime).utcOffset(0).add("hour",i + (i-4)*2).unix();
+            currentDate = moment.unix(uTCDateTime).utcOffset(0).add(i + (i-4)*2,"hour").unix();
           }
-
-          let newRating = new Rating();
-          newRating.utc = currentDate;
-          newRating.date = unixToRFC3339Date(currentDate);
-          return newRating;
+          let info = {
+            utc: currentDate,
+            kpPromise: this.kpService.getKpByUTCDate(currentDate)
+          };
+          return info;
         });
 
-        console.log("ratings.length",ratings.length)
+        Promise.all(ratingsPromises.map((info)=>info.kpPromise)).then((resultData)=>{
 
-        let response = {
-          "location": {
-            "lng": lng,
-            "lat": lat
-          },
-          "locationGeomagnetic": geoInformation,
-          "kpIndex": kpInformation
-        };
+          let ratings = resultData.map((kpInformation,i)=>{
 
-        resolve(ratings)
+            let originalUTC = ratingsPromises[i].utc;
+            let newRating = new Rating();
+            newRating.utc = originalUTC;
+            newRating.date = unixToRFC3339Date(newRating.utc);
+            newRating.kp = kpInformation;
+            return newRating;
+          });
+
+          resolve(ratings)
+
+        }).catch(reject);
+
       }).catch((err)=>{
         console.log(err);
         reject(err);

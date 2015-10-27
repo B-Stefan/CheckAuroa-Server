@@ -1,6 +1,6 @@
 "use strict";
 import request from "request"
-import {isDevMode} from "./../utils"
+import {isDevMode,unixToRFC3339Date} from "./../utils"
 import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 
@@ -32,13 +32,13 @@ export default class KPIndexService {
     /**
      *
      * @param UTCDate
-     * @returns {Promise.<T>}
+     * @returns {Promise.<KPInformation>}
      */
     getKpByUTCDate(UTCDate){
-        let unixUtcTime = moment(UTCDate).utc().unix();
 
         return new Promise((resolve,reject)=>{
 
+            let unixUtcTime = UTCDate;
             //Get the list
             this.kpWingService.getList().then((list)=>{
                 let nextKpInformation =
@@ -48,8 +48,9 @@ export default class KPIndexService {
                                 info: kpInformation
                             }
                         })
-                    .sort((a,b)=>a.distance - b.distance)
+                    .sort((a,b)=>b.distance - a.distance)
                     .pop();
+
                 resolve(nextKpInformation.info)
 
             }).catch(reject);
