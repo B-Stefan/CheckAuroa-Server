@@ -2,6 +2,7 @@ import request from "request"
 import KpInformationExtened  from "./../../aurora-classes/KpInformationExtended"
 import {unixToRFC3339Date}  from "./../../utils"
 import moment from "moment"
+import NodeCache from "node-cache"
 export default class Kp3DayForecast{
 
     static get URL(){return "http://services.swpc.noaa.gov/text/3-day-forecast.txt"}
@@ -21,6 +22,10 @@ export default class Kp3DayForecast{
 
     }
 
+    constructor(){
+        this.cache = new NodeCache();
+
+    }
     parseRawData(rawData){
         let currentDate = moment.utc();
         currentDate.hours(0);
@@ -111,19 +116,30 @@ export default class Kp3DayForecast{
 
     getKpIndexForNextDays(){
 
-        return new Promise((resolve,reject)=>{
+        if(this.pendingPromie != undefined){
+            return this.pendingPromie
+        }
+        this.pendingPromie =  new Promise((resolve,reject)=>{
 
+            let cachedResult =   this.cache.get("result");
+            if(cachedResult != undefined){
+                console.log("getKpIndexForNextDays: Used cache")
+                resolve(cachedResult)
+                return;
+            }
             request(Kp3DayForecast.URL,(err,request,body)=>{
                 if(err){
                     reject(err);
                     return;
                 }
                 let kpInformations = this.parseRawData(body);
+                this.cache.set("result",kpInformations,900000/2);
                 resolve(kpInformations)
 
             })
 
         });
+        return this.pendingPromie;
     }
 
 
