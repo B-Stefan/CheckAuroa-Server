@@ -303,11 +303,15 @@ export default class KpWingService {
      */
     getKpIndexFile() {
 
-        return new Promise((resolve,reject)=>{
+        if(this.pendingPromise != undefined){
+            return this.pendingPromise;
+        }
+        this.pendingPromise  = new Promise((resolve,reject)=>{
 
             let cachedResult = this.cache.get( "result" );
             if(cachedResult == undefined){
                 request(KpWingService.KP_API_URL, (error, response, body) => {
+                    this.pendingPromise = undefined;
                     if (!error && response.statusCode == 200) {
                         let results = this.parseKPRawFile(body);
                         this.cache.set("result", results, 10000);
@@ -319,13 +323,17 @@ export default class KpWingService {
                         })
                     }
                 })
-            }else {
+            }else{
                 console.log("getKpIndexFile: resolved with cache");
                 resolve(cachedResult)
             }
 
 
-        })
+        });
+
+
+
+        return this.pendingPromise
 
 
 
