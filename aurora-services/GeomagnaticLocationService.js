@@ -1,5 +1,6 @@
 import request from "request"
 import xml2json from "xml2json"
+import {GeomagnaticLocation} from "./../aurora-api/clients/typescript-node-client/api.ts";
 export default class GeomagnaticLocationService {
 
     static get API_URL() {return "http://omniweb.gsfc.nasa.gov/cgi/vitmo/vitmo_model.cgi"}
@@ -54,8 +55,10 @@ export default class GeomagnaticLocationService {
                 }
 
                 //get rest lat
-                let getMagnaticLat = xmlData.cgm_model.output_param.Height_profile.SP_CGM_Latitude.$t
-                resolve(getMagnaticLat);
+                let gmLoc = new GeomagnaticLocation();
+                gmLoc.latG = xmlData.cgm_model.output_param.Height_profile.SP_CGM_Latitude.$t
+                gmLoc.lngG = 0;
+                resolve(gmLoc);
 
             })
         })
