@@ -56,7 +56,7 @@ export default class GeomagnaticLocationService {
 
                 //get rest lat
                 let gmLoc = new GeomagnaticLocation();
-                gmLoc.latG = xmlData.cgm_model.output_param.Height_profile.SP_CGM_Latitude.$t
+                gmLoc.latG = parseFloat(xmlData.cgm_model.output_param.Height_profile.SP_CGM_Latitude.$t)
                 gmLoc.lngG = 0;
                 resolve(gmLoc);
 

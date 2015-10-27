@@ -133,8 +133,8 @@ class Row{
 
 
         //Set up Kp-Values
-        this.prediction1Hours.kpValue = rowValues[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX];
-        this.prediction4Hours.kpValue = rowValues[Row.COLLUMS.PREDICTION_8_HOURS_KP_INDEX];
+        this.prediction1Hours.kpValue = parseFloat(rowValues[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX]);
+        this.prediction4Hours.kpValue = parseFloat(rowValues[Row.COLLUMS.PREDICTION_8_HOURS_KP_INDEX]);
 
         //Set up minutes
 
