@@ -5,14 +5,29 @@ import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"
 
+/**
+ * Service to get the kp values
+ * @class KPIndexService
+ *
+ */
 export default class KPIndexService {
 
+    /**
+     *
+     * @constructor
+     */
     constructor(){
         this.kpWingService =  new KpWingService();
         this.kp3DayService =  new Kp3DayForecast();
 
     }
 
+    /**
+     * Collect all kpInformation from different services and return a unsorted list of KpInformation
+     * @method getKpList
+     * @private
+     * @returns {Promise<KpInformation[]>}
+     */
     getKpList(){
 
         return new Promise((resolve,reject)=>{
@@ -27,6 +42,13 @@ export default class KPIndexService {
             }).catch(reject)
         })
     }
+
+    /**
+     * Returns a list of kp information. All entires are after the param UTCDate
+     * @method getKpListByUTCDate
+     * @param UTCDate
+     * @returns {Promise<KpInformation[]>}
+     */
     getKpListByUTCDate(UTCDate){
         let unixUtcTime = UTCDate;
 
@@ -46,7 +68,8 @@ export default class KPIndexService {
         })
     }
     /**
-     *
+     * Returns the KPInformation that is the nearest to the param UTCDate
+     * @method getKpByUTCDate
      * @param UTCDate
      * @returns {Promise.<KPInformation>}
      */

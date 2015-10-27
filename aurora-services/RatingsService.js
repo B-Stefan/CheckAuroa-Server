@@ -27,6 +27,7 @@ export default class RatingsService{
    *
    * Calculate the rating value and returns the value.
    * In this function all magic happend
+   * @method calculateRating
    * @param kpInformation
    * @param weatherInformation
    * @param weatherInfo
@@ -41,9 +42,10 @@ export default class RatingsService{
 
   /**
    * Returns a list of ratings for the next 24 hours
-   * @param lng
-   * @param lat
-   * @param uTCDateTime
+   * @method getRatings
+   * @param {double} lng
+   * @param {double} lat
+   * @param {int} uTCDateTime
    * @returns {Promise<Ratings[]>}
      */
   getRatings(lng, lat, uTCDateTime){
