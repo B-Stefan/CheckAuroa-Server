@@ -4,7 +4,7 @@ The application originated from two study courses at the [Jamk.fi](http://jamk.f
 
 A live and running version of this server you can reach under the domain: 
 
- * [Api-Console & Docs ](https://check-aurora-api.herokuapp.com/docs/)
+ * [Api-Console & Docs ](http://check-aurora-api.herokuapp.com/docs/)
  * [Server](https://check-aurora-api.herokuapp.com/)
  
 
