@@ -1,6 +1,6 @@
 "use strict";
 import request from "request"
-import {isDevMode} from "./../../utils"
+import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
 import KPIndexInformation from "./../../aurora-classes/KpInformationExtended"
 
@@ -123,11 +123,11 @@ class Row{
 
         //Set up dates
         this.prediction1Hours.utc  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_4_HOURS_YEAR,rowValues);
-        this.prediction1Hours.date = moment.unix(this.prediction1Hours.utc).utcOffset(0).format("YYYY-MM-DDTHH:mm:ssZ");
+        this.prediction1Hours.date = unixToRFC3339Date(this.prediction1Hours.utc);
 
 
         this.prediction4Hours.utc  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_8_HOURS_YEAR,rowValues);
-        this.prediction4Hours.date = moment.unix(this.prediction4Hours.utc).utcOffset(0).format("YYYY-MM-DDTHH:mm:ssZ");
+        this.prediction4Hours.date = unixToRFC3339Date(this.prediction4Hours.utc);
 
         this.createdAt              = Row.getUTCDateFromRowARR(Row.COLLUMS.CREATED_AT_YEAR,rowValues);
 

@@ -11,10 +11,17 @@ export default class RatingsRoute{
         this.raitingService = new RatingsService()
     }
     normalizeParams(req){
+        let date;
+        if(req.swagger.params.UTCDateTime.value == "now"){
+            date = moment().utcOffset(0).unix()
+        }else {
+            date = moment(req.swagger.params.UTCDateTime.value).utcOffset(0).unix()
+        }
+
         return {
             lat: req.swagger.params.lat.value,
             lng: req.swagger.params.lng.value,
-            utcDate: req.swagger.params.UTCDateTime.value ? moment(req.swagger.params.UTCDateTime.value).unix(): moment().unix()
+            utcDate: date
         }
     }
     getRatings(req,res,next){
