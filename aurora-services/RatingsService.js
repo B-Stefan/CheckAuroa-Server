@@ -31,14 +31,60 @@ export default class RatingsService{
    * @method calculateRating
    * @class RatingsService
    * @param {KpInformation} kpInformation
+   * @param  geomagnaticLocation
    * @param {WeatherInformation} weatherInformation
    * @param {Location} location
    * @param {int} utcDateTime
    * @returns double
      */
-  calculateRating(kpInformation, weatherInformation, location, utcDateTime){
-    //console.log(arguments);
-    return Math.random();
+  calculateRating(kpInformation,geomagnaticLocation, weatherInformation, location, utcDateTime){
+
+
+      return Math.random();
+
+      let kpIndex = kpInformation.kpValue;// kpIndex value from 0-9, 9 = highest
+      let cloudCover = weatherInformation.cloudCover; // CloudCover value from 0-1, 1 = most cloudy
+      let magneticLatitude = geomagnaticLocation.latG;// value from -90 - 90 representing mag. latitude in degrees
+      let currentTime = utcDateTime;			// timestamp of forecasttime in Unix timestamp format (?)
+      let sunRise =  weatherInformation.sunriseTime; 				// timestamp of sunrise of forecastday in Unix timestamp format
+      let sunSet = weatherInformation.sunsetTime;				// timestamp of sunset of forecastday in Unix timestamp format
+
+      let options = {
+        kpIndex: kpIndex,
+        cloudCover: cloudCover,
+        magneticLatitude: magneticLatitude,
+        currentTime: currentTime,
+        sunRise: sunRise,
+        sunSet: sunSet
+
+      };
+
+      let returnValue;
+      if(currentTime > sunSet  || currentTime < sunRise){
+        {
+          if(magneticLatitude >= 66.5){
+            returnValue = (1 - cloudCover)*100;	// Grenzfall wenn nah am mag. Nordpol. Aurora eig. jeden Tag zu sehen, wird nur vom Wetter verhindert.
+          }
+          else if(magneticLatitude <= 48.1){
+            returnValue =  0;						// Grenzfall wenn zu weit vom mag. Nordpol entfernt. Chance auf Aurora ist zu vernachlässigen.
+          }
+          else if(((magneticLatitude - 68.567) / -2.0485) >= (kpIndex + 1)){	// kp + 1, da mit 0 beginnend
+            returnValue = 0;						// wenn kpIndex kleiner als Zonennummer, dann bleib zuhause.
+          } else {
+            returnValue = (1 - cloudCover);			// TODO here: distinction of cases between KP-Zones
+          }
+        }
+      }
+      else {
+        console.log("return 0")
+
+        returnValue =  0;
+      } // returns 0 if daytime.
+
+      options.returnValueAfterCalculation = returnValue
+      console.log(JSON.stringify(options));
+
+
   }
 
   /**
