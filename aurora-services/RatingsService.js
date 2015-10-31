@@ -40,6 +40,8 @@ export default class RatingsService{
   calculateRating(kpInformation,geomagnaticLocation, weatherInformation, location, utcDateTime){
 
 
+      return Math.random();
+
       let kpIndex = kpInformation.kpValue;// kpIndex value from 0-9, 9 = highest
       let cloudCover = weatherInformation.cloudCover; // CloudCover value from 0-1, 1 = most cloudy
       let magneticLatitude = geomagnaticLocation.latG;// value from -90 - 90 representing mag. latitude in degrees
@@ -82,7 +84,6 @@ export default class RatingsService{
       options.returnValueAfterCalculation = returnValue
       console.log(JSON.stringify(options));
 
-      return returnValue
 
   }
 
