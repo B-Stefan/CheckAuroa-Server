@@ -79,6 +79,8 @@ export default class Kp3DayForecast{
                                             //Now we have only the rows that we want with the following format:
                                             /**
                                              *  00-03UT        0          3          3
+                                             *  or:
+                                             *  15-18UT        2          6 (G2)     5 (G1)
                                              * @type {number}
                                              */
 
@@ -92,8 +94,9 @@ export default class Kp3DayForecast{
                                             let data = row  .split(" ")
                                                             .filter((item)=>item.length != 0)
                                                             .slice(1)
+                                                            .filter((item)=>item.length == 1)
                                                             .map((kpValue,index)=>{
-
+                                                                console.log(kpValue);
                                                                 //Now we can map all kp values in the array to an KPInformation instance
 
 
