@@ -96,7 +96,6 @@ export default class Kp3DayForecast{
                                                             .slice(1)
                                                             .filter((item)=>item.length == 1)
                                                             .map((kpValue,index)=>{
-                                                                console.log(kpValue);
                                                                 //Now we can map all kp values in the array to an KPInformation instance
 
 

@@ -38,6 +38,7 @@ export default class KPIndexService {
             Promise.all([kpWing,kp3Days]).then((data)=>{
 
                 let flattern = [].concat.apply([],data);
+                flattern.sort((a,b)=> a.utc > b.utc);
                 resolve(flattern);
 
             }).catch(reject)
