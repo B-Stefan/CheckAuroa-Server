@@ -5,6 +5,7 @@ import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"
 
+
 /**
  * Service to get the kp values
  * @class KPIndexService
