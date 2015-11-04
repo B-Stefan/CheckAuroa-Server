@@ -276,6 +276,10 @@
     },
     "Rating" : {
       "properties" : {
+        "date" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
         "location" : {
           "$ref" : "#/definitions/Location"
         },
