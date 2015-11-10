@@ -291,6 +291,10 @@
         },
         "weather" : {
           "$ref" : "#/definitions/WeatherInformation"
+        },
+        "value" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
