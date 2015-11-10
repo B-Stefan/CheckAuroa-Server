@@ -40,7 +40,7 @@ export default class RatingsService{
   calculateRating(kpInformation,geomagnaticLocation, weatherInformation, location, utcDateTime){
 
 
-      //return Math.random();
+      return Math.random();
 
       let kpIndex = kpInformation.kpValue;// kpIndex value from 0-9, 9 = highest
       let cloudCover = weatherInformation.cloudCover; // CloudCover value from 0-1, 1 = most cloudy
