@@ -24,7 +24,7 @@ export default class RatingsService{
     this.weatherService = new WeatherService()
   }
 
-/**
+  /**
    *
    * Calculate the rating value and returns the value.
    * In this function all magic happend
@@ -60,18 +60,18 @@ export default class RatingsService{
       };
 
       let returnValue;
-	  
+
 	  if(currentTime > sunSet  || currentTime < sunRise && cloudCover <= .9){
 			{
-				if(((magneticLatitude - 68.567) / -2.0485) -1 >= (kpIndex)){	
+				if(((magneticLatitude - 68.567) / -2.0485) -1 >= (kpIndex)){
 					returnValue = 0;						// if kp-index is less then zone number, you can stay home.
 				} else {
-					
+
 					// 0-40% Cloudcover doesn't affect visibility, 40-60% substracts 20% chance, 60-80% substracts 45%, 80-90% substracts 80%
 					// when kp-Index is way larger then the zonenumber (i.e. +2, sounds somewhat realistic -- check this later)
-					
+
 					console.log(((magneticLatitude - 68.567) / -2.0485) - 1);
-					
+
 					if(((magneticLatitude - 68.567) / -2.0485) <= (kpIndex)){
 						if(cloudCover >= .8){
 							returnValue = 1-.8;
@@ -85,10 +85,10 @@ export default class RatingsService{
 						else returnValue = 1;
 					}
 					else {
-						
+
 						if(cloudCover >= .85){
 							returnValue = .05;
-						} 
+						}
 						else if(cloudCover >= .8){
 							returnValue = .1;
 						}
@@ -102,10 +102,10 @@ export default class RatingsService{
 					}
 				}
 			}
-		} 
+		}
 		else returnValue = 0; // returns 0 if daytime and/or it's too cloudy
-	
-	
+
+
 	  options.returnValueAfterCalculation = returnValue
       //console.log(JSON.stringify(options));
       return returnValue;
