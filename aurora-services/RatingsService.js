@@ -75,7 +75,7 @@ export default class RatingsService{
 					if(((magneticLatitude - 68.567) / -2.0485) <= (kpIndex)){
 						if(cloudCover >= .8){
 							returnValue = 1-.8;
-						} 
+						}
 						else if(cloudCover >= .6){
 							returnValue = 1-.45;
 						}
@@ -107,7 +107,8 @@ export default class RatingsService{
 	
 	
 	  options.returnValueAfterCalculation = returnValue
-      console.log(JSON.stringify(options));
+      //console.log(JSON.stringify(options));
+      return returnValue;
 }
 
   /**
