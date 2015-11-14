@@ -108,6 +108,7 @@ export default class RatingsService{
 	
 	  options.returnValueAfterCalculation = returnValue
       console.log(JSON.stringify(options));
+      return returnValue;
 }
 
   /**
