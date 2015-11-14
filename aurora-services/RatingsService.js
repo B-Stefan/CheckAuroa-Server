@@ -24,7 +24,7 @@ export default class RatingsService{
     this.weatherService = new WeatherService()
   }
 
-  /**
+/**
    *
    * Calculate the rating value and returns the value.
    * In this function all magic happend
@@ -40,7 +40,7 @@ export default class RatingsService{
   calculateRating(kpInformation,geomagnaticLocation, weatherInformation, location, utcDateTime){
 
 
-      return Math.random();
+      //return Math.random();
 
       let kpIndex = kpInformation.kpValue;// kpIndex value from 0-9, 9 = highest
       let cloudCover = weatherInformation.cloudCover; // CloudCover value from 0-1, 1 = most cloudy
@@ -60,33 +60,55 @@ export default class RatingsService{
       };
 
       let returnValue;
-      if(currentTime > sunSet  || currentTime < sunRise){
-        {
-          if(magneticLatitude >= 66.5){
-            returnValue = (1 - cloudCover)*100;	// Grenzfall wenn nah am mag. Nordpol. Aurora eig. jeden Tag zu sehen, wird nur vom Wetter verhindert.
-          }
-          else if(magneticLatitude <= 48.1){
-            returnValue =  0;						// Grenzfall wenn zu weit vom mag. Nordpol entfernt. Chance auf Aurora ist zu vernachlässigen.
-          }
-          else if(((magneticLatitude - 68.567) / -2.0485) >= (kpIndex + 1)){	// kp + 1, da mit 0 beginnend
-            returnValue = 0;						// wenn kpIndex kleiner als Zonennummer, dann bleib zuhause.
-          } else {
-            returnValue = (1 - cloudCover);			// TODO here: distinction of cases between KP-Zones
-          }
-        }
-      }
-      else {
-        console.log("return 0")
-
-        returnValue =  0;
-      } // returns 0 if daytime.
-
-      //options.returnValueAfterCalculation = returnValue
-      //console.log(JSON.stringify(options));
-  
-  return returnValue;
-
-  }
+	  
+	  if(currentTime > sunSet  || currentTime < sunRise && cloudCover <= .9){
+			{
+				if(((magneticLatitude - 68.567) / -2.0485) -1 >= (kpIndex)){	
+					returnValue = 0;						// if kp-index is less then zone number, you can stay home.
+				} else {
+					
+					// 0-40% Cloudcover doesn't affect visibility, 40-60% substracts 20% chance, 60-80% substracts 45%, 80-90% substracts 80%
+					// when kp-Index is way larger then the zonenumber (i.e. +2, sounds somewhat realistic -- check this later)
+					
+					console.log(((magneticLatitude - 68.567) / -2.0485) - 1);
+					
+					if(((magneticLatitude - 68.567) / -2.0485) <= (kpIndex)){
+						if(cloudCover >= .8){
+							returnValue = 1-.8;
+						} 
+						else if(cloudCover >= .6){
+							returnValue = 1-.45;
+						}
+						else if(cloudCover >= .4){
+							returnValue = 1-.2;
+						}
+						else returnValue = 1;
+					}
+					else {
+						
+						if(cloudCover >= .85){
+							returnValue = .05;
+						} 
+						else if(cloudCover >= .8){
+							returnValue = .1;
+						}
+						else if(cloudCover >= .6){
+							returnValue = .5-.3;
+						}
+						else if(cloudCover >= .4){
+							returnValue = .5-.2;
+						}
+						else returnValue = .5;
+					}
+				}
+			}
+		} 
+		else returnValue = 0; // returns 0 if daytime and/or it's too cloudy
+	
+	
+	  options.returnValueAfterCalculation = returnValue
+      console.log(JSON.stringify(options));
+}
 
   /**
    * Returns a list of ratings for the next 24 hours
