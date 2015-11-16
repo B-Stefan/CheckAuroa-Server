@@ -4,6 +4,7 @@ import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
 import KPIndexInformation from "./../../aurora-classes/KpInformationExtended"
 import NodeCache from "node-cache"
+import newrelic from "newrelic"
 /**
  * Class for one row of the text file
  */
@@ -45,15 +46,14 @@ class Row{
     }
     static isValidRow(rowArr){
 
-        var status = rowArr[Row.COLLUMS.STATUS];
-        if(rowArr.length == Object.keys(Row.COLLUMS).length && (status != Row.STATUS.MISSING  && status != Row.STATUS.ERROR)){
+        if(rowArr.length == Object.keys(Row.COLLUMS).length){
             return true;
         }
         return false;
     }
     /**
      * Enum for the collums
-     * @returns {{CREATED_AT_YEAR: number, CREATED_AT_MONTH: number, CREATED_AT_DAY: number, CREATED_AT_TIME: number, STATUS: number, PREDICTION_4_HOURS_YEAR: number, PREDICTION_4_HOURS_MONTH: number, PREDICTION_4_HOURS_DAY: number, PREDICTION_4_HOURS_TIME: number, PREDICTION_4_HOURS_KP_INDEX: number, PREDICTION_4_HOURS_MINUTES: number, PREDICTION_8_HOURS_YEAR: number, PREDICTION_8_HOURS_MONTH: number, PREDICTION_8_HOURS_DAY: number, PREDICTION_8_HOURS_TIME: number, PREDICTION_8_HOURS_KP_INDEX: number, PREDICTION_8_HOURS_MINUTES: number}}
+     * @returns {{CREATED_AT_YEAR: number, CREATED_AT_MONTH: number, CREATED_AT_DAY: number, CREATED_AT_TIME: number, PREDICTION_4_HOURS_YEAR: number, PREDICTION_4_HOURS_MONTH: number, PREDICTION_4_HOURS_DAY: number, PREDICTION_4_HOURS_TIME: number, PREDICTION_4_HOURS_KP_INDEX: number, PREDICTION_8_HOURS_YEAR: number, PREDICTION_8_HOURS_MONTH: number, PREDICTION_8_HOURS_DAY: number, PREDICTION_8_HOURS_TIME: number, PREDICTION_8_HOURS_KP_INDEX: number}}
      * @constructor
      */
     static get COLLUMS(){
@@ -62,22 +62,19 @@ class Row{
             "CREATED_AT_MONTH": 1,
             "CREATED_AT_DAY": 2,
             "CREATED_AT_TIME": 3,
-            "STATUS": 4,
 
-            "PREDICTION_4_HOURS_YEAR": 5,
-            "PREDICTION_4_HOURS_MONTH": 6,
-            "PREDICTION_4_HOURS_DAY": 7,
-            "PREDICTION_4_HOURS_TIME": 8,
-            "PREDICTION_4_HOURS_KP_INDEX": 9,
-            "PREDICTION_4_HOURS_MINUTES": 10,
+            "PREDICTION_4_HOURS_YEAR": 4,
+            "PREDICTION_4_HOURS_MONTH": 5,
+            "PREDICTION_4_HOURS_DAY": 6,
+            "PREDICTION_4_HOURS_TIME": 7,
+            "PREDICTION_4_HOURS_KP_INDEX": 8,
 
-            "PREDICTION_8_HOURS_YEAR": 11,
-            "PREDICTION_8_HOURS_MONTH": 12,
-            "PREDICTION_8_HOURS_DAY": 13,
-            "PREDICTION_8_HOURS_TIME": 14,
-            "PREDICTION_8_HOURS_KP_INDEX": 15,
-            "PREDICTION_8_HOURS_MINUTES": 16,
-            "USAF_EST_KP": 17,
+            "PREDICTION_8_HOURS_YEAR": 9,
+            "PREDICTION_8_HOURS_MONTH": 10,
+            "PREDICTION_8_HOURS_DAY": 11,
+            "PREDICTION_8_HOURS_TIME": 12,
+            "PREDICTION_8_HOURS_KP_INDEX": 13,
+            "USAF_EST_KP": 14,
 
         }
     }
@@ -89,19 +86,16 @@ class Row{
          '10',  => createdAt - month
          '21',  => createdAt - day
          '0715', => createdAt - time (UTC!!)
-         '0', => status
          '2015', => 4HourPrediction date -> year
          '10', => 4HourPrediction date -> month
          '21', => 4HourPrediction  date -> day
          '0821', => => 4Hour prediction date -> time (UTC)
          '1.67', => 4hour prediction KP-INDEX
-         '66.0', => minutes (4HourPrediction - createdAt  = 66)
          '2015',=> 8HourPrediction -> year
          '10', => 8HourPrediction -> month
          '21',=> 8HourPrediction -> day
          '1121',=> 8HourPrediction -> time (UTC)
          '1.33', => 8HourPrediction -> KP-Index
-         '246.0', => 8HourPrediction -> minutes after the created at (8HourPrediction - createdAt = 246)
          '2.33' ]
          *
          *
@@ -136,23 +130,16 @@ class Row{
         this.prediction1Hours.kpValue = parseFloat(rowValues[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX]);
         this.prediction4Hours.kpValue = parseFloat(rowValues[Row.COLLUMS.PREDICTION_8_HOURS_KP_INDEX]);
 
-        //Set up minutes
-
-        this.prediction1Hours.minutes = rowValues[Row.COLLUMS.PREDICTION_4_HOURS_MINUTES];
-        this.prediction4Hours.minutes = rowValues[Row.COLLUMS.PREDICTION_8_HOURS_MINUTES];
 
         this.prediction1Hours.original = rowValues.join(";");
         this.prediction4Hours.original = rowValues.join(";");
 
-        //Set up status
-        this.status = rowValues[Row.COLLUMS.STATUS];
 
         this.originalData = rowValues.join(";").toString();
 
     }
     originalData;
     createdAt;
-    status;
     prediction1Hours;
     prediction4Hours;
 }
@@ -229,7 +216,7 @@ export default class KpWingService {
          * The index where the header ends
          * @type {number}
          */
-        let startIndex = lineArr.indexOf("#-----------------------------------------------------------------------------------------------------------------");
+        let startIndex = lineArr.indexOf("#---------------------------------------------------------------------------------------");
         /**
          * Get the header information and remove this lines form the lineArr.
          * @type {Array<String>}
@@ -264,19 +251,16 @@ export default class KpWingService {
              '10',  => createdAt - month
              '21',  => createdAt - day
              '0715', => createdAt - time (UTC!!)
-             '0', => status
              '2015', => 4HourPrediction date -> year
              '10', => 4HourPrediction date -> month
              '21', => 4HourPrediction  date -> day
              '0821', => => 4Hour prediction date -> time (UTC)
              '1.67', => 4hour prediction KP-INDEX
-             '66.0', => minutes (4HourPrediction - createdAt  = 66)
              '2015',=> 8HourPrediction -> year
              '10', => 8HourPrediction -> month
              '21',=> 8HourPrediction -> day
              '1121',=> 8HourPrediction -> time (UTC)
              '1.33', => 8HourPrediction -> KP-Index
-             '246.0 ', => 8HourPrediction -> minutes after the created at (8HourPrediction - createdAt = 246)
              '2.33' ]
              *
              * @type {Array.<T>}
@@ -287,7 +271,7 @@ export default class KpWingService {
                 let newRow = new Row(rowValues);
                 results.push(newRow)
             }else {
-                //console.log("Row not valid ", rowValues)
+                newrelic.recordMetric("kp/kpWing/invalidRow", JSON.stringify(rowValues));
             }
 
         });
