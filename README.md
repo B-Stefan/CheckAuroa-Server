@@ -38,7 +38,7 @@ Possible libraries are:
 * Java 
 * PHP 
 * Scala 
-* [QT5](https://check-aurora-api.herokuapp.com/clients/qt5.zip) 
+* [QT5](https://check-aurora-api.herokuapp.com/clients/qt5cpp.zip) 
 * c++ 
 
 ### Upload new version 
