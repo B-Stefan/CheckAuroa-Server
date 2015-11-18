@@ -146,7 +146,7 @@
     "/kpIndex/current" : {
       "get" : {
         "summary" : "Retuns the current KP index",
-        "operationId" : "getLastKpIndex",
+        "operationId" : "getCurrentKpIndex",
         "x-swagger-router-controller" : "KPIndex",
         "tags" : [ "KP-Index" ],
         "parameters" : [ {
@@ -356,12 +356,12 @@
         },
         "sunsetTime" : {
           "description" : "The sunset time as UTC+0",
-          "type" : "number",
+          "type" : "integer",
           "format" : "int32"
         },
         "sunriseTime" : {
           "description" : "The sunrise time as UTC+0",
-          "type" : "number",
+          "type" : "integer",
           "format" : "int32"
         },
         "date" : {
