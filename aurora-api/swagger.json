@@ -307,20 +307,24 @@
     "Location" : {
       "properties" : {
         "lat" : {
-          "type" : "number"
+          "type" : "number",
+          "format" : "double"
         },
         "lng" : {
-          "type" : "number"
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
     "GeomagnaticLocation" : {
       "properties" : {
         "latG" : {
-          "type" : "number"
+          "type" : "number",
+          "format" : "double"
         },
         "lngG" : {
-          "type" : "number"
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
