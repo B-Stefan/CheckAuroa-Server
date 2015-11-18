@@ -28,8 +28,7 @@ export default class Router {
         this.app.get(RatingRoute.URL                ,this.ratingRoute.getRatings.bind(this.ratingRoute));
         this.app.get(RatingRoute.URL_CURRENT        ,this.ratingRoute.getCurrentRating.bind(this.ratingRoute));
         this.app.get(KpRoute.URL                    ,this.kpRoute.getKpIndexList.bind(this.kpRoute));
-        this.app.get(KpRoute.URL_LAST_RATING        ,this.kpRoute.getLastIndex.bind(this.kpRoute));
-        this.app.get(KpRoute.URL_LAST_RATING        ,this.kpRoute.getLastIndex.bind(this.kpRoute));
+        this.app.get(KpRoute.URL_CURRENT            ,this.kpRoute.getCurrentIndex.bind(this.kpRoute));
         this.app.get(WeatherRoute.URL               ,this.weatherRoute.getWeatherPrediction.bind(this.weatherRoute));
         this.app.get(WeatherRoute.URL_CURRENT       ,this.weatherRoute.getCurrentWeather.bind(this.weatherRoute));
     }

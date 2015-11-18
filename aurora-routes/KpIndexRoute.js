@@ -5,7 +5,7 @@ export default class KpIndexRoute{
 
     static get URL(){return "/kpIndex"}
 
-    static get URL_LAST_RATING(){return KpIndexRoute.URL + "/last"}
+    static get URL_CURRENT(){return KpIndexRoute.URL + "/current"}
 
     constructor(){
         this.kpService = new KPIndexService()
@@ -36,7 +36,7 @@ export default class KpIndexRoute{
 
 
     }
-    getLastIndex(req,res,next){
+    getCurrentIndex(req,res,next){
         const params = this.normalizeParams(req);
 
         this.kpService.getKpByUTCDate(params.utcDate).then((list)=>{
