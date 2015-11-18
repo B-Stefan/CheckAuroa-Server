@@ -296,14 +296,28 @@
           "description" : "The icon for the current situation",
           "type" : "string",
           "default" : "clear_day",
-          "enum" : [ "clear_day", "clear_night", "partly_cloudy_day", "partly_cloudy_night", "cloudy", "rain", "sleet", "snow", "wind", "fog" ]
+          "enum" : [ "clear-day", "clear-night", "partly-cloudy-day", "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind", "fog" ]
         },
-        "tempeture" : {
+        "cloudCover" : {
           "type" : "number",
           "format" : "double"
         },
         "summary" : {
           "type" : "string"
+        },
+        "sunsetTime" : {
+          "description" : "The sunset time as UTC+0",
+          "type" : "number",
+          "format" : "int32"
+        },
+        "sunriseTime" : {
+          "description" : "The sunrise time as UTC+0",
+          "type" : "number",
+          "format" : "int32"
+        },
+        "date" : {
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
