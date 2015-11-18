@@ -13,7 +13,33 @@
     "/weather" : {
       "get" : {
         "summary" : "Create a new notification",
-        "operationId" : "getWeather",
+        "operationId" : "getWeatherPrediction",
+        "x-swagger-router-controller" : "Notification",
+        "tags" : [ "Weather" ],
+        "parameters" : [ {
+          "$ref" : "#/parameters/UTCDateParam"
+        }, {
+          "$ref" : "#/parameters/latParam"
+        }, {
+          "$ref" : "#/parameters/lngParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the wehather",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/WeatherInformation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/weather/current" : {
+      "get" : {
+        "summary" : "Get the current weather",
+        "operationId" : "getWeatherCurrent",
         "x-swagger-router-controller" : "Notification",
         "tags" : [ "Weather" ],
         "parameters" : [ {
@@ -295,7 +321,7 @@
         "icon" : {
           "description" : "The icon for the current situation",
           "type" : "string",
-          "default" : "clear_day",
+          "default" : "clear-day",
           "enum" : [ "clear-day", "clear-night", "partly-cloudy-day", "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind", "fog" ]
         },
         "cloudCover" : {
