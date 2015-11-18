@@ -10,6 +10,29 @@
   "consumes" : [ "application/json" ],
   "produces" : [ "application/json", "text/html" ],
   "paths" : {
+    "/weather" : {
+      "get" : {
+        "summary" : "Create a new notification",
+        "operationId" : "getWeather",
+        "x-swagger-router-controller" : "Notification",
+        "tags" : [ "Weather" ],
+        "parameters" : [ {
+          "$ref" : "#/parameters/UTCDateParam"
+        }, {
+          "$ref" : "#/parameters/latParam"
+        }, {
+          "$ref" : "#/parameters/lngParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the wehather",
+            "schema" : {
+              "$ref" : "#/definitions/WeatherInformation"
+            }
+          }
+        }
+      }
+    },
     "/notification" : {
       "post" : {
         "summary" : "Create a new notification",
@@ -269,6 +292,16 @@
     },
     "WeatherInformation" : {
       "properties" : {
+        "icon" : {
+          "description" : "The icon for the current situation",
+          "type" : "string",
+          "default" : "clear_day",
+          "enum" : [ "clear_day", "clear_night", "partly_cloudy_day", "partly_cloudy_night", "cloudy", "rain", "sleet", "snow", "wind", "fog" ]
+        },
+        "tempeture" : {
+          "type" : "number",
+          "format" : "double"
+        },
         "summary" : {
           "type" : "string"
         }
