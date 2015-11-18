@@ -6,7 +6,7 @@ To edit the API-Schema please edit the schema in swagger-hub. If you press save 
  
 * [API-Schema online editor](https://swaggerhub.com/api/B-Stefan/CheckAuroa-API-Schema/dev)
 
-After you saved your changes push follow the [deploy instructions](./../Readme.md). 
+After you saved your changes push follow the [deploy instructions](./../README.md). 
 
 ## Create client libs 
 The client libs will be automaticly created if you push to heroku-live. This take a wihle, so wait for a few minutes and try to download the client-libs again. 
