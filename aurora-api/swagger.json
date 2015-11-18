@@ -331,7 +331,8 @@
     "KpInformation" : {
       "properties" : {
         "utc" : {
-          "type" : "number"
+          "type" : "integer",
+          "format" : "int32"
         },
         "date" : {
           "type" : "string",
