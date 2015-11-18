@@ -32,7 +32,8 @@ export default class RatingsRoute{
             res.json(list);
         }).catch((e)=>{
             res.status(501);
-            res.json(e);
+            let error = new Error();
+            res.json(error.message = e);
         });
 
 
@@ -44,7 +45,8 @@ export default class RatingsRoute{
             res.json(item);
         }).catch((e)=>{
             res.status(501);
-            res.json(e);
+            let error = new Error();
+            res.json(error.message = e);
         });
     }
     getRating(req,res,next){
