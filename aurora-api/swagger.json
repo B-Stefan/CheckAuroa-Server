@@ -143,9 +143,9 @@
         }
       }
     },
-    "/kpIndex/last" : {
+    "/kpIndex/current" : {
       "get" : {
-        "summary" : "Retuns the last KP index",
+        "summary" : "Retuns the current KP index",
         "operationId" : "getLastKpIndex",
         "x-swagger-router-controller" : "KPIndex",
         "tags" : [ "KP-Index" ],
