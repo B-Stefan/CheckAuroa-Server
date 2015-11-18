@@ -41,7 +41,7 @@ Possible libraries are:
 * [QT5](https://check-aurora-api.herokuapp.com/clients/qt5cpp.zip) 
 * c++ 
 
-### Upload new version 
+### Deploy instructions
 To upload a new version to the heroku server push the tested version of the server to the **heroku-live** branch. 
 After you pushed to this branch the server automatically update and restart and the the version is after 2 minutes online. 
 
