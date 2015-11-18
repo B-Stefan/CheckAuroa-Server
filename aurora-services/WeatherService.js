@@ -17,13 +17,23 @@ export default class WeatherService{
         });
         this.cache = new NodeCache();
     }
-    getNearestWeatherInformation(utcDate, weatherInformations){
+    getNearestWeatherInformation(utcDate, weatherInformation){
 
-        let list =  weatherInformations.sort((a,b)=>{
+        let list =  weatherInformation.sort((a,b)=>{
             return Math.abs(utcDate-a.utc) < Math.abs(utcDate-b.utc)
         }).pop();
         return list
 
+    }
+    getNearestWeatherInformationByLatLng(lat,lng,utcDate){
+
+        return new Promise((resolve,reject)=>{
+            this.getWeatherPredictionByLatLng(lat,lng,utcDate).then((list)=>{
+                resolve(this.getNearestWeatherInformation(utcDate,list))
+            }).catch((e)=>{
+                console.log(e)
+            })
+        });
     }
     getWeatherPredictionByLatLng(lat,lng,utcDate){
         let location = new Location();
