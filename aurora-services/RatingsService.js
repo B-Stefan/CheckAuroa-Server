@@ -175,9 +175,21 @@ export default class RatingsService{
     })
 
 
+  }
+  getNearestRatings(lat,lng,utcDate){
 
+    return new Promise((resolve,reject)=>{
 
+      this.getRatings(lat,lng,utcDate).then((ratings)=>{
 
+        let item =  ratings.sort((a,b)=>{
+          return Math.abs(utcDate-a.utc) < Math.abs(utcDate-b.utc)
+        }).pop();
+
+        resolve(item)
+
+      }).catch(reject)
+    })
   }
 
 

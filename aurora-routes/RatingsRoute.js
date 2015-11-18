@@ -5,7 +5,7 @@ export default class RatingsRoute{
 
     static get URL(){return "/ratings"}
 
-    static get URL_LAST_RATING(){return RatingsRoute.URL + "/last"}
+    static get URL_CURRENT(){return RatingsRoute.URL + "/current"}
 
     constructor(){
         this.raitingService = new RatingsService()
@@ -38,8 +38,14 @@ export default class RatingsRoute{
 
 
     }
-    getLastRating(req,res,next){
-        res.send("Yeees" )
+    getCurrentRating(req,res,next){
+        const params = this.normalizeParams(req);
+        this.raitingService.getNearestRatings(params.lat,params.lng,params.utcDate).then((item)=>{
+            res.json(item);
+        }).catch((e)=>{
+            res.status(501);
+            res.json(e);
+        });
     }
     getRating(req,res,next){
 

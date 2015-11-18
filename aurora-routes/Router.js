@@ -26,7 +26,7 @@ export default class Router {
     }
     applyRoutes(){
         this.app.get(RatingRoute.URL                ,this.ratingRoute.getRatings.bind(this.ratingRoute));
-        this.app.get(RatingRoute.URL                ,this.ratingRoute.getRatings.bind(this.ratingRoute));
+        this.app.get(RatingRoute.URL_CURRENT        ,this.ratingRoute.getCurrentRating.bind(this.ratingRoute));
         this.app.get(KpRoute.URL                    ,this.kpRoute.getKpIndexList.bind(this.kpRoute));
         this.app.get(KpRoute.URL_LAST_RATING        ,this.kpRoute.getLastIndex.bind(this.kpRoute));
         this.app.get(KpRoute.URL_LAST_RATING        ,this.kpRoute.getLastIndex.bind(this.kpRoute));
