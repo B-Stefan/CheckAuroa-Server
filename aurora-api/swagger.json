@@ -199,7 +199,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "An single rating element",
+            "description" : "An list of rating elements",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -211,6 +211,29 @@
             "description" : "unexpected error",
             "schema" : {
               "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ratings/current" : {
+      "get" : {
+        "summary" : "get a current rating for your location",
+        "operationId" : "getCurrentRating",
+        "x-swagger-router-controller" : "Rating",
+        "tags" : [ "Ratings" ],
+        "parameters" : [ {
+          "$ref" : "#/parameters/lngParam"
+        }, {
+          "$ref" : "#/parameters/latParam"
+        }, {
+          "$ref" : "#/parameters/UTCDateParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An single rating element",
+            "schema" : {
+              "$ref" : "#/definitions/Rating"
             }
           }
         }
