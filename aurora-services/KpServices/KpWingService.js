@@ -271,6 +271,7 @@ export default class KpWingService {
                 let newRow = new Row(rowValues);
                 results.push(newRow)
             }else {
+                console.log(JSON.stringify(rowValues))
                 newrelic.recordMetric("kp/kpWing/invalidRow", JSON.stringify(rowValues));
             }
 
