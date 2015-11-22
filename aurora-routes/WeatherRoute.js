@@ -15,7 +15,10 @@ export default class WeatherRoute{
         if(req.swagger.params.UTCDateTime.value == "now"){
             date = moment().utcOffset(0).unix()
         }else {
-            date = moment(Date(req.swagger.params.UTCDateTime.value)).utcOffset(0).unix()
+            //See https://github.com/moment/moment/issues/1407
+            moment.createFromInputFallback = function(config) { config._d = new Date(config._i); };
+
+            date = moment(req.swagger.params.UTCDateTime.value.replace(" ", "+")).utcOffset(0).unix()
         }
 
         return {
