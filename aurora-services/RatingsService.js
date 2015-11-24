@@ -61,7 +61,7 @@ export default class RatingsService{
 
       let returnValue;
 
-	  if(currentTime > sunSet  || currentTime  < sunRise && cloudCover <= .9){
+	  if((currentTime > sunSet  || currentTime  < sunRise || sunRise == 0) && cloudCover <= .9){
 			{
 				if(((magneticLatitude - 68.567) / -2.0485) -1 >= (kpIndex)){
 					returnValue = 0;						// if kp-index is less then zone number, you can stay home.
