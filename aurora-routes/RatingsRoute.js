@@ -1,6 +1,7 @@
 import {Error} from "./../aurora-api/clients/typescript-node-client/api.ts"
 import moment from "moment"
 import RatingsService from "./../aurora-services/RatingsService"
+
 export default class RatingsRoute{
 
     static get URL(){return "/ratings"}
@@ -15,7 +16,11 @@ export default class RatingsRoute{
         if(req.swagger.params.UTCDateTime.value == "now"){
             date = moment().utcOffset(0).unix()
         }else {
-            date = moment(req.swagger.params.UTCDateTime.value).utcOffset(0).unix()
+
+            //See https://github.com/moment/moment/issues/1407
+            moment.createFromInputFallback = function(config) { config._d = new Date(config._i); };
+
+            date = moment(req.swagger.params.UTCDateTime.value.replace(" ", "+")).utcOffset(0).unix()
         }
 
         return {
@@ -32,7 +37,8 @@ export default class RatingsRoute{
             res.json(list);
         }).catch((e)=>{
             res.status(501);
-            res.json(e);
+            let error = new Error();
+            res.json(error.message = e);
         });
 
 
@@ -44,7 +50,8 @@ export default class RatingsRoute{
             res.json(item);
         }).catch((e)=>{
             res.status(501);
-            res.json(e);
+            let error = new Error();
+            res.json(error.message = e);
         });
     }
     getRating(req,res,next){

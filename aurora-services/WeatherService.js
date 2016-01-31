@@ -62,7 +62,7 @@ export default class WeatherService{
             this.forecastAPI.fetch(location.lat, location.lng, unixToRFC3339Date(utcDate), options)
                 .then((result) =>{
 
-                    let today = result.daily.data.pop();
+                    let today = result.daily.data.reverse().pop();
                     let sunriseTime = today.sunriseTime;
                     let sunsetTime = today.sunsetTime;
 

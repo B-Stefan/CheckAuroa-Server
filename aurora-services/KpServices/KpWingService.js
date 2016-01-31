@@ -271,6 +271,7 @@ export default class KpWingService {
                 let newRow = new Row(rowValues);
                 results.push(newRow)
             }else {
+                console.log(JSON.stringify(rowValues))
                 newrelic.recordMetric("kp/kpWing/invalidRow", JSON.stringify(rowValues));
             }
 
@@ -292,13 +293,13 @@ export default class KpWingService {
         }
         this.pendingPromise  = new Promise((resolve,reject)=>{
 
-            let cachedResult = this.cache.get( "result" );
+            let cachedResult = this.cache.get("result");
             if(cachedResult == undefined){
                 request(KpWingService.KP_API_URL, (error, response, body) => {
                     this.pendingPromise = undefined;
                     if (!error && response.statusCode == 200) {
                         let results = this.parseKPRawFile(body);
-                        this.cache.set("result", results, 10000);
+                        //this.cache.set("result", results, 10000);
                         resolve(results)
                     }else {
                         reject({

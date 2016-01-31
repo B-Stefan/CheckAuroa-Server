@@ -58,11 +58,100 @@ export default class RatingsService{
         sunSet: sunSet
 
       };
-
       let returnValue;
 
-	  if(currentTime > sunSet  || currentTime < sunRise && cloudCover <= .9){
+      /**
+       * Sunrise / Sunset calculation
+       */
+
+      let SunriseSetPercent;
+      //If no sunset/sunrise
+      if(sunRise == null ||sunSet == null){
+
+          SunriseSetPercent = 1;
+      }
+      //If no sunset/sunrise
+      else if(sunSet + sunRise == 0){
+          SunriseSetPercent = 1;
+      }
+      //After sunset begins !!!
+      else if(currentTime > sunSet ){
+          SunriseSetPercent = 1;
+          var sunsetDistance = Math.abs(currentTime - sunSet);
+          var cal =  Math.round((1- (sunsetDistance / 1000) )* 100)/100;
+          if(cal > 0 ){
+              SunriseSetPercent =cal
+          }
+
+      }
+      //before sunrise begins
+      else if (currentTime < sunRise){
+          SunriseSetPercent =  1;
+      }
+      //No sunset and no sunrise you are in the middle of the day
+      else {
+          var sunriseDistance = Math.abs(currentTime - sunRise);
+          var cal =  Math.round((1- (sunriseDistance / 1000) )* 100)/100;
+          SunriseSetPercent =0;
+          if(cal > 0 ){
+            SunriseSetPercent =cal
+          }
+      }
+      /**
+       * Weather calculation
+       */
+      let WeatherPercent = 0;
+
+      if(cloudCover >= .8){
+          WeatherPercent = 1-.8;
+      }
+      else if(cloudCover >= .6){
+          WeatherPercent = 1-.45;
+      }
+      else if(cloudCover >= .4){
+          WeatherPercent = 1-.2;
+      }
+      else WeatherPercent = 1;
+
+      /**
+       * KP Index
+       * @type {number}
+       */
+      var requiredKPIndex = (((magneticLatitude - 68.567) / -2.0485) -1) ;
+
+      var kpDistance = requiredKPIndex - kpIndex
+      console.log(magneticLatitude,kpDistance,kpIndex)
+      let kpPercent;
+      if(kpDistance < 0){
+          kpPercent = 0.8 ;
+          if(kpDistance < -1){
+              kpPercent = kpPercent + 0.2;
+          }
+
+      }else if(kpDistance < 0.5){
+          kpPercent = 0.3;
+      }else if(kpDistance < 1){
+          kpPercent = 0.2;
+      }else{
+          kpPercent = 0;
+      }
+      if(SunriseSetPercent == 0 ){
+          returnValue = 0
+      }else {
+          returnValue = (kpPercent*4 + SunriseSetPercent + WeatherPercent/2)/6;
+      }
+      console.log("=======================================");
+      console.log("Date:",unixToRFC3339Date(currentTime));
+      console.log("SunriseSetPercent:",SunriseSetPercent);
+      console.log("WeatherPercent",WeatherPercent);
+      console.log("kpPercent",kpPercent);
+      console.log("returnValue",returnValue);
+      console.log("=======================================");
+      /*
+      if(currentTime > sunSet  || currentTime < sunRise && cloudCover <= .9){
 			{
+
+
 				if(((magneticLatitude - 68.567) / -2.0485) -1 >= (kpIndex)){
 					returnValue = 0;						// if kp-index is less then zone number, you can stay home.
 				} else {
@@ -104,9 +193,8 @@ export default class RatingsService{
 			}
 		}
 		else returnValue = 0; // returns 0 if daytime and/or it's too cloudy
+*/
 
-
-	  options.returnValueAfterCalculation = returnValue
       //console.log(JSON.stringify(options));
       return returnValue;
 }
@@ -120,7 +208,7 @@ export default class RatingsService{
    * @param {int} uTCDateTime
    * @returns {Promise<Ratings[]>}
      */
-  getRatings(lng, lat, uTCDateTime){
+  getRatings(lat,lng, uTCDateTime){
 
     let geoPromise = this.geoService.transformToGeomagnetic(lat,lng);
 
