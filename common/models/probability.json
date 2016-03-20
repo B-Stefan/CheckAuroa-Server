@@ -1,0 +1,24 @@
+{
+  "name": "Probability",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "location": {
+      "type": "geopoint"
+    },
+    "probability": {
+      "type": "number"
+    },
+    "UTCDatetime": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

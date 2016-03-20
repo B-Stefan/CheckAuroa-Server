@@ -5,6 +5,41 @@ import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"
 
+export class KpInformation {
+
+  /**
+   * @type number
+   */
+  utc;
+
+  /**
+   * @type date 
+   */
+  date;
+
+  /**
+   * @type number 
+   */
+  kpValue;
+
+
+  /**
+   * @type string 
+   */
+  original;
+  
+  
+  constructor(kpInformationInstance){
+    if(kpInformationInstance  instanceof KpInformation){
+      this.utc = kpInformationInstance.utc;
+      this.date = kpInformationInstance.date;
+      this.kpValue = kpInformationInstance.kpValue;
+      this.original = kpInformationInstance.original;
+    }
+  }
+  
+}
+
 
 /**
  * Service to get the kp values
@@ -27,7 +62,6 @@ export default class KPIndexService {
      * Collect all kpInformation from different services and return a unsorted list of KpInformation
      * @method getKpList
      * @class KPIndexService
-     * @private
      * @returns {Promise<KpInformation[]>}
      */
     getKpList(){
@@ -37,7 +71,7 @@ export default class KPIndexService {
             let kpWing = this.kpWingService.getList();
 
             Promise.all([kpWing,kp3Days]).then((data)=>{
-
+              
                 let flattern = [].concat.apply([],data);
 
                 resolve(flattern);
@@ -55,11 +89,12 @@ export default class KPIndexService {
      */
     getKpListByUTCDate(UTCDate){
         let unixUtcTime = UTCDate;
-
+        console.log("unixUtcTime" + unixUtcTime)
         return new Promise((resolve,reject)=>{
 
             //Get the list
             this.getKpList().then((list)=>{
+                console.log("unixUtcTime" + list.length)
                 let nextKpInformation =
                     list.filter((kpInformation)=> {
                             return (kpInformation.utc - unixUtcTime) > 0

@@ -2,9 +2,8 @@
 import request from "request"
 import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
-import KPIndexInformation from "./../../aurora-classes/KpInformationExtended"
+import {KpInformation} from "./../KPIndexService"
 import NodeCache from "node-cache"
-import newrelic from "newrelic"
 /**
  * Class for one row of the text file
  */
@@ -112,8 +111,8 @@ class Row{
          *
          * Date.UTC(year, month[, day[, hour[, minute[, second[, millisecond]]]]])
          */
-        this.prediction1Hours = new KPIndexInformation();
-        this.prediction4Hours = new KPIndexInformation();
+        this.prediction1Hours = new KpInformation();
+        this.prediction4Hours = new KpInformation();
 
         //Set up dates
         this.prediction1Hours.utc  = Row.getUTCDateFromRowARR(Row.COLLUMS.PREDICTION_4_HOURS_YEAR,rowValues);
@@ -180,14 +179,14 @@ export default class KpWingService {
 
                 // create a new arr with the predictions of 1 hour
                 let kpInformationArr = sorted.map((row)=>{
-                    return new KPIndexInformation(row.prediction1Hours);
+                    return new KpInformation(row.prediction1Hours);
                 });
 
                 //Add to the list the last 12 entries and form this entries the 4 hour prediction (12 because there is every 15 minutes a news row so 12/4 = 4h)
                 let last12Predictions  = sorted.slice(sorted.length-12,sorted.length);
                 last12Predictions.forEach((row)=>{
 
-                    let info = new KPIndexInformation(row.prediction4Hours);
+                    let info = new KpInformation(row.prediction4Hours);
 
                     kpInformationArr.push(info);
                 });
@@ -272,7 +271,6 @@ export default class KpWingService {
                 results.push(newRow)
             }else {
                 console.log(JSON.stringify(rowValues))
-                newrelic.recordMetric("kp/kpWing/invalidRow", JSON.stringify(rowValues));
             }
 
         });

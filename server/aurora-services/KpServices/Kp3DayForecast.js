@@ -1,5 +1,5 @@
 import request from "request"
-import KpInformationExtened  from "./../../aurora-classes/KpInformationExtended"
+import {KpInformation}  from "./../KPIndexService"
 import {unixToRFC3339Date}  from "./../../utils"
 import moment from "moment"
 import NodeCache from "node-cache"
@@ -99,7 +99,7 @@ export default class Kp3DayForecast{
                                                                 //Now we can map all kp values in the array to an KPInformation instance
 
 
-                                                                let kpInformation = new KpInformationExtened();
+                                                                let kpInformation = new KpInformation();
 
                                                                 //get the utc by using the pre calculated currentDateHours and add there the days
                                                                 kpInformation.utc = moment(currentDateHours).add(index,"days").unix();
