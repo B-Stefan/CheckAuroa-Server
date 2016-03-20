@@ -39,7 +39,7 @@
     "$resolved": true
   },
   "KpIndex": {
-    "dataSource": "db",
+    "dataSource": "mongoDb",
     "public": true,
     "$promise": {},
     "$resolved": true
