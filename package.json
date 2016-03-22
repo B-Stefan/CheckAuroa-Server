@@ -4,8 +4,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node $NODE_DEBUG_OPTION .",
-    "pretest": "jshint .",
-    "posttest": "nsp check"
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
     "babel-core": "^6.7.2",
@@ -26,7 +25,10 @@
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
+    "assert": "^1.3.0",
     "jshint": "^2.5.6",
+    "loopback-testing": "git+https://github.com/STRML/loopback-testing.git",
+    "mocha": "^2.4.5",
     "nsp": "^2.1.0"
   },
   "repository": {
