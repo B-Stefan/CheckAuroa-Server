@@ -9,6 +9,9 @@ var context = {};
 var KpIndex;
 
 
+/**
+ * Tests for KPIndex route 
+ */
 describe('/KpIndex', function() {
   lt.beforeEach.withApp(app);
   lt.describe.whenCalledRemotely('GET', '/api/KpIndices', function () {
