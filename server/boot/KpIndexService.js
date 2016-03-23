@@ -19,7 +19,7 @@ module.exports = function (server, callback) {
     console.log("Init results");
     callback();
   }).catch((err)=>{
-    throw new Error(err)
+    callback(new Error(err))
   });
 
 
