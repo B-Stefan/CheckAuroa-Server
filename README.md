@@ -1,4 +1,7 @@
 ## Check-Aurora-Sever
+
+[![Build Status](https://travis-ci.org/B-Stefan/CheckAuroa-Server.svg?branch=master)](https://travis-ci.org/B-Stefan/CheckAuroa-Server)
+
 This repository contains the code for the data api server for the mobile application "Check-Aurora". 
 The application originated from two study courses at the [Jamk.fi](http://jamk.fi) in 2015.
 
