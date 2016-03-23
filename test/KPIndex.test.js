@@ -1,7 +1,7 @@
 var lt = require('loopback-testing');
 var assert = require('assert');
 var app = require('../server/server.js'); //path to app.js or server.js
-
+var moment = require("moment")
 
 var KpIndex;
 
@@ -74,6 +74,38 @@ describe('/KpIndex', function() {
       assert(this.res.body.hasOwnProperty("date"));
       assert(this.res.body.hasOwnProperty("utc"));
       assert(this.res.body.hasOwnProperty("kpValue"));
+
+    });
+  });
+
+
+  lt.describe.whenCalledRemotely('GET', '/api/KpIndices/prediction', function () {
+
+    lt.it.shouldBeAllowed();
+    it('should have statusCode 200', function() {
+      assert.equal(this.res.statusCode, 200);
+    });
+
+    lt.beforeEach.givenModel('KpIndex',{
+      date: new Date()
+    });
+    it('should respond with an array of KpIndices', function () {
+      assert(Array.isArray(this.res.body));
+
+
+    });
+
+    it('should return more then one item', function () {
+      assert.ok(this.res.body.length > 1)
+    });
+
+    it('should contains only future items', function () {
+
+      var currentUTCDateInUNIX = moment.utc().unix();
+      var results = this.res.body.filter((item)=>{
+         return item.utc < currentUTCDateInUNIX;
+      });
+      assert.equal(results.length, 0);
 
     });
   });
