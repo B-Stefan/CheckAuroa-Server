@@ -1,5 +1,8 @@
 import moment from "moment"
 import {findNextKPIndexForUTC, unixToRFC3339Date} from "./../../server/utils"
+import KpIndexDailyPrediction from "./../../server/aurora-services/KpIndexDailyPrediction"
+import {ModelBuilder} from "loopback-datasource-juggler"
+
 module.exports = function (KpIndex) {
   /*
    KpIndex.observe('access', function(ctx, next) {
@@ -66,6 +69,43 @@ module.exports = function (KpIndex) {
           arg: 'items',
           root: true,
           type: ["KpIndex"]
+        }
+      }
+  );
+
+
+
+
+  KpIndex.modelBuilder.define("KpIndexDayPrediction", {
+    date: Date,
+    min: "KpIndex",
+    max: "KpIndex"
+  });
+
+  KpIndex.prediction3Days = function (cb) {
+    //12am of the current day
+    let currentDate = moment().utc().utcOffset(0).startOf("day").add(12,"hours").unix();
+
+    KpIndex.find({
+      where: {
+        utc: {gt: currentDate}
+      }
+    }, (err, items)=>{
+      let predictionClass = new KpIndexDailyPrediction();
+
+      let result = predictionClass.get3DaysPrediction(items);
+
+      cb(err, result)
+    });
+  };
+  KpIndex.remoteMethod(
+      'prediction3Days',
+      {
+        http: {path: '/prediction/daily', verb: 'get'},
+        returns: {
+          arg: 'items',
+          root: true,
+          type: ["KpIndexDayPrediction"]
         }
       }
   );

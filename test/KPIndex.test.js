@@ -110,6 +110,42 @@ describe('/KpIndex', function() {
     });
   });
 
+
+  lt.describe.whenCalledRemotely('GET', '/api/KpIndices/prediction/daily', function () {
+
+    lt.it.shouldBeAllowed();
+    it('should have statusCode 200', function() {
+      assert.equal(this.res.statusCode, 200);
+    });
+
+    lt.beforeEach.givenModel('KpIndex',{
+      date: new Date()
+    });
+    it('should respond with an array of KpIndices', function () {
+      assert(Array.isArray(this.res.body));
+
+
+    });
+
+    it('should return exact 3 items', function () {
+      assert.ok(this.res.body.length === 3 )
+    });
+
+
+    it('KpValue of Min should never be greater then max ', function () {
+
+      var arr = this.res.body.map(function (item){
+          return item.max.kpValue - item.min.kpValue;
+      }).filter(function (difference){
+        return difference < 0;
+      });
+
+      assert.equal(arr.length, 0 );
+    });
+
+  });
+
+
 });
 
 
