@@ -46,7 +46,9 @@ class Row{
     static isValidRow(rowArr){
 
         if(rowArr.length == Object.keys(Row.COLLUMS).length){
-            return true;
+            if(rowArr[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX] != -1){
+                return true;
+            }
         }
         return false;
     }
@@ -231,6 +233,7 @@ export default class KpWingService {
              console.log("lineValues: ", lineValues)
              */
         }
+
 
         /**
          * Results
