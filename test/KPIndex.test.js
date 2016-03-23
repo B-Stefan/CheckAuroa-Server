@@ -143,6 +143,16 @@ describe('/KpIndex', function() {
       assert.equal(arr.length, 0 );
     });
 
+    it('should not contain any past kpInformation', function () {
+
+      var now  = moment.utc().unix();
+      var arr = this.res.body.filter(function (item){
+          return moment(item.min.date).unix() < now || moment(item.max.date).unix() < now
+      });
+
+      assert.equal(arr.length, 0 );
+    });
+
   });
 
 

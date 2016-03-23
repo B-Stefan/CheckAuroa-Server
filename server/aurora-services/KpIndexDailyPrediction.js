@@ -13,8 +13,12 @@ export default class KpIndexDailyPrediction {
 
   }
   get3DaysPrediction(kpInformationArr){
-
+    let now = moment.utc().unix();
     let currentDate = moment.utc().startOf("day").add(12,"hours");
+
+    let kpInformationList  = kpInformationArr.filter((item)=>{
+      return item.utc > now;
+    });
 
     let arr =  Array.apply(null, {length: 3}).map((item,index)=>{
 
@@ -22,7 +26,7 @@ export default class KpIndexDailyPrediction {
       let day = moment(currentDate).add(index, "days");
 
       //Find all kpInformation for the next 24 hours
-      let matchingKpInformation = kpInformationArr.filter((kpInformation)=>{
+      let matchingKpInformation = kpInformationList.filter((kpInformation)=>{
               return kpInformation.utc > day.unix() && kpInformation.utc < moment(day).add(1,"days").unix();
           })
           .sort((a,b)=>{return a.kpValue - b.kpValue});
