@@ -6,10 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "entries": {
-      "type": "object",
-      "required": true
-    },
     "validAt": {
       "type": "date",
       "id": false,
@@ -21,6 +17,10 @@
       "required": true,
       "index": true,
       "comments": "index as date"
+    },
+    "entries": {
+      "type": "object",
+      "required": true
     }
   },
   "validations": [],

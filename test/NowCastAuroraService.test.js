@@ -12,8 +12,10 @@ describe('NowCastAuroraService', function() {
     new NowCastAuroraService()
         .getList()
         .then(function (result) {
-          assert.equal(result.entires.length,NowCastAuroraService.rowCountExpected * NowCastAuroraService.colCountExpected);
+          assert.equal(result.entries.length,NowCastAuroraService.rowCountExpected * NowCastAuroraService.colCountExpected);
           callback();
+        }).catch((err)=>{
+          throw new Error(err)
         })
 
   })

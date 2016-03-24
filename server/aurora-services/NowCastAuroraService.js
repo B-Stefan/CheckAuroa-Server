@@ -135,7 +135,7 @@ export default class NowCastAuroraService {
     return {
       createdAt: metaData.createdAt,
       validAt: metaData.validAt,
-      enties: [].concat.apply([],resultArr) //Flattern [[{},{}],[...]] =>[{},{},{},...]
+      entries: [].concat.apply([],resultArr) //Flattern [[{},{}],[...]] =>[{},{},{},...]
     }
 
 
@@ -144,10 +144,7 @@ export default class NowCastAuroraService {
     return new Promise((resolve, reject)=>{
       request.get(NowCastAuroraService.URL, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-          console.time("parseTime")
           let results = this.parseResponse(body);
-          console.timeEnd("parseTime")
-          //this.cache.set("result", results, 10000);
           resolve(results)
         }else {
           reject({
