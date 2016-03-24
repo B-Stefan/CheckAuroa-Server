@@ -12,7 +12,9 @@ module.exports = function (server) {
       console.timeEnd("nowcast");
       server.models.AuroraNowcast.upsert(result, (err, item)=>{
           if(err) console.error(err);
-          else console.log("yeeah", item.getId())
+
+          if(item != null)console.log("yeeah", item.getId());
+          else console.log(arguments);
       });
       console.log("new prob results are there ", result.validAt.format());
     }).catch((err)=>{
