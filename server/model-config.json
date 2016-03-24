@@ -43,5 +43,11 @@
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "AuroraNowcast": {
+    "dataSource": "mongoDb",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
   }
 }
