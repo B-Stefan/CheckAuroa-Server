@@ -6,6 +6,12 @@ module.exports = function (server) {
 
   let nowCastAurora = new NowCastAuroraService(server);
 
+
+  setInterval(()=>{
+    server.models.AuroraNowcast.count().then((number )=>{
+      console.log("count", number);
+    });
+  },2000);
   function crawl() {
     console.time("nowcast");
     nowCastAurora.getList().then((result)=>{
