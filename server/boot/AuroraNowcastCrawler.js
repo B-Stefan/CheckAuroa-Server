@@ -11,7 +11,7 @@ module.exports = function (server) {
     nowCastAurora.getList().then((result)=>{
       console.timeEnd("nowcast");
       server.models.AuroraNowcast.upsert(result, (err, item)=>{
-          if(err) console.error(err);
+          if(err) console.log(JSON.stringify(err));
 
           if(item != null)console.log("yeeah", item.getId());
           else console.log(arguments);
