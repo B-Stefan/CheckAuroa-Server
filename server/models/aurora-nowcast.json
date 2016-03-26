@@ -13,13 +13,19 @@
     },
     "createdAt": {
       "type": "date",
-      "id": true,
+      "id": false,
       "required": true,
-      "index": true,
+      "index": false,
       "comments": "index as date"
     },
+    "id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "index": true
+    },
     "entries": {
-      "type": "object",
+      "type": "string",
       "required": true
     }
   },

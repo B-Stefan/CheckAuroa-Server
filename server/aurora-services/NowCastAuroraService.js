@@ -30,6 +30,35 @@ export default class NowCastAuroraService {
 
   static PRODUCT_CREAtED_AT_CAPTION = "# Product Generated At";
 
+  static validateMatrix(matrix){
+    if(matrix.length == NowCastAuroraService.rowCountExpected){
+      if(matrix[0].length == NowCastAuroraService.colCountExpected){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static getProbabilityByLatLng(matrix, lat,lng){
+    if(!NowCastAuroraService.validateMatrix(matrix)){
+      console.log(matrix.length);
+      console.log(matrix[0].length);
+      //throw new Error ("Not valid matrix provided")
+
+    }
+
+    let row = (lat+90) / NowCastAuroraService.degreesPerRow; // + 90 because the latitude goes from -90 to 90, for the matrix we need 0 - 180
+    let col = lng / NowCastAuroraService.degreesPerCollum;
+
+    let rowIndex = Math.round(row);
+    let colIndex = Math.round(col);
+
+    console.log("lat,row", lat," - " , rowIndex, row);
+    console.log("lng, col", lng," - " , colIndex, row);
+
+    return matrix[rowIndex][colIndex];
+  }
+  
   constructor(){
 
   }
@@ -98,10 +127,10 @@ export default class NowCastAuroraService {
      * @type {Array}
      */
     let resultArr = splitArray
-
         .filter((row)=>{
           return row.indexOf("#") == -1; //Filter description
         })
+        .filter((row)=>row.length > 0) // filter out all spaces
         .map((row, rowIndex)=>{
 
           /**
@@ -120,25 +149,46 @@ export default class NowCastAuroraService {
           return row
               .split(" ") //split row into array
               .filter((content)=>{return content.length > 0 }) //filter out all missing spaces
-              .map((number)=>{ parseInt(number);}) //parse number
-              .map((collum, collumIndex)=>{
-                let item = new ProbabilityInformation();
-                item.probability = collum;
-                item.position.lat = rowLat;
-                item.position.lng = (collumIndex) * NowCastAuroraService.degreesPerCollum;
-                return item;
-          })
+              .map((number)=>{ return parseInt(number);});//parse number
 
     });
-
 
     return {
       createdAt: metaData.createdAt,
       validAt: metaData.validAt,
-      entries: [].concat.apply([],resultArr) //Flattern [[{},{}],[...]] =>[{},{},{},...]
+      entries: resultArr
     }
 
 
+  }
+
+
+  convertMatrixToClasses(etries) {
+
+    let re = etries.map((row, rowIndex)=> {
+
+      /**
+       * only one row
+       *
+       * 1 3 0 0 0 0 0.... -> 1024
+       */
+
+      /**
+       * calculate the latitute for this row.
+       * @type {number}
+       */
+      let rowLat = (rowIndex) * NowCastAuroraService.degreesPerRow - 90;
+
+      row.map((collum, collumIndex)=> {
+        let item = new ProbabilityInformation();
+        item.probability = collum;
+        item.position.lat = rowLat;
+        item.position.lng = (collumIndex) * NowCastAuroraService.degreesPerCollum;
+        return item;
+      });
+    });
+
+    return [].concat.apply([],re); //Flattern [[{},{}],[...]] =>[{},{},{},...]
   }
   getList(){
     return new Promise((resolve, reject)=>{
