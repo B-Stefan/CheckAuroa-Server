@@ -13,7 +13,7 @@
     "probability": {
       "type": "number"
     },
-    "UTCDatetime": {
+    "validAt": {
       "type": "date"
     }
   },
