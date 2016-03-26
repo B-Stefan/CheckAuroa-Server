@@ -1,6 +1,5 @@
 import NowCastAuroraService from "./../aurora-services/NowCastAuroraService"
-import Queue from "promise-queue"
-import fs from "fs"
+
 module.exports = function (server) {
   console.log("boot nowCastAurora");
 
