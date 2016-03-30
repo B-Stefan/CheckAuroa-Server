@@ -44,7 +44,7 @@ module.exports = function (server) {
    * @type {number}
    */
 
-  let maxEntries = 100;
+  let maxEntries = 20;
 
   /**
    * Destroy function to check if there are more then the maxEntries
