@@ -10,5 +10,6 @@ export function findNextKPIndexForUTC(unixUTC, listOFKpIndex){
 
         return listOFKpIndex
             .sort((a,b)=> Math.abs(a.utc - unixUTC) - Math.abs(b.utc - unixUTC))
+            .reverse()
             .pop();
 }
