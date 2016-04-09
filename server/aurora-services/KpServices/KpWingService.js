@@ -9,28 +9,7 @@ import NodeCache from "node-cache"
  */
 class Row{
 
-    /**
-     *              0 = nominal solar wind input data,
-     #            1 = data are good but required an extrapolation
-     #            2 = data are bad: incomplete ACE speed data
-     #            3 = data are bad: solar wind speed input errors; model output likely unreliable
-     #            4 = missing Wing Kp data
-     * @returns {{OK: number, MISSING: number}}
-     * @constructor
-     */
-    static get STATUS(){
-        return {
-
-
-            NORMAL: 0,
-            GOOD: 1,
-            INCOMPLETE: 2,
-            UNRELIABLE: 3,
-            MISSING : 4,
-            ERROR : -1,
-        }
-    }
-
+    
     static getUTCDateFromRowARR(startIndex, row){
         let date =  moment.utc(
             {
