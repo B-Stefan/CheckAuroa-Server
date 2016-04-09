@@ -1,6 +1,6 @@
 "use strict";
 import request from "request"
-import {isDevMode,unixToRFC3339Date} from "./../utils"
+import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"

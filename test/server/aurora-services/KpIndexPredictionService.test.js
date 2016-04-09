@@ -1,5 +1,5 @@
-import KpIndexPredictionService from "./../../../server/aurora-services/KpIndexPredictionService"
-import KPIndexService from "./../../../server/aurora-services/KPIndexService"
+import KpIndexPredictionService from "./../../../server/services/aurora-services/KpIndexPredictionService"
+import KPIndexService from "./../../../server/services/aurora-services/KPIndexService"
 import assert from "assert"
 import moment from "moment"
 describe('KpIndexPredictionService', function() {

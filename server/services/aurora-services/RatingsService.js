@@ -1,8 +1,6 @@
 import KPService from "./KPIndexService"
-import WeatherService from "./WeatherService"
 import GeomagnaticLocationService from "./GeomagnaticLocationService"
-import {Rating, Location,GeomagnaticLocation} from "./../aurora-api/clients/typescript-node-client/api.ts"
-import {unixToRFC3339Date} from "./../utils"
+import {unixToRFC3339Date} from "./../../utils"
 import moment from "moment"
 /**
  *

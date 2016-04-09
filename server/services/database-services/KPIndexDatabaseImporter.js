@@ -1,4 +1,4 @@
-import KpIndexService from "./KPIndexService"
+import KpIndexService from "./../aurora-services/KPIndexService"
 
 export default class KPIndexDatabaseImporter {
 
