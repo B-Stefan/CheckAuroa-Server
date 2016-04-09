@@ -1,4 +1,4 @@
-import NowCastAuroraService from "./../server/aurora-services/NowCastAuroraService";
+import NowCastAuroraService from "./../../../server/aurora-services/NowCastAuroraService";
 import assert from "assert"
 
 

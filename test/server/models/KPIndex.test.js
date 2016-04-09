@@ -1,6 +1,6 @@
 var lt = require('loopback-testing');
 var assert = require('assert');
-var app = require('../server/server.js'); //path to app.js or server.js
+var app = require('../../../server/server.js'); //path to app.js or server.js
 var moment = require("moment")
 
 var KpIndex;
