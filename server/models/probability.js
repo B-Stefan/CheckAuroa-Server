@@ -1,5 +1,5 @@
 import moment from "moment"
-import NowCastAuroraService from "./../../server/aurora-services/NowCastAuroraService"
+import NowCastAuroraService from "./../aurora-services/NowCastAuroraService"
 
 module.exports = function(Probability) {
   

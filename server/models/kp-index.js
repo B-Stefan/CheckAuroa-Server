@@ -1,6 +1,6 @@
 import moment from "moment"
 import {findNextKPIndexForUTC, unixToRFC3339Date} from "./../../server/utils"
-import KpIndexDailyPrediction from "./../../server/aurora-services/KpIndexPredictionService"
+import KpIndexDailyPrediction from "./../aurora-services/KpIndexPredictionService"
 import {ModelBuilder} from "loopback-datasource-juggler"
 
 module.exports = function (KpIndex) {
