@@ -1,6 +1,4 @@
-require("babel-register")({
-  "presets": ["es2015", "stage-0"]
-});
+require("babel-register")();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
