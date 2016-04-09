@@ -1,8 +1,6 @@
-require("babel-register")({
-  "presets": ["es2015", "stage-0"]
-});
-var NowCastAuroraService  = require("./../server/aurora-services/NowCastAuroraService").default;
-var assert = require('assert');
+import NowCastAuroraService from "./../server/aurora-services/NowCastAuroraService";
+import assert from "assert"
+
 
 describe('NowCastAuroraService', function() {
 
