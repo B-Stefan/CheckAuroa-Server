@@ -1,0 +1,25 @@
+{
+  "name": "sunInfromation",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "altitude": {
+      "type": "number",
+      "required": true,
+      "comments": "sun altitude above the horizon in radians, e.g. 0 at the horizon and PI/2 at the zenith (straight over your head)"
+    },
+    "azimuth": {
+      "type": "number",
+      "required": true,
+      "comments": "sun azimuth in radians (direction along the horizon, measured from south to west), e.g. 0 is south and Math.PI * 3/4 is northwest"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

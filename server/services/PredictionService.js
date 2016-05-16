@@ -1,6 +1,7 @@
 import moment from "moment"
 import KPIndexService from "./aurora-services/KPIndexService"
 import GeomagnaticLocationService from "./aurora-services/GeomagnaticLocationService"
+import SuncalcService from "./SuncalcService";
 import {findNextKPIndexForUTC} from "./../utils"
 import {predict} from "aurora-probability-calculation"
 
@@ -29,6 +30,7 @@ export default class PredictionService {
 
     this.kpIndexService = new KPIndexService();
     this.geomagnaticLocationService= new GeomagnaticLocationService();
+    this.suncalcService = new SuncalcService();
 
   }
 
@@ -109,7 +111,9 @@ export default class PredictionService {
                return {
                  date: date,
                  probability: probability,
-                 kpInformation: bestKpInfo
+                 kpInformation: bestKpInfo,
+                 sunInformation: this.suncalcService.getSunPosition(date,lat,lng),
+                 moonInformation: this.suncalcService.getMoonInformation(date,lat,lng)
                }
             })
           })

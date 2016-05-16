@@ -184,6 +184,8 @@ describe('PredictionService', function() {
                   assert.property(item,"date");
                   assert.property(item,"probability");
                   assert.property(item,"kpInformation");
+                  assert.property(item,"sunInformation");
+                  assert.property(item,"moonInformation");
 
                   return item;
                 })

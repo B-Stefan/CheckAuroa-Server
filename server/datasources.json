@@ -6,6 +6,5 @@
   "mongoDb": {
     "name": "mongoDb",
     "connector": "memory"
-
   }
 }

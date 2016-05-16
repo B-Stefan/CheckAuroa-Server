@@ -17,11 +17,17 @@ module.exports = function(Probability) {
   Probability.disableRemoteMethod("create", true);
   Probability.disableRemoteMethod("createChangeStream", true);
   Probability.disableRemoteMethod("upsert", true);
-
-
+  
 
   Probability.prediction= function (date,lat,lng,cb) {
-    return Promise.all(predictionService.get24HourPrediction(date,lat,lng))
+
+    //Get prediction and warp result with the location 
+    return Promise.all(predictionService.get24HourPrediction(date,lat,lng)).then((results)=>{
+      return results.map((item)=>{
+        item.location = {lat: lat, lng:lng};
+        return item;
+      })
+    })
   };
   Probability.remoteMethod(
       'prediction',
@@ -32,7 +38,7 @@ module.exports = function(Probability) {
           {arg: 'lng', type: 'number'},
         ],
         http: {path: '/prediction', verb: 'get'},
-        returns: {arg: 'prediction', type: "object", root: true}
+        returns: {arg: 'prediction', type: "Probability", root: true}
       }
   );
 
