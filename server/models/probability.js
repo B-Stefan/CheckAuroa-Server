@@ -1,8 +1,12 @@
 import moment from "moment"
 import NowCastAuroraService from "./../services/aurora-services/NowCastAuroraService"
+import PredictionService from "./../services/PredictionService"
 
 module.exports = function(Probability) {
-  
+
+  const predictionService = new PredictionService();
+
+
   Probability.disableRemoteMethod("exists", true);
   Probability.disableRemoteMethod("deleteById", true);
   Probability.disableRemoteMethod("delete", true);
@@ -14,6 +18,23 @@ module.exports = function(Probability) {
   Probability.disableRemoteMethod("createChangeStream", true);
   Probability.disableRemoteMethod("upsert", true);
 
+
+
+  Probability.prediction= function (date,lat,lng,cb) {
+    return Promise.all(predictionService.get24HourPrediction(date,lat,lng))
+  };
+  Probability.remoteMethod(
+      'prediction',
+      {
+        accepts: [
+          {arg: 'date', type: 'Date'},
+          {arg: 'lat', type: 'number'},
+          {arg: 'lng', type: 'number'},
+        ],
+        http: {path: '/prediction', verb: 'get'},
+        returns: {arg: 'prediction', type: "object", root: true}
+      }
+  );
 
   Probability.current = function (lat,lng,cb) {
     console.time("NowCastGet");
