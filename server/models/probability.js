@@ -29,11 +29,18 @@ module.exports = function(Probability) {
       })
     })
   };
+
+  //cast datetime to date
+  Probability.beforeRemote("prediction", function( ctx,model, next){
+    let date = moment(ctx.req.query.date).utc().format("YYYY-MM-DD");
+    ctx.req.query.date = date;
+    next()
+  });
   Probability.remoteMethod(
       'prediction',
       {
         accepts: [
-          {arg: 'date', type: 'string'},
+          {arg: 'date', type: 'Date'},
           {arg: 'lat', type: 'number'},
           {arg: 'lng', type: 'number'},
         ],
