@@ -38,7 +38,7 @@ module.exports = function(Probability) {
           {arg: 'lng', type: 'number'},
         ],
         http: {path: '/prediction', verb: 'get'},
-        returns: {arg: 'prediction', type: "Probability", root: true}
+        returns: {arg: 'prediction', type: ["Probability"], root: true}
       }
   );
 
