@@ -33,7 +33,7 @@ module.exports = function(Probability) {
       'prediction',
       {
         accepts: [
-          {arg: 'date', type: 'Date'},
+          {arg: 'date', type: 'string'},
           {arg: 'lat', type: 'number'},
           {arg: 'lng', type: 'number'},
         ],
