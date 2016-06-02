@@ -82,8 +82,14 @@ export default class PredictionService {
       throw new Error("Please provide date, lat,lng as arguemnts you provided: " + JSON.stringify(arguments));
     }
 
-    let normalizedDate = moment(date).utc().startOf("Day").add(8,"hours");
+    let normalizedDate;
+    if(moment(date).format("HHmmssSSS") == "000000000"){
+      normalizedDate = moment(date).utc().add(8,"hours");
+    } else {
+      normalizedDate = moment(date).utc().startOf("Day").add(8,"hours");
+    }
 
+ 
     let staticInformationPromise = this.getKpAndMagneticLocInformation(normalizedDate,lat,lng);
 
     //create an array with 24 items
