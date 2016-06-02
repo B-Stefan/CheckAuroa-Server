@@ -28,7 +28,7 @@ module.exports = function(Probability) {
       let list = results.map((item)=>{
         item.location = {lat: lat, lng:lng};
         return item;
-      }).sort((a,b)=>a.date.unix() - b.date.unix());
+      })
 
 
       let sunInformation = sunCalcService.getSunInformation(date,lat,lng)
@@ -37,7 +37,7 @@ module.exports = function(Probability) {
         sunrise: sunInformation.sunriseEnd,
         sunset: sunInformation.sunset,
         max: max,
-        hours:list
+        hours:list.sort((a,b)=>a.date.unix() - b.date.unix())
       }
     })
   };
