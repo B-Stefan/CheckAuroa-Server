@@ -62,9 +62,21 @@ module.exports = function(Probability) {
       'prediction',
       {
         accepts: [
-          {arg: 'date', type: 'date'},
+          {arg: 'date', type: 'date',
+            http: function(ctx) {
+              // ctx is LoopBack Context object
+
+              // 1. Get the HTTP request object as provided by Express
+              var req = ctx.req;
+              
+              return moment(req.param('date'))
+            }
+
+
+          },
           {arg: 'lat', type: 'number'},
           {arg: 'lng', type: 'number'},
+
         ],
         http: {path: '/prediction', verb: 'get'},
         returns: {arg: 'prediction', type: "ProbabilityConclusion", root: true}
