@@ -23,7 +23,7 @@ export default class SuncalcService {
    * @returns {object} see  https://github.com/mourner/suncalc
    */
   getMoonPosition(date, lat, lng){
-    date = moment(date).toDate();
+    date = moment(date).utc().toDate();
 
     return SunCalc.getMoonPosition(date,lat,lng);
 
@@ -35,7 +35,7 @@ export default class SuncalcService {
    * @returns {object} see https://github.com/mourner/suncalc
    */
   getMoonIllumination(date){
-    date = moment(date).toDate();
+    date = moment(date).utc().toDate();
     return SunCalc.getMoonIllumination(date)
   }
 
@@ -49,7 +49,7 @@ export default class SuncalcService {
    */
   getMoonInformation(date,lat,lng){
 
-    date = moment(date).toDate();
+    date = moment(date).utc().toDate();
     
     let position = this.getMoonPosition(date,lat,lng);
     let illu = this.getMoonIllumination(date);
@@ -65,12 +65,11 @@ export default class SuncalcService {
    * @param date {date}
    * @param lat {number}
    * @param lng {number}
-   * @returns {{altitude,azimuth,angle,phase,friction}}
+   * @returns {}
    */
   getSunInformation(date,lat,lng){
 
-    let dateNormal = moment(date).toDate();
-    console.log(dateNormal);
+    let dateNormal = moment(date).utc().add(moment(date).utcOffset(),"minutes");
     return SunCalc.getTimes(dateNormal,lat,lng)
   }
 }
