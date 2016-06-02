@@ -1,11 +1,13 @@
 import moment from "moment"
 import NowCastAuroraService from "./../services/aurora-services/NowCastAuroraService"
 import PredictionService from "./../services/PredictionService"
-
+import SuncalcService from "./../services/SuncalcService"
+ 
 module.exports = function(Probability) {
 
   const predictionService = new PredictionService();
 
+  const sunCalcService = new SuncalcService();
 
   Probability.disableRemoteMethod("exists", true);
   Probability.disableRemoteMethod("deleteById", true);
@@ -23,10 +25,20 @@ module.exports = function(Probability) {
 
     //Get prediction and warp result with the location 
     return Promise.all(predictionService.get24HourPrediction(date,lat,lng)).then((results)=>{
-      return results.map((item)=>{
+      let list = results.map((item)=>{
         item.location = {lat: lat, lng:lng};
         return item;
-      })
+      }).sort((a,b)=>a.date - b.date)
+
+
+      let sunInformation = sunCalcService.getSunInformation(date,lat,lng)
+      let max = list.sort((item)=>item.probability).pop();
+      return {
+        sunrise: sunInformation.sunriseEnd,
+        sunset: sunInformation.sunset,
+        max: max,
+        hours:list
+      }
     })
   };
 
@@ -36,16 +48,26 @@ module.exports = function(Probability) {
     ctx.req.query.date = date;
     next()
   });
+
+  Probability.modelBuilder.define("ProbabilityConclusion", {
+    sunrise: Date,
+    sunset: Date,
+    max: "Probability",
+    hours: ["Probability"]
+
+  });
+
+
   Probability.remoteMethod(
       'prediction',
       {
         accepts: [
-          {arg: 'date', type: 'string'},
+          {arg: 'date', type: 'date'},
           {arg: 'lat', type: 'number'},
           {arg: 'lng', type: 'number'},
         ],
         http: {path: '/prediction', verb: 'get'},
-        returns: {arg: 'prediction', type: ["Probability"], root: true}
+        returns: {arg: 'prediction', type: "ProbabilityConclusion", root: true}
       }
   );
 

@@ -59,4 +59,18 @@ export default class SuncalcService {
 
     return illu
   }
+
+  /**
+   *
+   * @param date {date}
+   * @param lat {number}
+   * @param lng {number}
+   * @returns {{altitude,azimuth,angle,phase,friction}}
+   */
+  getSunInformation(date,lat,lng){
+
+    let dateNormal = moment(date).toDate();
+    console.log(dateNormal);
+    return SunCalc.getTimes(dateNormal,lat,lng)
+  }
 }
