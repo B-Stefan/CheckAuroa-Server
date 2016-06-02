@@ -252,7 +252,9 @@ export default class KpWingService {
                 let newRow = new Row(rowValues);
                 results.push(newRow)
             }else {
-                console.log(JSON.stringify(rowValues))
+                if(process.env.NODE_ENV != "production"){
+                    console.log(JSON.stringify(rowValues))
+                }
             }
 
         });
