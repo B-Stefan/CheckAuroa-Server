@@ -31,10 +31,11 @@ module.exports = function(Probability) {
       })
 
 
-      let sunInformation = sunCalcService.getSunInformation(date,lat,lng)
+      let sunInformation = sunCalcService.getSunInformation(date,lat,lng);
+      let sunInformationNextDay = sunCalcService.getSunInformation(moment(date).add(1,"days"),lat,lng);
       let max = list.slice().sort((item)=>item.probability).pop();
       return {
-        sunrise: sunInformation.sunriseEnd,
+        sunrise: sunInformationNextDay.sunriseEnd,
         sunset: sunInformation.sunset,
         max: max,
         hours:list.sort((a,b)=>a.date.unix() - b.date.unix())
