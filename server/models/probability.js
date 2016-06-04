@@ -32,7 +32,7 @@ module.exports = function(Probability) {
 
 
       let sunInformation = sunCalcService.getSunInformation(date,lat,lng)
-      let max = list.sort((item)=>item.probability).pop();
+      let max = list.slice().sort((item)=>item.probability).pop();
       return {
         sunrise: sunInformation.sunriseEnd,
         sunset: sunInformation.sunset,
@@ -62,7 +62,9 @@ module.exports = function(Probability) {
       'prediction',
       {
         accepts: [
-          {arg: 'date', type: 'date',
+          {
+            arg: 'date', 
+            type: 'date',
             http: function(ctx) {
               // ctx is LoopBack Context object
 
