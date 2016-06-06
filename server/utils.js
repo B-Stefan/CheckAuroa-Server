@@ -9,6 +9,7 @@ export function unixToRFC3339Date(unixUtcDate){
 export function findNextKPIndexForUTC(unixUTC, listOFKpIndex){
 
         return listOFKpIndex
+            .slice()
             .sort((a,b)=> Math.abs(a.utc - unixUTC) - Math.abs(b.utc - unixUTC))
             .reverse()
             .pop();

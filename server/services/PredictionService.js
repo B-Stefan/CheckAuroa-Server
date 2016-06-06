@@ -101,7 +101,7 @@ export default class PredictionService {
 
           //Return a promise for each item that contains the result of the request for KPInfomration
           return staticInformationPromise.then((result)=>{
-            let bestKpInfo = findNextKPIndexForUTC(date,result.kpInformations);
+            let bestKpInfo = findNextKPIndexForUTC(date.unix(),result.kpInformations);
 
             //If no kpInformation are there (for example if I ask for the date 01.01.2020) 
             let calulatedPropbabilityPromise = new Promise((resolve)=>{resolve(0)});
