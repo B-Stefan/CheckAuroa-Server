@@ -89,12 +89,11 @@ export default class KPIndexService {
      */
     getKpListByUTCDate(UTCDate){
         let unixUtcTime = UTCDate;
-        console.log("unixUtcTime" + unixUtcTime)
+      
         return new Promise((resolve,reject)=>{
 
             //Get the list
             this.getKpList().then((list)=>{
-                console.log("unixUtcTime" + list.length)
                 let nextKpInformation =
                     list.filter((kpInformation)=> {
                             return (kpInformation.utc - unixUtcTime) > 0
