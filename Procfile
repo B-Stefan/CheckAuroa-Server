@@ -1,1 +1,1 @@
-web: slc run --cluster 1
+web: node pm2Bootstrap.js
