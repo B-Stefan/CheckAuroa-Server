@@ -28,7 +28,10 @@ export default class KpIndexServiceRedisCached extends KpIndexService {
           port: this.redisPort,
           password: this.redisPass
         });
-        client.on("error",reject);
+        client.on("error",function (err) {
+            console.log("REDIS:err");
+            reject(err);
+        });
         client.on("connect",function (){
             console.log("REDIS:connect");
            resolve(client);
@@ -45,9 +48,10 @@ export default class KpIndexServiceRedisCached extends KpIndexService {
 
       this.connectToRedisServer().then((redisClient)=>{
         redisClient.get("kpList",(err,result)=>{
-          //console.log("getResolve", result,err);
+          console.log("getResolve", result,err);
           if(err || result == null){
             super.getKpList().then((kpIndexList)=>{
+              console.log("getKpList", kpIndexList);
               redisClient.setex("kpList",60 * 2,JSON.stringify(kpIndexList));
               resolve(kpIndexList)
             }).catch(reject)
