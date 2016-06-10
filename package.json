@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
+    "startWithPm2": "nvm && npm install && pm2 startOrRestart ecosystem.json",
     "start": "node $NODE_DEBUG_OPTION .",
     "test": "./node_modules/.bin/mocha --require babel-core/register --recursive"
   },
