@@ -53,6 +53,7 @@ export default class KPIndexService {
      * @constructor
      */
     constructor(){
+        this.pendingKpRequest = null;
         this.kpWingService =  new KpWingService();
         this.kp3DayService =  new Kp3DayForecast();
 
@@ -66,18 +67,22 @@ export default class KPIndexService {
      */
     getKpList(){
 
-        return new Promise((resolve,reject)=>{
+        if(this.pendingKpRequest  == null ){
+          this.pendingKpRequest = new Promise((resolve,reject)=>{
             let kp3Days = this.kp3DayService.getKpIndexForNextDays();
             let kpWing = this.kpWingService.getList();
 
             Promise.all([kpWing,kp3Days]).then((data)=>{
-              
-                let flattern = [].concat.apply([],data);
 
-                resolve(flattern);
+              let flattern = [].concat.apply([],data);
+
+              resolve(flattern);
+              this.pendingKpRequest = null; 
 
             }).catch(reject)
-        })
+          })
+        }
+        return this.pendingKpRequest
     }
 
     /**
@@ -89,7 +94,7 @@ export default class KPIndexService {
      */
     getKpListByUTCDate(UTCDate){
         let unixUtcTime = UTCDate;
-      
+
         return new Promise((resolve,reject)=>{
 
             //Get the list
