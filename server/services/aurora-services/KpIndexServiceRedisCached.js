@@ -50,6 +50,9 @@ export default class KpIndexServiceRedisCached extends KpIndexService {
         redisClient.get("kpList",(err,result)=>{
           console.log("getResolve", result,err);
           if(err || result == null){
+            if(err){
+              reject(err)
+            }
             super.getKpList().then((kpIndexList)=>{
               console.log("getKpList", kpIndexList);
               redisClient.setex("kpList",60 * 2,JSON.stringify(kpIndexList));
