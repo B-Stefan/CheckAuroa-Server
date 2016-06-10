@@ -4,7 +4,7 @@ var MACHINE_NAME = 'aurora-heroku';
 var PRIVATE_KEY  =  process.env.KEYMETRICS_PRIVATE;   // Keymetrics Private key
 var PUBLIC_KEY   = process.env.KEYMETRICS_PUBLIC;   // Keymetrics Public  key
 
-var instances = process.env.WEB_CONCURRENCY || -1; // Set by Heroku or -1 to scale to max cpu core -1
+var instances = 1; // Set by Heroku or -1 to scale to max cpu core -1
 var maxMemory = process.env.WEB_MEMORY      || 512;// " " "
 
 pm2.connect(function() {
