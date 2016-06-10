@@ -1,5 +1,5 @@
 import moment from "moment"
-import KPIndexService from "./aurora-services/KPIndexService"
+import KpIndexServiceRedisCached from "./aurora-services/KpIndexServiceRedisCached"
 import GeomagnaticLocationService from "./aurora-services/GeomagnaticLocationService"
 import SuncalcService from "./SuncalcService";
 import {findNextKPIndexForUTC} from "./../utils"
@@ -28,7 +28,7 @@ export default class PredictionService {
 
   constructor(){
 
-    this.kpIndexService = new KPIndexService();
+    this.kpIndexService = new KpIndexServiceRedisCached("apps.conts.de", 6379, process.env.REDIS_PASS);
     this.geomagnaticLocationService= new GeomagnaticLocationService();
     this.suncalcService = new SuncalcService();
 
