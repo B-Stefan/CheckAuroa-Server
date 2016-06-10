@@ -12,7 +12,7 @@ module.exports = function (server, callback) {
     }).catch((err)=>{
       throw new Error(err)
     });
-  },60 * 1000);
+  },60 * 1000 * 5);
 
 
   databaseImporter.startNewImport().then((results)=>{
