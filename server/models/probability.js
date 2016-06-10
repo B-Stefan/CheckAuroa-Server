@@ -72,7 +72,7 @@ module.exports = function(Probability) {
               // 1. Get the HTTP request object as provided by Express
               var req = ctx.req;
               
-              return moment(req.param('date'))
+              return moment(req.params.date)
             }
 
 
