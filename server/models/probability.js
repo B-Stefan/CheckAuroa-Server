@@ -30,7 +30,6 @@ module.exports = function(Probability) {
         return item;
       })
 
-
       let sunInformation = sunCalcService.getSunInformation(date,lat,lng);
       let sunInformationNextDay = sunCalcService.getSunInformation(moment(date).add(1,"days"),lat,lng);
       let max = list.slice().sort((item)=>item.probability).pop();
@@ -71,8 +70,8 @@ module.exports = function(Probability) {
 
               // 1. Get the HTTP request object as provided by Express
               var req = ctx.req;
-              
-              return moment(req.params.date)
+
+              return moment(req.param('date'))
             }
 
 
