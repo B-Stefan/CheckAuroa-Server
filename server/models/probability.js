@@ -32,10 +32,13 @@ module.exports = function(Probability) {
 
       let sunInformation = sunCalcService.getSunInformation(date,lat,lng);
       let sunInformationNextDay = sunCalcService.getSunInformation(moment(date).add(1,"days"),lat,lng);
-      let max = list.slice().sort((item)=>item.probability).pop();
+      let sunrise = sunInformationNextDay.sunriseEnd;
+      let sunset = sunInformation.sunset;
+
+      let max = list.slice().filter((item)=>moment(item.date).isBetween(moment(sunset),moment(sunrise))).sort((item)=>item.probability).pop();
       return {
-        sunrise: sunInformationNextDay.sunriseEnd,
-        sunset: sunInformation.sunset,
+        sunrise: sunrise,
+        sunset: sunset,
         max: max,
         hours:list.sort((a,b)=>a.date.unix() - b.date.unix())
       }
