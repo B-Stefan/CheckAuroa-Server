@@ -58,6 +58,7 @@ module.exports = function(Probability) {
     sunrise: Date,
     sunset: Date,
     max: "Probability",
+    min: "Probability",
     hours: ["Probability"]
 
   });
