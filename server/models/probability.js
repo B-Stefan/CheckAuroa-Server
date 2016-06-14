@@ -28,18 +28,19 @@ module.exports = function(Probability) {
       let list = results.map((item)=>{
         item.location = {lat: lat, lng:lng};
         return item;
-      })
+      });
 
       let sunInformation = sunCalcService.getSunInformation(date,lat,lng);
       let sunInformationNextDay = sunCalcService.getSunInformation(moment(date).add(1,"days"),lat,lng);
       let sunrise = sunInformationNextDay.sunriseEnd;
       let sunset = sunInformation.sunset;
 
-      let max = list.slice().filter((item)=>moment(item.date).isBetween(moment(sunset),moment(sunrise))).sort((item)=>item.probability).pop();
+
+      let max = list.slice().filter((item)=>moment(item.date).isBetween(moment(sunset),moment(sunrise))).sort((a,b)=>a.probability - b.probability);
       return {
         sunrise: sunrise,
         sunset: sunset,
-        max: max,
+        max: max.pop(),
         hours:list.sort((a,b)=>a.date.unix() - b.date.unix())
       }
     })
