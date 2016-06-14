@@ -41,6 +41,7 @@ module.exports = function(Probability) {
         sunrise: sunrise,
         sunset: sunset,
         max: max.pop(),
+        min: max.reverse().pop(),
         hours:list.sort((a,b)=>a.date.unix() - b.date.unix())
       }
     })
