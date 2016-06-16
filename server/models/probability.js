@@ -24,7 +24,7 @@ module.exports = function(Probability) {
   Probability.prediction= function (date,lat,lng,cb) {
 
     //Get prediction and warp result with the location 
-    return Promise.all(predictionService.get24HourPrediction(date,lat,lng)).then((results)=>{
+    return Promise.all(predictionService.get24HourPrediction(date,lat,lng,Probability.app.models.KpIndex)).then((results)=>{
       let list = results.map((item)=>{
         item.location = {lat: lat, lng:lng};
         return item;
