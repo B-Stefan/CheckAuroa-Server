@@ -36,6 +36,9 @@ module.exports = function(Probability) {
       let sunset = sunInformation.sunset;
 
 
+      if(list == null || typeof  list == "undefined"){
+        list = [];
+      }
       let max = list.slice().filter((item)=>moment(item.date).isBetween(moment(sunset),moment(sunrise))).sort((a,b)=>a.probability - b.probability);
       return {
         sunrise: sunrise,
