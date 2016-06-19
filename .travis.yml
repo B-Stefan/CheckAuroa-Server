@@ -1,14 +1,14 @@
 language: node_js
 node_js:
   - "4"
-compiler: clang-3.6
+compiler: clang
 env:
-  - CXX=clang-3.6 NODE_ENV=test
+  - CXX=clang NODE_ENV=test
 addons:
   apt:
     sources:
-      - llvm-toolchain-precise-3.6
       - ubuntu-toolchain-r-test
     packages:
-      - clang-3.6
+      - libgnome-keyring-dev
+      - clang
       - g++-4.8
