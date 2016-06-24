@@ -56,10 +56,10 @@ export default class PredictionService {
     //transform normal lat,lng to geomagnatic lat,lng
     let geomagneticPromise = this.getMagneticLatLng(lat,lng);
 
-    let kpPromise = this.getKPInformation(date,moment(date).add(1.5,"day"));
+    //let kpPromise = this.getKPInformation(date,moment(date).add(1.5,"day"));
 
 
-    //let kpPromise = KpIndexModel.prediction();
+    let kpPromise = KpIndexModel.prediction();
 
     return Promise
         .all([geomagneticPromise,kpPromise])
