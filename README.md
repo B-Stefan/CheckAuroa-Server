@@ -1,5 +1,7 @@
 ## Check-Aurora-Sever
 
+[![Join the chat at https://gitter.im/B-Stefan/CheckAuroa-Server](https://badges.gitter.im/B-Stefan/CheckAuroa-Server.svg)](https://gitter.im/B-Stefan/CheckAuroa-Server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/B-Stefan/CheckAuroa-Server.svg?branch=loopback-implementation)](https://travis-ci.org/B-Stefan/CheckAuroa-Server)
 
 This repository contains the code for the data api server for the mobile application "Check-Aurora". 
