@@ -20,7 +20,7 @@ export default class KPIndexDatabaseImporter {
   }
 
   /**
-   * @private
+   * 
    * @param kpIndexResultList: Array<KpInformation>
    */
   mergeListIntoDatabase(kpIndexResultList){
