@@ -4,6 +4,7 @@ import {isDevMode,unixToRFC3339Date} from "./../../utils"
 import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"
+import KpDstService from "./KpServices/KpDstService"
 
 export class KpInformation {
 
@@ -56,6 +57,7 @@ export default class KPIndexService {
         this.pendingKpRequest = null;
         this.kpWingService =  new KpWingService();
         this.kp3DayService =  new Kp3DayForecast();
+        this.kpDstServie =  new KpDstService();
 
     }
 
@@ -71,8 +73,9 @@ export default class KPIndexService {
           this.pendingKpRequest = new Promise((resolve,reject)=>{
             let kp3Days = this.kp3DayService.getKpIndexForNextDays();
             let kpWing = this.kpWingService.getList();
-
-            Promise.all([kpWing,kp3Days]).then((data)=>{
+            let kpDst = this.kpDstServie.getKpIndexList();
+            
+            Promise.all([kpWing,kp3Days,kpDst]).then((data)=>{
 
               let flattern = [].concat.apply([],data);
 
