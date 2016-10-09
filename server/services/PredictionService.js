@@ -52,7 +52,7 @@ export default class PredictionService {
 
   }
 
-  getKpAndMagneticLocInformation(date,lat,lng, KpIndexModel){
+  getKpAndMagneticLocInformation(date,lat,lng){
     //transform normal lat,lng to geomagnatic lat,lng
     let geomagneticPromise = this.getMagneticLatLng(lat,lng);
 
@@ -78,11 +78,12 @@ export default class PredictionService {
    * @param lng {number}
    * @returns {Array}
    */
-  get24HourPrediction(date,lat,lng, KpIndexModel){
+  get24HourPrediction(date,lat,lng){
     //Parameter check
     if(arguments.length != 4 ||
+
         !(moment(date).isValid() && typeof lat == "number" && typeof lng== "number")){
-      throw new Error("Please provide date, lat,lng as arguemnts you provided: " + JSON.stringify(arguments));
+      throw new Error("Please provide date, lat,lng as arguemnts you provided: " + JSON.stringify(arguments) + "- " + arguments.length);
     }
 
     let normalizedDate;
@@ -93,7 +94,7 @@ export default class PredictionService {
     }
 
  
-    let staticInformationPromise = this.getKpAndMagneticLocInformation(normalizedDate,lat,lng,KpIndexModel);
+    let staticInformationPromise = this.getKpAndMagneticLocInformation(normalizedDate,lat,lng);
 
     //create an array with 24 items
     let result = Array.apply(null, {length: 24})
