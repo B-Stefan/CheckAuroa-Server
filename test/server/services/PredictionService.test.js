@@ -121,7 +121,7 @@ describe('PredictionService', function() {
       let dateFormat = "DD.MM.YYYY HH:mm";
       let predictionService = new PredictionService();
 
-      this.timeout(10000);
+      this.timeout(60000);//1 minute per test 
       function runTest(date,callback){
 
         //create arr for the next 24 hours
