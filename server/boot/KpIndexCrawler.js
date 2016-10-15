@@ -1,4 +1,5 @@
 import KPIndexDatabaseImporter from "./../services/database-services/KPIndexDatabaseImporter"
+import KpIndexService from "./../services/aurora-services/KpIndexService"
 
 
 module.exports = function (server, callback) {
@@ -14,12 +15,15 @@ module.exports = function (server, callback) {
     });
   },60 * 1000 * 5);
 
+  let kpService = new KpIndexService();
 
-  databaseImporter.startNewImport().then((results)=>{
-    console.log("Init results");
-    callback();
+  kpService.getKpList().then((result_data)=>{
+    databaseImporter.mergeListIntoDatabase(result_data)
+  }).then(()=>{
+    console.log("new init data  received ")
+    callback()
   }).catch((err)=>{
-    callback(new Error(err))
+    console.log(err)
   });
 
 

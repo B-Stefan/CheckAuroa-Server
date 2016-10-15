@@ -17,7 +17,7 @@ export default class KpDstService {
   }
   parseJSON(jsonArr){
     //remove header
-    jsonArr.splice(0,1)
+    jsonArr.splice(0,1);
 
     //Map intput to instance of KpInfroamtion
     return jsonArr.map((rawData)=>{
@@ -43,7 +43,15 @@ export default class KpDstService {
         if (err){
           reject(err)
         }
-        let resultArr = this.parseJSON(result.body);
+
+        let resultArr;
+
+        try {
+          resultArr = this.parseJSON(result.body);
+        }catch (e){
+          reject(e)
+        }
+        console.log("resultArr",resultArr.length);
         resolve(resultArr)
       })
 
