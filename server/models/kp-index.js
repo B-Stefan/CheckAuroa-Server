@@ -2,6 +2,13 @@ import moment from "moment"
 import {findNextKPIndexForUTC, unixToRFC3339Date} from "./../../server/utils"
 import KpIndexDailyPrediction from "./../services/aurora-services/KpIndexPredictionService"
 import {ModelBuilder} from "loopback-datasource-juggler"
+import pmx from "pmx"
+
+var probe = pmx.probe();
+
+var counter = probe.counter({
+  name : 'Kp-Index req processed'
+});
 
 module.exports = function (KpIndex) {
   /*
@@ -34,6 +41,8 @@ module.exports = function (KpIndex) {
     let min = currentDate.add(-1, "days").unix();
     let max = currentDate.add(1, "days").unix();
 
+    counter.inc();
+
     KpIndex.find({
       where: {
         utc: {between: [min, max]}
@@ -54,6 +63,8 @@ module.exports = function (KpIndex) {
 
   KpIndex.prediction = function (cb) {
     let currentDate = moment().utc().utcOffset(0).unix();
+
+    counter.inc();
 
     KpIndex.find({
       where: {
@@ -85,6 +96,8 @@ module.exports = function (KpIndex) {
   KpIndex.prediction3Days = function (cb) {
     //12am of the current day
     let currentDate = moment().utc().utcOffset(0).startOf("day").add(12,"hours").unix();
+
+    counter.inc();
 
     KpIndex.find({
       where: {

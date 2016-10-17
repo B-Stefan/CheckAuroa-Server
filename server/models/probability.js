@@ -2,7 +2,13 @@ import moment from "moment"
 import NowCastAuroraService from "./../services/aurora-services/NowCastAuroraService"
 import PredictionServiceDatabase from "./../services/PredictionServiceDatabase"
 import SuncalcService from "./../services/SuncalcService"
- 
+import pmx from "pmx"
+var probe = pmx.probe();
+
+var counter = probe.counter({
+  name : 'Prediction req processed'
+});
+
 module.exports = function(Probability) {
 
   
@@ -23,6 +29,8 @@ module.exports = function(Probability) {
     const predictionService = new PredictionServiceDatabase(Probability.app);
 
     const sunCalcService = new SuncalcService();
+
+    counter.inc()
 
     //Get prediction and warp result with the location 
     return Promise.all(predictionService.get24HourPrediction(date,lat,lng,null)).then((results)=>{
@@ -98,6 +106,8 @@ module.exports = function(Probability) {
   Probability.current = function (lat,lng,cb) {
     console.time("NowCastGet");
     let currentDate = moment().utc().utcOffset(0);
+
+    counter.inc()
 
     let min = currentDate.add(-5, "minutes").unix();
     let max = currentDate.add(5, "minutes").unix();
