@@ -1,5 +1,5 @@
-import KPIndexDatabaseImporter from "./../services/database-services/KPIndexDatabaseImporter"
-import KpIndexService from "./../services/aurora-services/KPIndexService"
+import KPIndexDatabaseImporter from "./../../server/services/database-services/KPIndexDatabaseImporter"
+import KpIndexService from "./../../server/services/aurora-services/KPIndexService"
 
 
 module.exports = function (server, callback) {

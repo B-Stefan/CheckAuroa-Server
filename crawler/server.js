@@ -19,8 +19,8 @@ var app = module.exports = loopback();
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, {
-  appRootDir: __dirname,
-  bootDirs: ["./boot-crawler"]
+  appRootDir: __dirname + "/../server",
+  bootDirs: [__dirname + "/boot-crawler"]
 }, function(err) {
   if(err) console.error(err);
 

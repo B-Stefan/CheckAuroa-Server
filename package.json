@@ -5,7 +5,7 @@
   "scripts": {
     "startWithPm2": "nvm && npm install && pm2 startOrRestart ecosystem.json",
     "start": "node $NODE_DEBUG_OPTION .",
-    "start-crawler": "node $NODE_DEBUG_OPTION ./server/server_crawler.js",
+    "start-crawler": "node $NODE_DEBUG_OPTION ./crawler/server.js",
     "test": "./node_modules/.bin/mocha --require babel-core/register --recursive"
   },
   "dependencies": {

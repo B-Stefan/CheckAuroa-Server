@@ -1,4 +1,4 @@
-import NowCastAuroraService from "./../services/aurora-services/NowCastAuroraService"
+import NowCastAuroraService from "./../../server/services/aurora-services/NowCastAuroraService"
 
 module.exports = function (server) {
   console.log("boot nowCastAurora");
