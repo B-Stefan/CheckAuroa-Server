@@ -4,7 +4,6 @@ import KpIndexService from "./../services/aurora-services/KPIndexService"
 
 module.exports = function (server, callback) {
 
-  if(process.env["AURORA_MODE"] == "crawler"){
     console.log("boot crawler");
 
     let databaseImporter = new KPIndexDatabaseImporter(server);
@@ -27,13 +26,5 @@ module.exports = function (server, callback) {
     }).catch((err)=>{
       throw new Error(err)
     });
-
-
-  }else {
-    console.log("normal web server start ")
-    callback()
-  }
-
-
 
 };
