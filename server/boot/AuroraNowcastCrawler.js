@@ -65,10 +65,10 @@ module.exports = function (server) {
     }).catch(errorHandling)
   }
 
-  setInterval(crawl,1000 * 60 * 2);
-  setInterval(deleteOldestEntry,1000 * 60 * 2);
-  crawl();//init
-  deleteOldestEntry()//init;
+  //setInterval(crawl,1000 * 60 * 2);
+  //setInterval(deleteOldestEntry,1000 * 60 * 2);
+  //crawl();//init
+  //deleteOldestEntry()//init;
 
 
 };
