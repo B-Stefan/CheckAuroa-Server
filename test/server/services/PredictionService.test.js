@@ -36,7 +36,7 @@ describe('PredictionService', function() {
     let lat = 30;
     let lng = 40;
 
-    let glat = 24.34;
+    let glat = 24.37;
     let gLng = 0 ;
 
     it("should accept a lat and lng as parameters", function () {
@@ -68,7 +68,7 @@ describe('PredictionService', function() {
 
 
     it("should return a array of KpInformation", function () {
-      this.timeout(5000);
+      this.timeout(10000);
       return this.predictionService.getKPInformation(from,to)
           .then((result)=>{
 
@@ -91,8 +91,8 @@ describe('PredictionService', function() {
 
 
     let date = moment();
-    let lat = 40;
-    let lng = 40;
+    let lat = 40.0;
+    let lng = 40.0;
 
     beforeEach(function(){
       this.predictionService  =  new PredictionService();
@@ -131,7 +131,7 @@ describe('PredictionService', function() {
             });
 
         //transform results to an array with the next 3 days (hopefully)
-        let promisedResults = predictionService.get24HourPrediction(date,lat,lng);
+        let promisedResults = predictionService.get24HourPrediction(date.toString(),lat,lng);
 
         return Promise
               .all(promisedResults)//wait for all promises

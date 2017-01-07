@@ -26,7 +26,7 @@ describe('KpIndexPredictionService', function() {
 
   describe('get3DaysPrediction', function() {
 
-    this.timeout(5000);
+    this.timeout(10000);
     let kPIndexService = new KPIndexService();
     beforeEach(function(callback){
       let self = this;

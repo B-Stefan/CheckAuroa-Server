@@ -20,7 +20,7 @@ var ref = TestDataBuilder.ref;
  * Tests for KPIndex route
  */
 describe('/KpIndex', function() {
-  this.timeout(5000);
+  this.timeout(10000);
   lt.beforeEach.withApp(app);
 
   /**
@@ -29,21 +29,6 @@ describe('/KpIndex', function() {
    */
   beforeEach(function(callback){
     setTimeout(callback,1000)
-  });
-  lt.describe.whenCalledRemotely('GET', '/api/KpIndices', function () {
-
-    lt.it.shouldBeAllowed();
-    it('should have statusCode 200', function() {
-      assert.equal(this.res.statusCode, 200);
-    });
-
-    lt.beforeEach.givenModel('KpIndex',{
-      date: new Date()
-    });
-    it('should respond with an array of KpIndices', function () {
-      assert(Array.isArray(this.res.body));
-
-    });
   });
 
   lt.describe.whenCalledRemotely('GET', '/api/KpIndices/count', function () {
@@ -111,6 +96,11 @@ describe('/KpIndex', function() {
   });
 
 
+  /*
+  /**
+  * Not supported right now
+  * */
+  /*
   lt.describe.whenCalledRemotely('GET', '/api/KpIndices/prediction/daily', function () {
 
     lt.it.shouldBeAllowed();
@@ -154,7 +144,7 @@ describe('/KpIndex', function() {
     });
 
   });
-
+   */
 
 });
 

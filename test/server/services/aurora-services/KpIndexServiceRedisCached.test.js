@@ -6,7 +6,7 @@ import moment from "moment"
 describe('KpIndexServiceRedisCached', function() {
 
 
-  describe('connectClient', function() {
+  describe.skip('connectClient', function() {
     
       it("should connect to server", function () {
           let instance = new KPIndexServiceRedisCached("apps.conts.de", 6379,process.env.REDIS_PASS);
