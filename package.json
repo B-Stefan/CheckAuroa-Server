@@ -24,14 +24,14 @@
     "loopback-connector-mongodb": "^1.17.0",
     "loopback-datasource-juggler": "^2.53.1",
     "moment": "^2.12.0",
-    "node-cache": "^4.1.0",
-    "pm2": "^2.1.4",
+    "node-cache": "^3.2.0",
+    "pm2": "^1.1.3",
     "pmx": "^0.6.2",
     "redis": "^2.6.1",
     "request": "^2.69.0",
     "serve-favicon": "^2.0.1",
     "suncalc": "^1.7.0",
-    "xml2json": "^0.10.0"
+    "xml2json": "^0.9.0"
   },
   "devDependencies": {
     "assert": "^1.3.0",
