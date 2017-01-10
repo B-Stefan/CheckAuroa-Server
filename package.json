@@ -2,6 +2,9 @@
   "name": "aurora-api",
   "version": "1.0.0",
   "main": "server/server.js",
+  "engines": {
+    "node": "6.9.2"
+  },
   "scripts": {
     "startWithPm2": "nvm && npm install && pm2 startOrRestart ecosystem.json",
     "start": "node $NODE_DEBUG_OPTION .",
