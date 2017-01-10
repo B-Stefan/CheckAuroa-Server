@@ -25,6 +25,7 @@
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "git://github.com/B-Stefan/loopback-component-explorer.git",
     "loopback-connector-mongodb": "^1.17.0",
+    "loopback-context": "^3.0.0",
     "loopback-datasource-juggler": "^3.1.1",
     "moment": "^2.12.0",
     "node-cache": "^4.1.1",
