@@ -13,16 +13,16 @@ module.exports = function(Probability) {
 
   
 
-  Probability.disableRemoteMethod("exists", true);
-  Probability.disableRemoteMethod("deleteById", true);
-  Probability.disableRemoteMethod("delete", true);
-  Probability.disableRemoteMethod("findById", true);
-  Probability.disableRemoteMethod("update", true);
-  Probability.disableRemoteMethod("updateAttributes", false);
-  Probability.disableRemoteMethod("updateAll", true);
-  Probability.disableRemoteMethod("create", true);
-  Probability.disableRemoteMethod("createChangeStream", true);
-  Probability.disableRemoteMethod("upsert", true);
+  Probability.disableRemoteMethodByName("exists", true);
+  Probability.disableRemoteMethodByName("deleteById", true);
+  Probability.disableRemoteMethodByName("delete", true);
+  Probability.disableRemoteMethodByName("findById", true);
+  Probability.disableRemoteMethodByName("update", true);
+  Probability.disableRemoteMethodByName("updateAttributes", false);
+  Probability.disableRemoteMethodByName("updateAll", true);
+  Probability.disableRemoteMethodByName("create", true);
+  Probability.disableRemoteMethodByName("createChangeStream", true);
+  Probability.disableRemoteMethodByName("upsert", true);
   
 
   Probability.prediction= function (date,lat,lng,cb) {

@@ -24,16 +24,16 @@ module.exports = function (KpIndex) {
    */
 
 
-  KpIndex.disableRemoteMethod("exists", true);
-  KpIndex.disableRemoteMethod("deleteById", true);
-  KpIndex.disableRemoteMethod("delete", true);
-  KpIndex.disableRemoteMethod("findById", true);
-  KpIndex.disableRemoteMethod("update", true);
-  KpIndex.disableRemoteMethod("updateAttributes", false);
-  KpIndex.disableRemoteMethod("updateAll", true);
-  KpIndex.disableRemoteMethod("create", true);
-  KpIndex.disableRemoteMethod("createChangeStream", true);
-  KpIndex.disableRemoteMethod("upsert", true);
+  KpIndex.disableRemoteMethodByName("exists", true);
+  KpIndex.disableRemoteMethodByName("deleteById", true);
+  KpIndex.disableRemoteMethodByName("delete", true);
+  KpIndex.disableRemoteMethodByName("findById", true);
+  KpIndex.disableRemoteMethodByName("update", true);
+  KpIndex.disableRemoteMethodByName("updateAttributes", false);
+  KpIndex.disableRemoteMethodByName("updateAll", true);
+  KpIndex.disableRemoteMethodByName("create", true);
+  KpIndex.disableRemoteMethodByName("createChangeStream", true);
+  KpIndex.disableRemoteMethodByName("upsert", true);
 
   KpIndex.current = function (cb) {
     let currentDate = moment().utc().utcOffset(0);
