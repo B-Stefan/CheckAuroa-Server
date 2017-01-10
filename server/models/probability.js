@@ -88,8 +88,12 @@ module.exports = function(Probability) {
 
               // 1. Get the HTTP request object as provided by Express
               var req = ctx.req;
-
-              return moment(req.param('date'))
+              var date = req.param("date");
+              //
+              if(date.split(" ").length == 2) {
+               date = req.param("date").split(" ").join("+")
+              }
+              return moment(date).toString()
             }
 
 
