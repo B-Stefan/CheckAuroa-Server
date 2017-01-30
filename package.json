@@ -34,7 +34,7 @@
     "redis": "^2.6.1",
     "request": "^2.69.0",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^1.1.1",
+    "strong-error-handler": "1.1.1",
     "suncalc": "^1.7.0",
     "xml2json": "^0.10.0"
   },
