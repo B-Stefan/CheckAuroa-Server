@@ -27,7 +27,7 @@
     "loopback-connector-mongodb": "^1.17.0",
     "loopback-context": "^3.0.0",
     "loopback-datasource-juggler": "^3.1.1",
-    "moment": "^2.17.1",
+    "moment": "2.17.1",
     "node-cache": "^4.1.1",
     "pm2": "^2.2.3",
     "pmx": "^0.6.2",
