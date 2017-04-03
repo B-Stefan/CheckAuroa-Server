@@ -22,7 +22,7 @@
     "helmet": "^3.3.0",
     "kerberos": "0.0.22",
     "loopback": "^3.2.0",
-    "loopback-boot": "^2.6.5",
+    "loopback-boot": "2.23.0",
     "loopback-component-explorer": "git://github.com/B-Stefan/loopback-component-explorer.git",
     "loopback-connector-mongodb": "^1.17.0",
     "loopback-context": "^3.0.0",
