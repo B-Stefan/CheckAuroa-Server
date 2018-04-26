@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "4"
+  - "10"
 compiler: clang
 env:
   - CXX=clang NODE_ENV=test
