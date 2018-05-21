@@ -16,8 +16,8 @@ module.exports = function (server, callback) {
 
   let kpService = new KpIndexService()
 
-  kpService.getKpList().then((result_data) => {
-    databaseImporter.mergeListIntoDatabase(result_data)
+  kpService.getKpList().then((resultData) => {
+    databaseImporter.mergeListIntoDatabase(resultData)
   }).then(() => {
     console.log('new init data  received ')
     callback()
