@@ -70,10 +70,15 @@ export default class PredictionService {
    */
   get24HourPrediction (date, lat, lng) {
     // Parameter check
-    if (arguments.length !== 4 ||
 
-        !(moment(date).isValid() && typeof lat === 'number' && typeof lng === 'number')) {
-      throw new Error('Please provide date, lat,lng as arguemnts you provided: ' + JSON.stringify(arguments) + '- ' + arguments.length)
+    if (!moment(date).isValid()) {
+      throw new Error(`Date is not valid ${date}`)
+    }
+    if (typeof lat !== 'number') {
+      throw new Error(`lat is not valid ${lat}`)
+    }
+    if (typeof lng !== 'number') {
+      throw new Error(`lng is not valid ${lng}`)
     }
 
     let normalizedDate

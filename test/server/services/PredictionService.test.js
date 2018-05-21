@@ -33,7 +33,7 @@ describe('PredictionService', function () {
     let lat = 30
     let lng = 40
 
-    let glat = 24.37
+    let glat = 24.4
     let gLng = 0
 
     it('should accept a lat and lng as parameters', function () {

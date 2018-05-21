@@ -17,7 +17,7 @@ export class GeomagnaticLocation {
 export default class GeomagnaticLocationService {
 
   static get API_URL() {
-    return "http://omniweb.gsfc.nasa.gov/cgi/vitmo/vitmo_model.cgi"
+    return "https://omniweb.gsfc.nasa.gov/cgi/vitmo/vitmo_model.cgi"
   }
 
   /**
