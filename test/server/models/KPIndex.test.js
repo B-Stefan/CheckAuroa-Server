@@ -1,100 +1,121 @@
-var lt = require('loopback-testing');
-var assert = require('assert');
-var app = require('../../../server/server.js'); //path to app.js or server.js
-var moment = require("moment")
-
-var KpIndex;
-
-var TestDataBuilder = require('loopback-testing').TestDataBuilder;
-var ref = TestDataBuilder.ref;
-
-// The context object to hold the created models.
-// You can use `this` in mocha test instead.
-var context = {};
-
-var ref = TestDataBuilder.ref;
-
-
-
+const assert = require('assert');
+const bootstrap = require('../../../server/server.js'); //path to app.js or server.js
+const moment = require("moment");
+const supertest = require("supertest");
 /**
  * Tests for KPIndex route
  */
 describe('/KpIndex', function() {
+
   this.timeout(10000);
-  lt.beforeEach.withApp(app);
 
-  /**
-   * Wait for app to get started
-   * @Todo modify to real async processing instead of only wait and hope.
-   */
-  beforeEach(function(callback){
-    setTimeout(callback,1000)
+  beforeEach(async function (){
+    const {app, server} = await bootstrap();
+    this.app = app;
+    this.server = server;
+  });
+  afterEach(function (callback){
+    this.server.close(callback);
   });
 
-  lt.describe.whenCalledRemotely('GET', '/api/KpIndices/count', function () {
+  describe('GET /api/KpIndices/count', function () {
 
-    lt.it.shouldBeAllowed();
-    it('should have statusCode 200', function() {
-      assert.equal(this.res.statusCode, 200);
+    it('should be allowed', async function () {
+      await supertest(this.server)
+        .get("/api/KpIndices/count")
+        .expect(200);
     });
 
-    it('should respond with an number ', function () {
-      assert.notEqual(this.res.body.count, undefined);
-      assert.ok(this.res.body.count > 0);
-
-
-    });
-  });
-
-  lt.describe.whenCalledRemotely('GET', '/api/KpIndices/current', function () {
-
-    lt.it.shouldBeAllowed();
-    it('should have statusCode 200', function() {
-      assert.equal(this.res.statusCode, 200);
+    it('should have statusCode 200', async function () {
+      await supertest(this.server)
+        .get("/api/KpIndices/count")
+        .expect(200);
     });
 
-    it('should respond with one KPIndex entry ', function () {
-
-      assert(this.res.body instanceof  Object);
-      assert(this.res.body.hasOwnProperty("date"));
-      assert(this.res.body.hasOwnProperty("utc"));
-      assert(this.res.body.hasOwnProperty("kpValue"));
+    it('should respond with an number ', async function () {
+      const { body } = await supertest(this.server)
+        .get("/api/KpIndices/count")
+        .expect(200);
+      assert.notEqual(body.count, undefined);
+      assert.ok(body.count > 0);
 
     });
   });
 
 
-  lt.describe.whenCalledRemotely('GET', '/api/KpIndices/prediction', function () {
+  describe('GET /api/KpIndices/current', function () {
 
-    lt.it.shouldBeAllowed();
-    it('should have statusCode 200', function() {
-      assert.equal(this.res.statusCode, 200);
+    it('should be allowed', async function () {
+      await supertest(this.server)
+        .get("/api/KpIndices/current")
+        .expect(200);
     });
 
-    lt.beforeEach.givenModel('KpIndex',{
-      date: new Date()
-    });
-    it('should respond with an array of KpIndices', function () {
-      assert(Array.isArray(this.res.body));
-
-
+    it('should have statusCode 200',async function() {
+      await supertest(this.server)
+        .get("/api/KpIndices/current")
+        .expect(200);
     });
 
-    it('should return more then one item', function () {
-      assert.ok(this.res.body.length > 1)
+    it('should respond with one KPIndex entry ',async function () {
+
+      const { body }  = await supertest(this.server)
+        .get("/api/KpIndices/current")
+        .expect(200);
+
+      assert(body instanceof  Object);
+      assert(body.hasOwnProperty("date"));
+      assert(body.hasOwnProperty("utc"));
+      assert(body.hasOwnProperty("kpValue"));
+
+    });
+  });
+
+
+  describe('GET /api/KpIndices/prediction', function () {
+
+    const path = "/api/KpIndices/prediction";
+
+    it('should be allowed', async function () {
+      await supertest(this.server)
+        .get(path)
+        .expect(200);
     });
 
-    it('should contains only future items', function () {
+    it('should have statusCode 200', async function() {
+      await supertest(this.server)
+        .get(path)
+        .expect(200);
+    });
 
-      var currentUTCDateInUNIX = moment.utc().unix();
-      var results = this.res.body.filter((item)=>{
+    it('should respond with an array of KpIndices', async function () {
+      const { body }  = await supertest(this.server)
+        .get(path)
+        .expect(200);
+      assert(Array.isArray(body));
+    });
+
+    it('should return more then one item', async  function () {
+      const { body }  = await supertest(this.server)
+        .get(path)
+        .expect(200);
+      assert.ok(body.length > 1)
+    });
+
+    it('should contains only future items', async function () {
+      const { body }  = await supertest(this.server)
+        .get(path)
+        .expect(200);
+
+
+      const currentUTCDateInUNIX = moment.utc().unix();
+      const results = body.filter((item)=>{
          return item.utc < currentUTCDateInUNIX;
       });
       assert.equal(results.length, 0);
 
     });
   });
-
 
   /*
   /**
@@ -147,25 +168,3 @@ describe('/KpIndex', function() {
    */
 
 });
-
-
-/*
- describe('/admin', function() {
- lt.beforeEach.withApp(app);
-
- // All tests below this will execute with the same user on the same role.
- // Use individual 'whenCalledByUserWithRole' describes if you want to
- // create and tear down the user each test.
- lt.describe.whenLoggedInAsUserWithRole({username:"test", password:"test"}, 'admin', function() {
-
- lt.describe.whenCalledRemotely('POST', '/makeAnnouncement', function() {
- lt.it.shouldBeAllowed();
- });
-
- lt.describe.whenCalledRemotely('POST', '/analytics', function() {
- lt.it.shouldBeAllowed();
- });
-
- });
- });
- */
