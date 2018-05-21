@@ -1,7 +1,7 @@
 import request from 'request'
 import {KpInformation} from './../KPIndexService'
 import {unixToRFC3339Date} from './../../../utils'
-import moment from 'moment'
+import * as moment from 'moment'
 import NodeCache from 'node-cache'
 export default class Kp3DayForecast {
   static get URL () { return 'http://services.swpc.noaa.gov/text/3-day-forecast.txt' }

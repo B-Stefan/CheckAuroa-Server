@@ -1,4 +1,4 @@
-import moment from 'moment'
+import * as moment from 'moment'
 import NowCastAuroraService from './../services/aurora-services/NowCastAuroraService'
 import PredictionServiceDatabase from './../services/PredictionServiceDatabase'
 import SuncalcService from './../services/SuncalcService'

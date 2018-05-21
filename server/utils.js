@@ -1,4 +1,4 @@
-import moment from 'moment'
+import * as moment from 'moment'
 export function isDevMode () {
   return process.env.NODE_ENV === 'development'
 }

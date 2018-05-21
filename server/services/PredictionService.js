@@ -1,4 +1,4 @@
-import moment from 'moment'
+import * as moment from 'moment'
 import KpIndexServiceRedisCached from './aurora-services/KpIndexServiceRedisCached'
 import GeomagnaticLocationService from './aurora-services/GeomagnaticLocationService'
 import SuncalcService from './SuncalcService'

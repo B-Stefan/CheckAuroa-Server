@@ -2,7 +2,7 @@ import KPService from './KPIndexService'
 import WeatherService from './WeatherService'
 import GeomagnaticLocationService from './GeomagnaticLocationService'
 import {unixToRFC3339Date} from './../../utils'
-import moment from 'moment'
+import * as moment from 'moment'
 /**
  *
  * This class provide functions to get a mixed rating from weather, location, datetime and kp index

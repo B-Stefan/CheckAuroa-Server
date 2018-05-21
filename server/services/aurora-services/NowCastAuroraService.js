@@ -1,5 +1,5 @@
 import request from  "request"
-import moment from "moment"
+import * as moment from "moment"
 export class ProbabilityInformation {
   date;
   position = {
@@ -58,7 +58,7 @@ export default class NowCastAuroraService {
 
     return matrix[rowIndex][colIndex];
   }
-  
+
   constructor(){
 
   }
@@ -66,7 +66,7 @@ export default class NowCastAuroraService {
   parseResponse(txtRaw){
 
     let splitArray = txtRaw.split("\n");
-    
+
     /**
      * Get the meta data for this batch
      */
@@ -98,7 +98,7 @@ export default class NowCastAuroraService {
        * arr = [{caption: # Product Valid At", date: new Date()}, ... ]
        */
       /**
-       * Find right item in array 
+       * Find right item in array
        */
       return {
           createdAt: arr.find((item)=>{return item.caption === NowCastAuroraService.PRODUCT_CREAtED_AT_CAPTION}).date,

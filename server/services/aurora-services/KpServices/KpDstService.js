@@ -2,7 +2,7 @@
 import request from 'request'
 import {KpInformation} from './../KPIndexService'
 import {unixToRFC3339Date} from './../../../utils'
-import moment from 'moment'
+import * as moment from 'moment'
 
 export default class KpDstService {
   static get URL () { return 'http://services.swpc.noaa.gov/products/geospace/planetary-k-index-dst.json' }
