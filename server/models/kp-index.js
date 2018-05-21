@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import moment from 'moment'
 import {findNextKPIndexForUTC} from './../../server/utils'
 import KpIndexDailyPrediction from './../services/aurora-services/KpIndexPredictionService'
 
