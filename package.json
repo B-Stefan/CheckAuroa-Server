@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
-    "node": "6.9.2"
+    "node": "8.9.0"
   },
   "scripts": {
-    "startWithPm2": "nvm && npm install && pm2 startOrRestart ecosystem.json",
     "start": "node $NODE_DEBUG_OPTION .",
-    "start-crawler": "node $NODE_DEBUG_OPTION ./crawler/server.js",
     "test": "./node_modules/.bin/mocha --require babel-core/register --recursive"
   },
   "dependencies": {
