@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8"
+compiler: clang
+env:
+  - CXX=clang NODE_ENV=test
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libgnome-keyring-dev
+      - clang
+      - g++-4.8

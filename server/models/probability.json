@@ -1,0 +1,45 @@
+{
+  "name": "Probability",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "id": true,
+      "comments": "The datetime with utc offset"
+    },
+    "kpInformation": {
+      "type": "KpIndex",
+      "required": true,
+      "comments": "the relevant kp Information for this probability entry"
+    },
+    "location": {
+      "type": "geopoint",
+      "required": true,
+      "comments": ""
+    },
+    "moonInformation": {
+      "type": "moonInformation",
+      "required": true,
+      "comments": "The moon information for the date"
+    },
+    "probability": {
+      "type": "number",
+      "required": true,
+      "comments": "The aurora probability between 0 and 1 (0 = 0%; 1 = 100%)"
+    },
+    "sunInformation": {
+      "type": "sunInfromation",
+      "required": true,
+      "comments": "The sun information contains sunset / sunrise information and more"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

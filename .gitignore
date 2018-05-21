@@ -1,3 +1,6 @@
+/server/datasources.development.js
+/server/datasources.local.js
+/server/middleware.local.json
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
@@ -11,6 +14,7 @@ tmp
 pids
 *.pid
 *.seed
+config/
 
 docs/
 
@@ -27,6 +31,7 @@ coverage
 
 # node-waf configuration
 .lock-wscript
+processes.json
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release

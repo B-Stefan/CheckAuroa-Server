@@ -1,0 +1,36 @@
+{
+  "name": "AuroraNowcast",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "validAt": {
+      "type": "date",
+      "id": false,
+      "required": true
+    },
+    "createdAt": {
+      "type": "date",
+      "id": false,
+      "required": true,
+      "index": false,
+      "comments": "index as date"
+    },
+    "id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "index": true
+    },
+    "entries": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

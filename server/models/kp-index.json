@@ -1,0 +1,30 @@
+{
+  "name": "KpIndex",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "kpValue": {
+      "type": "number"
+    },
+    "original": {
+      "type": "string"
+    },
+    "utc": {
+      "type": "number",
+      "id": true,
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

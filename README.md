@@ -1,13 +1,10 @@
 ## Check-Aurora-Sever
+
+[![Join the chat at https://gitter.im/B-Stefan/CheckAuroa-Server](https://badges.gitter.im/B-Stefan/CheckAuroa-Server.svg)](https://gitter.im/B-Stefan/CheckAuroa-Server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This repository contains the code for the data api server for the mobile application "Check-Aurora". 
 The application originated from two study courses at the [Jamk.fi](http://jamk.fi) in 2015.
-
-A live and running version of this server you can reach under the domain: 
-
- * [Api-Console & Docs ](http://check-aurora-api.herokuapp.com/docs/)
- * [Server](https://check-aurora-api.herokuapp.com/)
  
-
 ### Application idea 
 The problem to solve is that all providers of forecast for northern lights not realy provide good data. Or if they provide accurate and good usable data they dont have an API or mobile application. 
 This is the reason why we decide to develop a new aurora forecast application 
@@ -32,13 +29,13 @@ To start the programm follow the next steps:
 To use this api in your application we provide several client libs. 
 Possible libraries are: 
 
-* [Typescript-Angular](https://check-aurora-api.herokuapp.com/clients/android.zip)
+* Typescript-Angular
 * Typescript-Node 
-* [Android](https://check-aurora-api.herokuapp.com/clients/android.zip)
+* Android
 * Java 
 * PHP 
 * Scala 
-* [QT5](https://check-aurora-api.herokuapp.com/clients/qt5cpp.zip) 
+* QT5
 * c++ 
 
 ### Deploy instructions
