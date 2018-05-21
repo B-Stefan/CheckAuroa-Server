@@ -1,3 +1,3 @@
-module.exports = function(AuroraNowcast) {
+module.exports = function (AuroraNowcast) {
 
-};
+}

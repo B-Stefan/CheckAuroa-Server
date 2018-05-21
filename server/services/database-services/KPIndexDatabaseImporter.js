@@ -2,7 +2,6 @@ import KpIndexService from "./../aurora-services/KPIndexService"
 
 export default class KPIndexDatabaseImporter {
 
-
   server;
 
   kpService;
@@ -20,13 +19,13 @@ export default class KPIndexDatabaseImporter {
   }
 
   /**
-   * 
+   *
    * @param kpIndexResultList: Array<KpInformation>
    */
   mergeListIntoDatabase(kpIndexResultList){
 
     return kpIndexResultList.map((entry)=>this.createOrUpdate(entry))
-  
+
   }
 
   startNewImport(){

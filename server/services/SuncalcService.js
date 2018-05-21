@@ -1,8 +1,7 @@
-import SunCalc from "suncalc";
-import moment from "moment"; 
+import SunCalc from 'suncalc'
+import * as moment from 'moment'
 
 export default class SuncalcService {
-
   /**
    *
    * @param date {date}
@@ -10,9 +9,9 @@ export default class SuncalcService {
    * @param lng {number}
    * @returns {object} see https://github.com/mourner/suncalc
    */
-  getSunPosition(date,lat,lng){
-    date = moment(date).toDate();
-    return SunCalc.getPosition(date, lat,lng)
+  getSunPosition (date, lat, lng) {
+    date = moment(date).toDate()
+    return SunCalc.getPosition(date, lat, lng)
   }
 
   /**
@@ -22,11 +21,10 @@ export default class SuncalcService {
    * @param lng {number}
    * @returns {object} see  https://github.com/mourner/suncalc
    */
-  getMoonPosition(date, lat, lng){
-    date = moment(date).utc().toDate();
+  getMoonPosition (date, lat, lng) {
+    date = moment(date).utc().toDate()
 
-    return SunCalc.getMoonPosition(date,lat,lng);
-
+    return SunCalc.getMoonPosition(date, lat, lng)
   }
 
   /**
@@ -34,11 +32,10 @@ export default class SuncalcService {
    * @param date {date}
    * @returns {object} see https://github.com/mourner/suncalc
    */
-  getMoonIllumination(date){
-    date = moment(date).utc().toDate();
+  getMoonIllumination (date) {
+    date = moment(date).utc().toDate()
     return SunCalc.getMoonIllumination(date)
   }
-
 
   /**
    *
@@ -47,15 +44,14 @@ export default class SuncalcService {
    * @param lng {number}
    * @returns {{altitude,azimuth,angle,phase,friction}}
    */
-  getMoonInformation(date,lat,lng){
+  getMoonInformation (date, lat, lng) {
+    date = moment(date).utc().toDate()
 
-    date = moment(date).utc().toDate();
-    
-    let position = this.getMoonPosition(date,lat,lng);
-    let illu = this.getMoonIllumination(date);
+    let position = this.getMoonPosition(date, lat, lng)
+    let illu = this.getMoonIllumination(date)
 
-    illu.altitude = position.altitude;
-    illu.azimuth = position.azimuth;
+    illu.altitude = position.altitude
+    illu.azimuth = position.azimuth
 
     return illu
   }
@@ -67,9 +63,8 @@ export default class SuncalcService {
    * @param lng {number}
    * @returns {}
    */
-  getSunInformation(date,lat,lng){
-
-    let dateNormal = moment(date).utc().add(moment(date).utcOffset(),"minutes");
-    return SunCalc.getTimes(dateNormal,lat,lng)
+  getSunInformation (date, lat, lng) {
+    let dateNormal = moment(date).utc().add(moment(date).utcOffset(), 'minutes')
+    return SunCalc.getTimes(dateNormal, lat, lng)
   }
 }

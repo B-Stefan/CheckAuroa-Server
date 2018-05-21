@@ -1,3 +1,3 @@
-module.exports = function(MoonInformation) {
+module.exports = function (MoonInformation) {
 
-};
+}

@@ -1,9 +1,9 @@
-import moment from "moment"
+import * as moment from "moment"
 
 
 /**
- * This service provide methods to get different predictions for a list of KpIndexInformations 
- * 
+ * This service provide methods to get different predictions for a list of KpIndexInformations
+ *
  */
 export default class KpIndexPredictionService {
 
@@ -30,9 +30,9 @@ export default class KpIndexPredictionService {
   }
 
   /**
-   * Returns a 3-Day prediction for a list of kpInformations. 
-   * This information contains a minimul kpValue entry and a maxKpValue entry 
-   * 
+   * Returns a 3-Day prediction for a list of kpInformations.
+   * This information contains a minimul kpValue entry and a maxKpValue entry
+   *
    * @param kpInformationArr
    * @returns {*}
    */
@@ -61,7 +61,7 @@ export default class KpIndexPredictionService {
       let maxEntry;
 
       //If there is only one entry
-      if(matchingKpInformation.length == 1 ){
+      if(matchingKpInformation.length === 1 ){
         minEntry = matchingKpInformation.pop();
         maxEntry = minEntry;
 

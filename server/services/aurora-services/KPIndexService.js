@@ -1,7 +1,3 @@
-"use strict";
-import request from "request"
-import {isDevMode,unixToRFC3339Date} from "./../../utils"
-import moment from "moment";
 import KpWingService from "./KpServices/KpWingService"
 import Kp3DayForecast from "./KpServices/Kp3DayForecast"
 import KpDstService from "./KpServices/KpDstService"
@@ -14,22 +10,22 @@ export class KpInformation {
   utc;
 
   /**
-   * @type date 
+   * @type date
    */
   date;
 
   /**
-   * @type number 
+   * @type number
    */
   kpValue;
 
 
   /**
-   * @type string 
+   * @type string
    */
   original;
-  
-  
+
+
   constructor(kpInformationInstance){
     if(kpInformationInstance  instanceof KpInformation){
       this.utc = kpInformationInstance.utc;
@@ -38,7 +34,7 @@ export class KpInformation {
       this.original = kpInformationInstance.original;
     }
   }
-  
+
 }
 
 
@@ -74,13 +70,13 @@ export default class KPIndexService {
             let kp3Days = this.kp3DayService.getKpIndexForNextDays();
             let kpWing = this.kpWingService.getList();
             let kpDst = this.kpDstServie.getKpIndexList();
-            
+
             Promise.all([kpWing,kp3Days,kpDst]).then((data)=>{
 
               let flattern = [].concat.apply([],data);
 
               resolve(flattern);
-              this.pendingKpRequest = null; 
+              this.pendingKpRequest = null;
 
             }).catch(reject)
           })

@@ -1,4 +1,3 @@
-"use strict";
 import request from "request"
 import {isDevMode,unixToRFC3339Date} from "./../../../utils"
 import moment from "moment";
@@ -9,7 +8,7 @@ import NodeCache from "node-cache"
  */
 class Row{
 
-    
+
     static getUTCDateFromRowARR(startIndex, row){
         let date =  moment.utc(
             {
@@ -24,8 +23,8 @@ class Row{
     }
     static isValidRow(rowArr){
 
-        if(rowArr.length == Object.keys(Row.COLLUMS).length){
-            if(rowArr[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX] != -1){
+        if(rowArr.length === Object.keys(Row.COLLUMS).length){
+            if(rowArr[Row.COLLUMS.PREDICTION_4_HOURS_KP_INDEX] !== -1){
                 return true;
             }
         }
