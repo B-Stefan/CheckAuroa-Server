@@ -21,7 +21,7 @@ module.exports = function (server, callback) {
     kpService.getKpList().then((result_data)=>{
       databaseImporter.mergeListIntoDatabase(result_data)
     }).then(()=>{
-      console.log("new init data  received ")
+      console.log("new init data  received ");
       callback()
     }).catch((err)=>{
       throw new Error(err)
