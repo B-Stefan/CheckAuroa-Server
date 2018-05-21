@@ -1,11 +1,17 @@
 import moment from 'moment'
-import KpIndexServiceRedisCached from './aurora-services/KpIndexServiceRedisCached'
 import GeomagnaticLocationService from './aurora-services/GeomagnaticLocationService'
 import SuncalcService from './SuncalcService'
 import {findNextKPIndexForUTC} from './../utils'
 import {predict} from 'aurora-probability-calculation'
+import KPIndexService from './aurora-services/KPIndexService'
 
 export default class PredictionService {
+  constructor () {
+    this.kpIndexService = new KPIndexService()
+    this.geomagnaticLocationService = new GeomagnaticLocationService()
+    this.suncalcService = new SuncalcService()
+  }
+
   /**
    *
    */
@@ -21,12 +27,6 @@ export default class PredictionService {
    */
   getMagneticLatLng (gLat, gLng) {
     return this.geomagnaticLocationService.transformToGeomagnetic(gLat, gLng)
-  }
-
-  constructor () {
-    this.kpIndexService = new KpIndexServiceRedisCached('apps.conts.de', 6379, process.env.REDIS_PASS)
-    this.geomagnaticLocationService = new GeomagnaticLocationService()
-    this.suncalcService = new SuncalcService()
   }
 
   /**
