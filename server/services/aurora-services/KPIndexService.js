@@ -69,9 +69,9 @@ export default class KPIndexService {
           this.pendingKpRequest = new Promise((resolve,reject)=>{
             let kp3Days = this.kp3DayService.getKpIndexForNextDays();
             let kpWing = this.kpWingService.getList();
-            let kpDst = this.kpDstServie.getKpIndexList();
+            //let kpDst = this.kpDstServie.getKpIndexList();
 
-            Promise.all([kpWing,kp3Days,kpDst]).then((data)=>{
+            Promise.all([kpWing,kp3Days]).then((data)=>{
 
               let flattern = [].concat.apply([],data);
 
