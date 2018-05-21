@@ -1,36 +1,30 @@
-import NowCastAuroraService from "./../../../../server/services/aurora-services/NowCastAuroraService";
-import assert from "assert"
+import NowCastAuroraService from './../../../../server/services/aurora-services/NowCastAuroraService'
+import assert from 'assert'
 
+describe('NowCastAuroraService', function () {
+  this.timeout(100000)
 
-describe('NowCastAuroraService', function() {
-
-  this.timeout(100000);
-
-  it("should response a list of nowcast ", function (callback) {
+  it('should response a list of nowcast ', function (callback) {
     new NowCastAuroraService()
-        .getList()
-        .then(function (result) {
-          assert.strictEqual(result.entries.length,NowCastAuroraService.rowCountExpected);
-          assert.strictEqual(result.entries[0].length,NowCastAuroraService.colCountExpected);
-          callback();
-        }).catch((err)=>{
-          throw new Error(err)
-        })
-
-  });
-
-  it("should equal zero probability in london and somewhere in africa", function (callback) {
-    new NowCastAuroraService()
-        .getList()
-        .then(function (result) {
-          assert.equal(0,NowCastAuroraService.getProbabilityByLatLng(result.entries,0,0));
-          assert.equal(0,NowCastAuroraService.getProbabilityByLatLng(result.entries,-45,0));
-          callback();
-        }).catch((err)=>{
-      throw new Error(err)
-    })
-
+      .getList()
+      .then(function (result) {
+        assert.strictEqual(result.entries.length, NowCastAuroraService.rowCountExpected)
+        assert.strictEqual(result.entries[0].length, NowCastAuroraService.colCountExpected)
+        callback()
+      }).catch((err) => {
+        throw new Error(err)
+      })
   })
 
-
-});
+  it('should equal zero probability in london and somewhere in africa', function (callback) {
+    new NowCastAuroraService()
+      .getList()
+      .then(function (result) {
+        assert.equal(0, NowCastAuroraService.getProbabilityByLatLng(result.entries, 0, 0))
+        assert.equal(0, NowCastAuroraService.getProbabilityByLatLng(result.entries, -45, 0))
+        callback()
+      }).catch((err) => {
+        throw new Error(err)
+      })
+  })
+})
