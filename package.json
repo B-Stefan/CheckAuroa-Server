@@ -30,7 +30,7 @@
     "node-cache": "^4.2.0",
     "request": "^2.87.0",
     "serve-favicon": "^2.5.0",
-    "strong-error-handler": "^1.2.1",
+    "strong-error-handler": "^3.0.0",
     "suncalc": "^1.8.0",
     "xml2json": "^0.10.0"
   },
