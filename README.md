@@ -1,6 +1,7 @@
 ## Check-Aurora-Sever
 
 [![Join the chat at https://gitter.im/B-Stefan/CheckAuroa-Server](https://badges.gitter.im/B-Stefan/CheckAuroa-Server.svg)](https://gitter.im/B-Stefan/CheckAuroa-Server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FB-Stefan%2FCheckAuroa-Server.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FB-Stefan%2FCheckAuroa-Server?ref=badge_shield)
 
 This repository contains the code for the data api server for the mobile application "Check-Aurora". 
 The application originated from two study courses at the [Jamk.fi](http://jamk.fi) in 2015.
@@ -44,3 +45,7 @@ After you pushed to this branch the server automatically update and restart and 
 
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FB-Stefan%2FCheckAuroa-Server.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FB-Stefan%2FCheckAuroa-Server?ref=badge_large)
