@@ -19,7 +19,7 @@
     "compression": "^1.7.2",
     "cors": "^2.8.4",
     "helmet": "^3.12.1",
-    "kerberos": "0.0.22",
+    "kerberos": "1.1.1",
     "loopback": "^3.19.1",
     "loopback-boot": "^2.27.1",
     "loopback-component-explorer": "git://github.com/B-Stefan/loopback-component-explorer.git",
