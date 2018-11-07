@@ -18,7 +18,7 @@
     "babel-register": "^6.26.0",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
-    "helmet": "^3.12.1",
+    "helmet": "^3.15.0",
     "kerberos": "0.0.22",
     "loopback": "^3.19.1",
     "loopback-boot": "^2.27.1",
