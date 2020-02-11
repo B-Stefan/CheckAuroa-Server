@@ -28,7 +28,7 @@
     "loopback-datasource-juggler": "^3.20.2",
     "moment": "^2.22.1",
     "node-cache": "^4.2.0",
-    "request": "^2.87.0",
+    "request": "^2.88.2",
     "serve-favicon": "^2.5.0",
     "strong-error-handler": "^1.2.1",
     "suncalc": "^1.8.0",
